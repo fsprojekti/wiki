@@ -27,14 +27,12 @@ Ko je tipka neaktivna sedaj vodnik ni več prost ampak je preko upora **R1** pov
 
 ### Električne komponente
 
-| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                          |
-| --------------- | ------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83) |
-| mikrokrmilnik   | ATmega328    | Microchip       | datoteka                                                                                                                                                                                                 |
-| razvojna plošča | Arduino Nano | Gravitech       | datoteka                                                                                                                                                                                                 |
-| upor            | /            | Multicomp       | datoteka                                                                                                                                                                                                 |
-
-
+| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                                                 |
+| --------------- | ------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83)                        |
+| mikrokrmilnik   | ATmega328    | Microchip       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                       |
+| razvojna plošča | Arduino Nano | Gravitech       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| upor            | /            | Multicomp       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                         |
 
 ### Dimenzioniranje komponent
 
@@ -42,6 +40,6 @@ Ko je tipka neaktivna sedaj vodnik ni več prost ampak je preko upora **R1** pov
 
 Vrednost upora mora biti dovolj velika, da ob aktivnem stikalu ne trošimo preveč energije in dovolj majhen, da preusmeri večino induciranega toka preko sebe na nizek napetostni potencial. Velikost upora se lahko izračuna vendar večinoma uporabimo izkustvene vrednosti. Velikost upora določimo glede na potrebe:
 
-* $3,3k\Omega...10k\Omega$ za splošno uporabo
-* $50k\Omega...100k\Omega$ se uporablja tam kjer je pomembna poraba energije
-* $200\Omega...1k\Omega$ se uporablja tam kjer je pomembna hitrost preklapljanja
+* 3,3kΩ...10kΩ za splošno uporabo
+* 50kΩ...100kΩ se uporablja tam kjer je pomembna poraba energije
+* 200Ω...1kΩ se uporablja tam kjer je pomembna hitrost preklapljanja
