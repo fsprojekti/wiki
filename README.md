@@ -21,18 +21,20 @@ Delovanje vezja:
 
 Za pravilno delovanje moramo dodati (pull-down) upor v naše vezje. Obsežnejšo razlago o tej tematiki lahko najdete v priročniku. Popravljeno električno shemo prikazuje spodnja slika.
 
-<figure><img src=".gitbook/assets/inputArduino.png" alt="" width="563"><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/inputArduino.png" alt="" width="563"><figcaption><p>Priključitev tipke in dodatnega (pull-up) upora</p></figcaption></figure>
 
 Ko je tipka neaktivna sedaj vodnik ni več prost ampak je preko upora **R1** povezan na nizek napetostni potencial. Vsak tok, ki je posledica inducirane napetosti sedaj odteče preko upora na nizek potencial, ker je upornost **R1** za dekado nižja od upornosti vhoda mikrokrmilnika.
 
 ### Električne komponente
 
-| Komponenta      | Koda         | Proizvajalec    | Podatkovni list |
-| --------------- | ------------ | --------------- | --------------- |
-| tipka           | KS11R22CQD   | C\&K COMPONENTS | datoteka        |
-| mikrokrmilnik   | ATmega328    | Microchip       | datoteka        |
-| razvojna plošča | Arduino Nano | Gravitech       | datoteka        |
-| upor            | /            | Multicomp       | datoteka        |
+| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                          |
+| --------------- | ------------ | --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83) |
+| mikrokrmilnik   | ATmega328    | Microchip       | datoteka                                                                                                                                                                                                 |
+| razvojna plošča | Arduino Nano | Gravitech       | datoteka                                                                                                                                                                                                 |
+| upor            | /            | Multicomp       | datoteka                                                                                                                                                                                                 |
+
+
 
 ### Dimenzioniranje komponent
 
