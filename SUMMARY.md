@@ -3,10 +3,7 @@
 ## Elektrotehnika
 
 * [Tipka in mikrokrmilnik](README.md)
-
-***
-
-* [LED in mikrokrmilnik](led-in-mikrokrmilnik.md)
+* [LED in mikrokrmilnik](elektrotehnika/led-in-mikrokrmilnik.md)
 
 ## Programiranje
 
