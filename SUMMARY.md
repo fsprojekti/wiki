@@ -6,7 +6,7 @@
 
 ***
 
-* [Page 2](page-2.md)
+* [LED in mikrokrmilnik](led-in-mikrokrmilnik.md)
 
 ## Programiranje
 
