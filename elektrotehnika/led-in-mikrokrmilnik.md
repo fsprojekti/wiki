@@ -39,6 +39,8 @@ Pri dimenzioniranju komponent si pomagamo s shemo na sliki, ki prikazuje elektri
 
 Iz podatkovnega lista LED diode razberemo podatek o maksimalnemu toku diode (DC Forward Current), ki znaša _20mA_. Odločimo se, da LED dioda dovolj sveti tudi pri polovičnem toku _10mA_, zato bomo dimenzionirali vezje na ta tok. Padec napetosti na diodi pri toku _10mA_ je približno _2V_, kar razberemo iz karakteristike:
 
+<figure><img src="../.gitbook/assets/ledCharasteristics.png" alt="" width="563"><figcaption><p>Napetostno tokovna karakteristika LED diode</p></figcaption></figure>
+
 Vrednost upora R1 izračunamo po enačbi:
 
 $$
