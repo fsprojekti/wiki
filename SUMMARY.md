@@ -2,7 +2,7 @@
 
 ## Elektrotehnika
 
-* [Page 3](README.md)
+* [Tipka in mikrokrmilnik](README.md)
 
 ***
 
