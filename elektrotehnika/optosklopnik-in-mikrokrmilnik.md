@@ -12,7 +12,7 @@ Optosklopnik ima na vhodu LED na katero priključimo tokokrog vira informacije i
 
 Gradnjo električnega vezja pričnemo z izdelavo električne sheme.
 
-### Električna shema
+## Električna shema
 
 Električna shema vključitve optosklopnika prikazuje slika.
 
@@ -31,7 +31,7 @@ Delovanje vezja:
 * Ko je tranzistor odprt steče tok skozi upor **R2** in potencial **GND** se prenese na vhod mikrokrmilnika, ki predstavlja logično 0 oz. _FALSE_.
 * Ko je tranzistor zaprt tok skozi upor **R2** ne teče in na vhodu mikrokrmilnika dobimo visok potencial, ki predstavlja logično 1 oz. _TRUE_.
 
-#### Električne komponente
+## Električne komponente
 
 | Komponenta      | Koda         | Proizvajalec | Podatkovni list                                                                                                                                                                                                                 |
 | --------------- | ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -40,16 +40,16 @@ Delovanje vezja:
 | razvojna plošča | Arduino Nano | Gravitech    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
 | upori           | /            | Multicomp    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                         |
 
-### Dimenzioniranje komponent
+## Dimenzioniranje komponent
 
-#### Upor R1
+### Upor R1
 
 Pri izračunu upora R1 si pomagajte z [gradivom](led-in-mikrokrmilnik.md)
 
-#### Upor R2
+### Upor R2
 
 Pri izračunu upora R2 si pomagajte z [gradivom](../)
 
-#### Upor R3
+### Upor R3
 
 Optosklopnik **4n25** ima dodatno električno povezavo baze optičnega tranzistorja na pin _6_. To povezavo lahko vzporedno uporabimo kot dodatno možnost odpiranja optosklopnika. V tem primeru te možnosti ne bomo uporabljali in bomo to povezavo vezali preko upora R3 na negativni potencial. Nepovezana povezava se obnaša kot antena, ki sprejema elektromagnetno sevanje iz okolice, kar povzroča nenadzorovano odpiranje optičnega tranzistorja. Pri izračunu vrednosti upora R3 si pomagajte z [gradivom](../#dimenzioniranje-komponent)
