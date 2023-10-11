@@ -1,5 +1,20 @@
 ---
-coverY: 0
+cover: .gitbook/assets/shutterstock_333995531.jpg
+coverY: 53.645333333333355
+layout:
+  cover:
+    visible: true
+    size: hero
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: false
+  outline:
+    visible: false
+  pagination:
+    visible: false
 ---
 
 # Baza znanja za študente elektrotehnike
