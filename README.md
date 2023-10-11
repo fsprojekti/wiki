@@ -1,4 +1,5 @@
 ---
+description: Baza znanja za študente mehatronike
 cover: .gitbook/assets/shutterstock_333995531.jpg
 coverY: 53.645333333333355
 layout:
@@ -8,7 +9,7 @@ layout:
   title:
     visible: true
   description:
-    visible: false
+    visible: true
   tableOfContents:
     visible: false
   outline:
@@ -17,7 +18,7 @@ layout:
     visible: false
 ---
 
-# Baza znanja za študente elektrotehnike
+# Baza znanja
 
 
 

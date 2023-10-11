@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Baza znanja za študente elektrotehnike](README.md)
+* [Baza znanja](README.md)
 
 ## Elektrotehnika
 
@@ -9,6 +9,7 @@
 * [7-segmentni LED prikazovalnik in mikrokrmilnik](elektrotehnika/7-segmentni-led-prikazovalnik-in-mikrokrmilnik.md)
 * [Optosklopnik in mikrokrmilnik](elektrotehnika/optosklopnik-in-mikrokrmilnik.md)
 * [Rele in mikrokrmilnik](elektrotehnika/rele-in-mikrokrmilnik.md)
+* [Enosmerni motor in mikrokrmilnik](elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md)
 
 ## Programiranje
 
