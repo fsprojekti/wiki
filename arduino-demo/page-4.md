@@ -4,7 +4,7 @@ Brali bomo stanje tipke ter ga shranili v pomnilnik mikrokrmilnika. Z branjem di
 
 ## Elektrotehnični del
 
-Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja tipka, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v gradivu
+Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja tipka, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v[ gradivu](<../README (1).md>).
 
 ### Programski del
 

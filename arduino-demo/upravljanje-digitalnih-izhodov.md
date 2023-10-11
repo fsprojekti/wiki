@@ -4,9 +4,9 @@ Z mikrokrmilnikom bomo izmenično na $$1s$$ prižigali in ugašali LED. Z zapiso
 
 ## Elektrotehnični del
 
-Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja LED, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v gradivu
+Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja LED, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v [gradivu](../elektrotehnika/led-in-mikrokrmilnik.md)
 
-### Programski del
+## Programski del
 
 Pri pisanju kode si bomo pomagali s funkcijami iz knjižnice Arduino projekta.
 

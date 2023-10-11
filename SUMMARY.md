@@ -25,5 +25,6 @@
 
 ## Arduino demo
 
-* [Branje digitalnih signalov](arduino-demo/branje-digitalnih-signalov.md)
+* [Branje digitalnih signalov](arduino-demo/page-4.md)
 * [Upravljanje digitalnih izhodov](arduino-demo/upravljanje-digitalnih-izhodov.md)
+* [Uporaba serijske komunikacije](arduino-demo/uporaba-serijske-komunikacije.md)
