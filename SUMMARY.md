@@ -25,4 +25,5 @@
 
 ## Arduino demo
 
-* [Page 4](arduino-demo/page-4.md)
+* [Branje digitalnih signalov](arduino-demo/branje-digitalnih-signalov.md)
+* [Upravljanje digitalnih izhodov](arduino-demo/upravljanje-digitalnih-izhodov.md)
