@@ -18,7 +18,8 @@
 ## laboratorijska oprema
 
 * [PLK](laboratorijska-oprema/plk/README.md)
-  * [Simatic 1200](laboratorijska-oprema/plk/simatic-1200.md)
+  * [Siemens Simatic 1200](laboratorijska-oprema/plk/siemens-simatic-1200.md)
+  * [Siemens LOGO](laboratorijska-oprema/plk/siemens-logo.md)
 * [Makete](laboratorijska-oprema/makete/README.md)
   * [Tekoči trak](laboratorijska-oprema/makete/tekoci-trak.md)
   * [Parkirna zapornica](laboratorijska-oprema/makete/parkirna-zapornica.md)
