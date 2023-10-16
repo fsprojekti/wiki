@@ -3,7 +3,7 @@
 Serijska povezava omogoča znakovno dvosmerno komunikacijo z vzpostavitvijo komunikacijskega kanala med mikrokrmilnikom in osebnim računalnikom kot prikazuje slika
 
 ```mermaid
- graph LR;
+graph LR;
     A(Osebni računalnik)---|serijska povezava|B(mikrokrmilnik )
 ```
 
@@ -12,8 +12,8 @@ Serijska povezava omogoča znakovno dvosmerno komunikacijo z vzpostavitvijo komu
 Serijska povezava povezuje dve serijski napravi, kar pomeni, da mora tako osebni računalnik kot mikrokrmilnik to omogočati. Računalniki, po večini, nimajo vgrajene serijske naprave tako, da je potrebno serijsko napravo dodati (primer). Tako serijsko naprave se poveže na računalnik preko kakega drugega vodila najpogosteje je to USB. Skoraj vsi mikrokrmilniki imajo serijsko napravo vgrajeno v čip kot eno izmed perifernih naprav. Najdemo jo pod imenom UART ali USART. Shema serijske povezave bolj natančno izgleda kot je prikazano na sliki
 
 ```mermaid
-graph LR;
-   A(Osebni računalnik)---|USB|B(Serijska naprava)
+graph LR
+  A(Osebni računalnik)---|USB|B(Serijska naprava)
    B---|Žična povezava|C(UART/USART)
    subgraph Mikrokrmilnik
    C---|Povezave v čipu|D(procesor in ostali <br> deli mikrokrmilnika)
@@ -132,4 +132,6 @@ void loop() {
 }
 ```
 
-!> Pozor. Uporaba serijske komunikacije je časovno potraten proces in zavira delovanje mikrokrmilnika.
+{% hint style="info" %}
+**Pozor!** Uporaba serijske komunikacije je časovno potraten proces in zavira delovanje mikrokrmilnika.
+{% endhint %}
