@@ -51,7 +51,7 @@ Naprava je rotirajoči mehanski dinamičen sistem. Shematično je prikazan na sl
 
 <figure><img src="../../.gitbook/assets/aeroScheme.png" alt="" width="375"><figcaption><p>Shema masnega modela makete</p></figcaption></figure>
 
-Napravo sestavlja tram, ki rotira okoli vertikalne osi. Na obeh koncih rotirajočega trama je pritrjen po en ventilatorski pogon, ki je ponazorjen s točkasto maso $m\_3$. Zasuk vertikalne osi označuje kot $varphi(t)$, poganja pa ga potisk ventilatorskih pogonov, ki ustvarjata sili $F\_1(t)$ in $F\_2(t)$.
+Napravo sestavlja tram, ki rotira okoli vertikalne osi. Na obeh koncih rotirajočega trama je pritrjen po en ventilatorski pogon, ki je ponazorjen s točkasto maso $m\_3$. Zasuk vertikalne osi označuje kot $$varphi(t)$$, poganja pa ga potisk ventilatorskih pogonov, ki ustvarjata sili $$F_1(t)$$ in $$F_2(t)$$.
 
 * Spremenljivke sistema
 
@@ -72,7 +72,7 @@ Napravo sestavlja tram, ki rotira okoli vertikalne osi. Na obeh koncih rotirajo�
 
 ### Merilnik zasuka
 
-Vertikalna os je opremljena z merilnikom zasuka oz. kota. Nameščen je magnetni inkrementalni enkoder RLS AM4096 slovenskega podjetja [RLS d.o.o.](https://www.rls.si/). Merilnik meri relativno gibanje osi ter posreduje informacijo v obliki digitalnega signala mikrokrmilniku. Praktičen primer uporabe takega merilnika je dostopen v gradivu.
+Vertikalna os je opremljena z merilnikom zasuka oz. kota. Nameščen je magnetni inkrementalni enkoder [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02\_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) slovenskega podjetja [RLS d.o.o.](https://www.rls.si/). Merilnik meri relativno gibanje osi ter posreduje informacijo v obliki digitalnega signala mikrokrmilniku. Praktičen primer uporabe takega merilnika je dostopen v gradivu.
 
 ### Ventilatorski pogon
 
@@ -131,167 +131,11 @@ Povezave digitalnih signalov z Arduinom so predstavljene v tabeli
 
 Seznam vse uporabljenih električnih komponent:
 
-| Komponenta                      | Oznaka             | Proizvajalec                                | Podatkovni list |
-| ------------------------------- | ------------------ | ------------------------------------------- | --------------- |
-| inkrementalni dajalnik          | RLS AM4096         | [RLS d.o.o.](https://www.rls.si/)           | datoteka        |
-| gonilnik ventilatorskih pogonov | MD10C R3           | [Cytron](https://www.cytron.io/)            | datoteka        |
-| mikrokrmilnik                   | SAM3X8E ARM        | [Microchip](https://www.microchip.com/)     | datoteka        |
-| razvojna plošča                 | Arduino Due        | [Arduino](https://www.arduino.cc/)          | datoteka        |
-| mikroračunalnik                 | RaspberryPi 4B 4GB | [RaspberryPi](https://www.raspberrypi.org/) | datoteka        |
+| Komponenta                      | Oznaka             | Proizvajalec                                | Podatkovni list                                                                                                                                                                                                  |
+| ------------------------------- | ------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| inkrementalni dajalnik          | RLS AM4096         | [RLS d.o.o.](https://www.rls.si/)           | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02\_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) |
+| gonilnik ventilatorskih pogonov | MD10C R3           | [Cytron](https://www.cytron.io/)            | datoteka                                                                                                                                                                                                         |
+| mikrokrmilnik                   | SAM3X8E ARM        | [Microchip](https://www.microchip.com/)     | datoteka                                                                                                                                                                                                         |
+| razvojna plošča                 | Arduino Due        | [Arduino](https://www.arduino.cc/)          | datoteka                                                                                                                                                                                                         |
+| mikroračunalnik                 | RaspberryPi 4B 4GB | [RaspberryPi](https://www.raspberrypi.org/) | datoteka                                                                                                                                                                                                         |
 
-## Programski del
-
-Mikrokrmilnik mora:
-
-* dekodirat signal dajalnika ter ga pretvarjati v kot
-* generirati PWM signal za krmiljenje motorja
-* izvajati regulacijske algoritme
-
-Predstavljen je vzorec programa, ki vsebuje vse elemente vendar ga je potrebno ustrezno dopolniti. Vzorčni program če ga poženete na napravi bo deloval po naslednji sekvenci:
-
-* 5 sekund sekund miruje
-* 5 sekund se vrti v eno smer
-* 5 sekund se vrti v drugo smer
-* nato miruje dalje Med delovanjem bo po serijski komunikaciji sporočal podatke o kotu, pwm, smeri vrtenja, stanju, in števcu.
-
-```c
-// knjižnica za izvedbo prekinitvene rutine
-#include <DueTimer.h>
-// knjižnica za izvedbo konzolnega programskega vmesnika
-
-// definicija pina za enkoder kanal A
-#define pinEncoderA  22
-// definicija pina za enkoder kanal B
-#define pinEncoderB  23
-// definicija pina za določanje smeri vrtenja
-#define pinDir 2
-// definicija pina za PWM signal
-#define pinPwm 3
-
-// seznam parametrov sistema
-// čas vzorčenja v us
-int ts = 10000;
-// razmernik pwm signala
-float dcyc = 0;
-// smer vrtenja
-int dir = 0;
-// spremenljivka za beleženje kota v korakih
-int encoderPos = 0;
-// spremenljivka stanja
-int state = 0;
-// spremenljivka števca za izvedbo časovnika
-int counter = 0;
-
-
-void setup() {
-  // inicializacija serijskega vmesnika
-  Serial.begin(115200);
-
-  //****************************************GONILNIŠE NASTAVITVE****************************************
-  pinMode(pinDir, OUTPUT);
-
-
-  //****************************************VZORČENJE***************************************************
-  // nastavitev časovnika za proženje prekinitvene rutine
-  Timer3.attachInterrupt(sampling_task).start(ts);
-
-  //****************************************ENKODER polovična ločljivost********************************
-  // definicija vhodnih signalov enkoderja
-  pinMode(pinEncoderA, INPUT);
-  pinMode(pinEncoderB, INPUT);
-
-  // prekinitvna rutina, ki se proži ob spremembi stanja signala A
-  attachInterrupt(digitalPinToInterrupt(pinEncoderA), doEncoderA, CHANGE);
-}
-
-void loop() {
-  //Izpis podatka o kotu in pwm vsako sekundo
-  Serial.print("pozicija: ");
-  Serial.print(encoderPos);
-  Serial.print(" pwm: ");
-  Serial.print(dcyc);
-  Serial.print(" dir: ");
-  Serial.println(dir);
-
-  Serial.print("state: ");
-  Serial.print(state);
-  Serial.print(" counter:");
-  Serial.println(counter);
-  delay(1000);
-}
-
-// prekinitvena rutina, ki se proži na vsakih Ts ms
-void sampling_task() {
-  // izvajanje korakov avtomata
-  switch (state) {
-    //Stanje 0 sistem miruje 10s
-    case 0: {
-        counter++;
-        //Izpolnjen pogoj pomeni, da je preteklo 5s
-        if (counter > 500) {
-          dcyc = 240;
-          dir = 0;
-          counter = 0;
-          state = 1;
-        }
-      }
-      break;
-    //Stanje 1 sistem vrti naprej 5s
-    case 1: {
-        counter++;
-        //Izpolnjen pogoj pomeni, da je preteklo 5s
-        if (counter > 500) {
-          dcyc = 240;
-          dir = 1;
-          counter = 0;
-          state = 2;
-        }
-      }
-
-      break;
-    //Stanje 2 sistem vrti nazaj 5s
-    case 2: {
-        counter++;
-        //Izpolnjen pogoj pomeni, da je preteklo 5s
-        if (counter > 500) {
-          dcyc = 0;
-          dir = 0;
-          counter = 0;
-          state = 3;
-        }
-      }
-      break;
-    //Stanje 3 sistem se ustavi
-    case 3: {
-      }
-      break;
-  }
-  //Zapis izhodnih vrednosti
-  analogWrite(pinPwm, dcyc);
-  digitalWrite(pinDir, dir);
-}
-
-// prekinitvena rutina signala A
-void doEncoderA() {
-  // ali je bila prekinitev posledica prehoda signala iz logične 0 na 1 ali obratno
-  if (digitalRead(pinEncoderA) == HIGH) {
-    // preverimo signal B da ugotovimo smer premikanja osi
-    if (digitalRead(pinEncoderB) == LOW) {
-      encoderPos++ ;
-    }
-    else {
-      encoderPos--;
-    }
-  }
-  else
-  {
-    // preverimo signal B da ugotovimo smer premikanja osi
-    if (digitalRead(pinEncoderB) == HIGH) {
-      encoderPos++;
-    }
-    else {
-      encoderPos--;
-    }
-  }
-}
-```
