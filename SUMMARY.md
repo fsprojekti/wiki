@@ -24,7 +24,6 @@
   * [Tekoči trak](laboratorijska-oprema/makete/tekoci-trak.md)
   * [Parkirna zapornica](laboratorijska-oprema/makete/parkirna-zapornica.md)
   * [Aero](laboratorijska-oprema/makete/aero.md)
-  * [Aero](laboratorijska-oprema/makete/aero-1.md)
 
 ## Arduino demo
 
