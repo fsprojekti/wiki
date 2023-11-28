@@ -67,11 +67,9 @@ Programiranja Controllino MINI se lahko izvaja v več okoljih.  Arduino IDE omog
 1. Napaka pri nalaganju
 
 {% code lineNumbers="true" %}
-````c
-```
+```c
 avrdude: stk500_recv(): programmer is not responding
 ```
-````
 {% endcode %}
 
 To težavo odpravimo z naslednjim postopkom
