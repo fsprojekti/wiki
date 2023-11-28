@@ -64,7 +64,18 @@ Programiranja Controllino MINI se lahko izvaja v več okoljih.  Arduino IDE omog
 
 ### Pogoste težave
 
-* stk500 error pri nalaganju na PLK
+1. Napaka pri nalaganju
 
-To težavo odpravimo s&#x20;
+````
+```
+avrdude: stk500_recv(): programmer is not responding
+```
+````
+
+To težavo odpravimo z naslednjim postopkom
+
+* Pritisnite in držite gumb za ponastavitev na napravi Controllino.&#x20;
+* Povežite USB kabel (še vedno držite gumb za ponastavitev, programska oprema v Controllinu se ne zažene)&#x20;
+* Kliknite za nalaganje skice v Arduino IDE in počakajte na sporočilo "uploading" v vrstici za odpravljanje napak, nato takoj spustite gumb za ponastavitev in nalaganje se mora zaključiti (držite gumb za ponastavitev med fazo prevajanja "compiling")&#x20;
+* Če ni uspešno, ponovite postopek
 
