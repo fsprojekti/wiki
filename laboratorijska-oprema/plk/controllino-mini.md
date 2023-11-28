@@ -60,3 +60,9 @@ Programiranja Controllino MINI se lahko izvaja v več okoljih.  Arduino IDE omog
 
 ### Monitoring programa
 
+### Pogoste težave
+
+* stk500 error pri nalaganju na PLK
+
+To težavo odpravimo s&#x20;
+
