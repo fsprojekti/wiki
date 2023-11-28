@@ -54,6 +54,8 @@ Programiranja Controllino MINI se lahko izvaja v več okoljih.  Arduino IDE omog
 
 ### Nastavitev Arduino okolja
 
+* [Navodila za nastavitev okolja](https://github.com/CONTROLLINO-PLC/CONTROLLINO\_Library#installation-guide)
+
 ### Nastavitev komunikacijskega vmesnika
 
 ### Prenos programa na krmilnik
