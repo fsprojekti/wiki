@@ -2,7 +2,7 @@
 
 ## Opis
 
-<figure><img src="../../.gitbook/assets/image.png" alt="" width="375"><figcaption><p>Razvojna plošča LILYGO</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="375"><figcaption><p>Razvojna plošča LILYGO</p></figcaption></figure>
 
 Razvojna plošča TTGO, z ESP32 mikrokrmilnik in TFT zaslonom, je napredna in vsestranska platforma, namenjena za razvoj in implementacijo IoT (Internet of Things) projektov. Tu so ključne značilnosti:
 
@@ -30,9 +30,13 @@ Ko odpremo nastavitve Arduino okolja dodamo povezavo do razvojne plošče v okno
 https://espressif.github.io/arduino-esp32/package_esp32_index.json
 ```
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>Dodajanje zunanje povezave za razvojno ploščo ESP32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Dodajanje zunanje povezave za razvojno ploščo ESP32</p></figcaption></figure>
 
-Ko smo dodali povezavo lahko sedaj izberemo razvojno ploščo iz nabora. Izberemo ploščo TTGO LoRa32-OLED.
+Ko smo dodali povezavo do zunanjega vira lahko sedaj namestimo dodatne module razvojnih ploščic, ki se nahajajo pod imenom _esp32 by Espressif Systems._
+
+<figure><img src="../../.gitbook/assets/image.png" alt="" width="563"><figcaption><p>Izbira modula razvojnih ploščic esp32</p></figcaption></figure>
+
+Po namestitvi modula lahko sedaj izberemo svojo razvojno ploščo iz nabora. Izberemo ploščo TTGO LoRa32-OLED.
 
 <figure><img src="../../.gitbook/assets/image (3).png" alt="" width="563"><figcaption><p>Izbira razvojne plošče</p></figcaption></figure>
 
