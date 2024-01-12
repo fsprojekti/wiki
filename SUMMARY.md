@@ -15,6 +15,10 @@
 
 * [Page 1](programiranje/page-1.md)
 
+***
+
+* [Page](page.md)
+
 ## laboratorijska oprema
 
 * [PLK](laboratorijska-oprema/plk/README.md)
@@ -27,6 +31,8 @@
   * [Aero](laboratorijska-oprema/makete/aero.md)
 * [Mikrokontrolerji](laboratorijska-oprema/mikrokontrolerji/README.md)
   * [LILYGO - ESP32](laboratorijska-oprema/mikrokontrolerji/lilygo-esp32.md)
+* [FPGA](laboratorijska-oprema/fpga/README.md)
+  * [DE10-Lite](laboratorijska-oprema/fpga/de10-lite.md)
 
 ## Arduino demo
 
