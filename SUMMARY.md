@@ -32,7 +32,9 @@
 * [Mikrokontrolerji](laboratorijska-oprema/mikrokontrolerji/README.md)
   * [LILYGO - ESP32](laboratorijska-oprema/mikrokontrolerji/lilygo-esp32.md)
 * [FPGA](laboratorijska-oprema/fpga/README.md)
-  * [DE10-Lite](laboratorijska-oprema/fpga/de10-lite.md)
+  * [DE10-Lite](laboratorijska-oprema/fpga/de10-lite/README.md)
+    * [Namestitev razvojnega okolja](laboratorijska-oprema/fpga/de10-lite/namestitev-razvojnega-okolja.md)
+    * [Demo program](laboratorijska-oprema/fpga/de10-lite/demo-program.md)
 
 ## Arduino demo
 
