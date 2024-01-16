@@ -2,7 +2,7 @@
 
 ## Priprava okolja
 
-Priprava okolja sledi [navodilom.](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FSHWJ4XZz3ON2kIm7nFCb%2FDE10-Lite\_User\_Manual.pdf?alt=media\&token=3dd0c566-b361-4798-8fb5-a70a7696de46)
+Priprava okolja sledi [navodilom. ](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2F7zWbbf79Gb7ZcregVAPd%2FGetting\_Started.pdf?alt=media\&token=37552df5-3d68-4bd3-9d88-f2becd6be48b)Namestitev bo potekala na OS Windows 11.
 
 #### 1. Namestitev programa Quartus Prime&#x20;
 
@@ -22,9 +22,18 @@ Po končani namestitvi se pojavi okno
 
 <figure><img src="../../../.gitbook/assets/image (18).png" alt=""><figcaption></figcaption></figure>
 
-#### 2. Namestitev programa _**Control Panel**_
+#### 2. Namestitev gonilnikov za razvojno ploščo
 
-{% file src="../../../.gitbook/assets/DE10_Lite_ControlPanel_V1.0.3.zip" %}
-Program Control Panel
-{% endfile %}
+Po končani namestitvi programa _Quartus Prime_ je potrebna še namestitev gonilnikov saj _Windows_ le teh ne ponuja. Če odpremo _Upravljalnik Naprav_ (Device Manager) lahko vidimo, da napravi USB-blaster manjkajo ustrezni gonilniki
 
+<figure><img src="../../../.gitbook/assets/image (23).png" alt="" width="283"><figcaption></figcaption></figure>
+
+Ustrezne gonilnike najdemo v namestitveni mapi programa _Quartus Prime_
+
+```
+C:\intelFPGA_lite\23.1std\quartus\drivers
+```
+
+Posodobimo gonilnike tako da program za posodobitev usmerimo na zgornjo pot, kjer bo OS sam našel ustrezne datoteke.
+
+<figure><img src="../../../.gitbook/assets/image (20).png" alt=""><figcaption></figcaption></figure>
