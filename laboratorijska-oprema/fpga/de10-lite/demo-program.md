@@ -1,5 +1,5 @@
 ---
-description: Switches, Lights, and Multiplexers
+description: Stikala, Svetila in Multiplekserji
 ---
 
 # Demo program
