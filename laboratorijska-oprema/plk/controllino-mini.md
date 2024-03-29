@@ -22,7 +22,7 @@ Krmilnik električno povežemo z napajanjem in z digitalnimi vhodi in digitalnim
 
 PLK za svoje delovanje potrebuje napajanje, v našem primeru je to enosmerna napetost 24V. Priključne sponke napajanja na PLK so prikazane na spodnji sliki.
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="375"><figcaption><p>Priključitev napajanja</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" width="375"><figcaption><p>Priključitev napajanja</p></figcaption></figure>
 
 Oznaka na sliki 12V/24V označuje pozitivni potencial in oznaka GND negativni potencial napajalne napetosti.
 

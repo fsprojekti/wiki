@@ -29,6 +29,7 @@
   * [Tekoči trak](laboratorijska-oprema/makete/tekoci-trak.md)
   * [Parkirna zapornica](laboratorijska-oprema/makete/parkirna-zapornica.md)
   * [Aero](laboratorijska-oprema/makete/aero.md)
+  * [FlexDrive](laboratorijska-oprema/makete/flexdrive.md)
 * [Mikrokontrolerji](laboratorijska-oprema/mikrokontrolerji/README.md)
   * [LILYGO - ESP32](laboratorijska-oprema/mikrokontrolerji/lilygo-esp32.md)
 * [FPGA](laboratorijska-oprema/fpga/README.md)
