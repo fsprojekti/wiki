@@ -61,3 +61,22 @@ Vrtenje vpete osi dosežemo z elektromotorjem. Maketa ima vgrajen elektromotor [
 ### Gonilnik elektromotorja
 
 Za pogon enosmernega motorja skrbi motorski gonilnik[ MD10C R3 ](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media\&token=e0621c34-4375-4835-b94b-6c76b18cf1ee)podjetja [Cytron](https://www.cytron.io/). Gonilnik upravljamo z dvema digitalnima signaloma $$power$$ in $$direction$$. Signal $$power$$ predstavlja PWM (Pulse Width Modulation) moduliran signal $$direction$$ pa smer toka na izhodu gonilnika, kar posledično določa smer vrtenja enosmernega elektromotorja.&#x20;
+
+## Električni del
+
+Električna shema naprave povezuje arduino mikrokrmilnik z dvema inkrementalnima dajalnikoma in regulatorjem enosmernega motorja. Serijska povezave med mikrokrmilnikom in mikroračunalnikom ni prikazana.
+
+Povezave digitalnih signalov z Arduinom so predstavljene v tabeli
+
+| Naprava  | Pin | Arduino Pin | Oznaka povezave | vhod/izhod |
+| -------- | --- | ----------- | --------------- | ---------- |
+| RMK4 Fi  | A   | 22          | A1              | vhod       |
+| RMK4 Fi  | B   | 23          | B1              | vhod       |
+| MD10C-R3 | DIR | 2           | DIR             | izhod      |
+| MD10C-R3 | PWM | 3           | PWM             | izhod      |
+
+### Električne komponente
+
+Seznam vse uporabljenih električnih komponent:
+
+<table><thead><tr><th>Komponenta</th><th width="461">Oznaka</th><th>Proizvajalec</th><th>Podatkovni list</th></tr></thead><tbody><tr><td>inkrementalni dajalnik</td><td>RLS AM4096</td><td><a href="https://www.rls.si/">RLS d.o.o.</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media&#x26;token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7">datoteka</a></td></tr><tr><td>gonilnik ventilatorskih pogonov</td><td>MD10C R3</td><td><a href="https://www.cytron.io/">Cytron</a></td><td>datoteka</td></tr><tr><td>mikrokrmilnik</td><td>SAM3X8E ARM</td><td><a href="https://www.microchip.com/">Microchip</a></td><td>datoteka</td></tr><tr><td>razvojna plošča</td><td>Arduino Due</td><td><a href="https://www.arduino.cc/">Arduino</a></td><td>datoteka</td></tr><tr><td>mikroračunalnik</td><td>RaspberryPi 4B 4GB</td><td><a href="https://www.raspberrypi.org/">RaspberryPi</a></td><td>datoteka</td></tr></tbody></table>
