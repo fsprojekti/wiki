@@ -50,9 +50,9 @@ Napravo sestavljajo vpeta os, ki z vztrajnostjo $$J_2$$. Na vpeto os je togo pri
 | ------- | ----------------------------- | -------- | -------------- |
 | $$B_1$$ | Dušenje vpete osi             |          | $$kg/s$$       |
 | $$B_2$$ | Dušenje gnane osi             |          | $$kg/s$$       |
-| $$J_1$$ | Vztrajnosti moment vztrjanika |          | $$g \cdot m²$$ |
-| $$J_2$$ | Vztrajnostni moment vpete osi |          | $$g \cdot m²$$ |
-| $$J_3$$ | Vztrajnostni moment gnane osi |          | $$g \cdot m²$$ |
+| $$J_1$$ | Vztrajnosti moment vztrjanika | 0.612    | $$g \cdot m²$$ |
+| $$J_2$$ | Vztrajnostni moment vpete osi | 0.0902   | $$g \cdot m²$$ |
+| $$J_3$$ | Vztrajnostni moment gnane osi | \~0      | $$g \cdot m²$$ |
 | $$k$$   | konstanta vzmeti              |          | $$N/m$$        |
 
 ### Merilnik zasuka gnana gred
