@@ -22,13 +22,13 @@ Povezava med odprtostjo ventila in pretokom je linearna in omejena pri 100% odpr
 
 #### 2.2 Odvodni ventil
 
-Odvodni ventil odvaja tekočino iz hranilnika. Pretok tekočine iz hranilnika je odvisen od odprtosti ventila in nivoja tekočine v hranilniku $h(t)$, opisuje pa ga enačba:
+Odvodni ventil odvaja tekočino iz hranilnika. Pretok tekočine iz hranilnika je odvisen od odprtosti ventila in nivoja tekočine v hranilniku $$h(t)$$, opisuje pa ga enačba:
 
 $$
 \varphi_{\text{odvodni}}(\text{valve}, h) = 0.005 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%] \cdot \sqrt{2 \cdot g \cdot h(t)}
 $$
 
-Maksimalni odvodni pretok bo dosežen, ko bo nivo tekočine najvišji ($h = 1 , \text{m}$) in ventil popolnoma odprt ($\text{valve} = 100%$).
+Maksimalni odvodni pretok bo dosežen, ko bo nivo tekočine najvišji ($$h = 1 , \text{m}$$) in ventil popolnoma odprt ($$\text{valve} = 100%$$).
 
 #### 2.3 Hranilnik tekočine
 
@@ -38,11 +38,11 @@ $$
 h(t) = \int \frac{1}{S_{\text{hranilnik}}} \left( \varphi_{\text{dovodni}}(t) - \varphi_{\text{odvodni}}(t) \right) \, dt
 $$
 
-Nivo tekočine v hranilniku je odvisen od konstrukcije hranilnika in integrala razlike pretokov ter začetnega stanja nivoja, ki je implicitno podan v integralu. Hranilnik ima obliko kvadra s površino $S = 0.1 , \text{m}^2$ in maksimalno višino $1 , \text{m}$. Minimalni nivo tekočine je $0 , \text{m}$, pri nivoju več kot $1 , \text{m}$ pa pride do preliva.
+Nivo tekočine v hranilniku je odvisen od konstrukcije hranilnika in integrala razlike pretokov ter začetnega stanja nivoja, ki je implicitno podan v integralu. Hranilnik ima obliko kvadra s površino $$S = 0.1 , \text{m}^2$$ in maksimalno višino $$1  \text{m}$$. Minimalni nivo tekočine je $$0 \text{m}$$, pri nivoju več kot $$1  \text{m}$$ pa pride do preliva.
 
 #### 2.4 Blokovna shema sistema
 
-Blokovna shema sistema opisuje gradnike in povezave med njimi. Dovodni ventil nastavlja dovodni pretok tekočine. Dovodnemu pretoku tekočine se odšteje odvodni pretok, ki ga nastavlja odvodni ventil. Razlika pretokov nato polni hranilnik tekočine in spreminja nivo tekočine $h(t)$.
+Blokovna shema sistema opisuje gradnike in povezave med njimi. Dovodni ventil nastavlja dovodni pretok tekočine. Dovodnemu pretoku tekočine se odšteje odvodni pretok, ki ga nastavlja odvodni ventil. Razlika pretokov nato polni hranilnik tekočine in spreminja nivo tekočine $$h(t)$$.
 
 <figure><img src="../../.gitbook/assets/image (1).png" alt="" width="516"><figcaption><p>Blokovna shema odprtozančnega sistema</p></figcaption></figure>
 
@@ -52,7 +52,7 @@ Za razliko od odprtozančnega sistema, kjer niso podane zahteve glede vodenja, z
 
 <figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Blokovna shema zaprtozančnega sistema</p></figcaption></figure>
 
-Zaprtozančni sistem podaja zahtevan oz. referenčni nivo tekočine $h\_{\text{ref\}}(t)$. Razlika med referenčnim in dejanskim nivojem je pogrešek $e(t) = h\_{\text{ref\}}(t) - h(t)$. Regulator na podlagi pogreška izračuna ustrezno odprtje ventila $u(t)$ oz. dovodni pretok v hranilnik tekočine, da zmanjša pogrešek.
+Zaprtozančni sistem podaja zahtevan oz. referenčni nivo tekočine $$h_{\text{ref}}(t)$$. Razlika med referenčnim in dejanskim nivojem je pogrešek $$e(t) = h_{\text{ref}}(t) - h(t)$$. Regulator na podlagi pogreška izračuna ustrezno odprtje ventila $$u(t)$$ oz. dovodni pretok v hranilnik tekočine, da zmanjša pogrešek.
 
 Maketa omogoča izvedbo dveh tipov:
 
