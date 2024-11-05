@@ -1,12 +1,12 @@
 # FlexDrive
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
 
 ### Opis makete
 
 Maketa FlexDrive je laboratorijska naprava namenjena za podrobno raziskovanje in razumevanje mehanike elastično sklopljenih pogonskih sistemov. Mehanski del naprave sestavljati dve gredi ki sta preko elastične sklopke mehko vpeti. Na vpeti gredi je togo pritrjen vztrajnik na gnani gredi pa je togo pritrjen elektro motor, ki poganja celoten sklop. Blokovna shema prikazuje vse elemente v obliki blokov in signale ki jih povezujejo
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Bločna shema makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Bločna shema makete</p></figcaption></figure>
 
 Bloki makete:
 
@@ -32,7 +32,7 @@ Signali makete:
 
 Mehanska naprava je rotirajoči dinamičen sistem in je shematično prikazan na sliki
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>Shema mehanskega dela makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Shema mehanskega dela makete</p></figcaption></figure>
 
 Napravo sestavljajo vpeta os, ki z vztrajnostjo $$J_2$$. Na vpeto os je togo pritrjen vztrajnih z vztrajnostjo $$J_1$$. Os je v podnožje vpeta preko dveh ležajev s skupnim dušenjem $$B_1$$. Gibanje vpete osi opisuje kot $$\phi_2(t)$$. Vpeta os je preko vzmetne sklopke s konstano $$k$$ mehko povezna na gnano os, katere vztrajnostni moment podaja $$J_3$$. Gnana os je togo vpeta na motor z dušenjem $$B_2$$. Gibanje gnane osi opisuje kot $$\phi_1(t)$$, navor $$M(t)$$pa dovaja elektro motor.
 

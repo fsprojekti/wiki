@@ -2,7 +2,7 @@
 
 ## Opis
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt="" width="375"><figcaption><p>Razvojna plošča LILYGO</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt="" width="375"><figcaption><p>Razvojna plošča LILYGO</p></figcaption></figure>
 
 Razvojna plošča TTGO, z ESP32 mikrokrmilnik in TFT zaslonom, je napredna in vsestranska platforma, namenjena za razvoj in implementacijo IoT (Internet of Things) projektov. Tu so ključne značilnosti:
 
@@ -22,7 +22,7 @@ Nastavitev delovnega okolja za razvojno ploščo TTGO obsega naslednje korake:
 
 V Arduino okolju je potrebno dodati povezavo do zunanjega modula, saj v osnovnem IDE ni podpore za to razvojno ploščo
 
-<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="312"><figcaption><p>Pot do pojavnega okna za nastavitve Arduino okolja</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" width="312"><figcaption><p>Pot do pojavnega okna za nastavitve Arduino okolja</p></figcaption></figure>
 
 Ko odpremo nastavitve Arduino okolja dodamo povezavo do razvojne plošče v okno (Additional board managers URL).&#x20;
 
@@ -30,21 +30,21 @@ Ko odpremo nastavitve Arduino okolja dodamo povezavo do razvojne plošče v okno
 https://espressif.github.io/arduino-esp32/package_esp32_index.json
 ```
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1).png" alt=""><figcaption><p>Dodajanje zunanje povezave za razvojno ploščo ESP32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1) (1) (1) (1) (1).png" alt=""><figcaption><p>Dodajanje zunanje povezave za razvojno ploščo ESP32</p></figcaption></figure>
 
 Ko smo dodali povezavo do zunanjega vira lahko sedaj namestimo dodatne module razvojnih ploščic, ki se nahajajo pod imenom _esp32 by Espressif Systems._
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt="" width="563"><figcaption><p>Izbira modula razvojnih ploščic esp32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1).png" alt="" width="563"><figcaption><p>Izbira modula razvojnih ploščic esp32</p></figcaption></figure>
 
 Po namestitvi modula lahko sedaj izberemo svojo razvojno ploščo iz nabora. Izberemo ploščo TTGO LoRa32-OLED.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt="" width="563"><figcaption><p>Izbira razvojne plošče</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1).png" alt="" width="563"><figcaption><p>Izbira razvojne plošče</p></figcaption></figure>
 
 ### 2. Inštalacija TFT prikazovalnika
 
 TFT prikazovalnik uporablja SPI komunikacijo z ravojno ploščo LILYGO. Če želimo uporabljati ta prikazovalnik lahko izkoristimo knjižnico, ki bo poskrbela za komunikacijo ter omogočala lažjo in predvsem hitrejšo uporabo prikazovalnika.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt="" width="423"><figcaption><p>Knjižnica za prikazovalnik</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt="" width="423"><figcaption><p>Knjižnica za prikazovalnik</p></figcaption></figure>
 
 Ko smo naložili knjižnico za prikazovalnik je potrebno še nastaviti pravilno konfiguracijo namreč knjižnica je splošna tako za različne dimenzije prikazovalnikov kot različnih tipov komunikacij z krmilniki. Potrebno bo urediti že dokument že nameščene knjižnice.
 

@@ -22,7 +22,7 @@ Krmilnik električno povežemo z napajanjem in z digitalnimi vhodi in digitalnim
 
 PLK za svoje delovanje potrebuje napajanje, v našem primeru je to enosmerna napetost 24V. Priključne sponke napajanja na PLK so prikazane na spodnji sliki.
 
-<figure><img src="../../.gitbook/assets/image (2) (1) (1).png" alt="" width="375"><figcaption><p>Priključitev napajanja</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2) (1) (1) (1).png" alt="" width="375"><figcaption><p>Priključitev napajanja</p></figcaption></figure>
 
 Oznaka na sliki 12V/24V označuje pozitivni potencial in oznaka GND negativni potencial napajalne napetosti.
 
@@ -30,13 +30,13 @@ Oznaka na sliki 12V/24V označuje pozitivni potencial in oznaka GND negativni po
 
 Vezava digitalnih vhodov na PLK nam omogoča spremljanje stanja digitalnih naprav, kot so končna stikala, tlačni stikala in vse druge vrste digitalnih naprav. Primer priklopa stikala prikazuje spodnja slika.
 
-<figure><img src="../../.gitbook/assets/image (3) (1).png" alt="" width="337"><figcaption><p>Priključitev PLK na vhod A2 v digitalnem načinu</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3) (1) (1).png" alt="" width="337"><figcaption><p>Priključitev PLK na vhod A2 v digitalnem načinu</p></figcaption></figure>
 
 ### Digitalni izhodi
 
 Vezava digitalnih izhodov na PLK nam omogoča izvajanje akcij oz. spreminjanje stanj digitalnih naprav, kot so luči, releji, motorji, črpalke in druge digitalne naprave. Primer povezave bremena na digitalni relejski izhod prikazuje spodnja slika.
 
-<figure><img src="../../.gitbook/assets/image (4) (1).png" alt="" width="234"><figcaption><p>Priklop bremena na relejski izhod D0</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1) (1).png" alt="" width="234"><figcaption><p>Priklop bremena na relejski izhod D0</p></figcaption></figure>
 
 Digitalni izhod PLK je izveden z relejem, zato lahko breme krmilimo samo preko relejskega stikala. Na prvo sponko relejskega stikala priključimo pozitivni potencial vira (24V) na drugo sponko pa prvi konec bremena. Drugi konec bremena zvežemo na negativni potencial vira (0V).
 
