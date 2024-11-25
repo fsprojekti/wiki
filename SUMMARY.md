@@ -13,7 +13,7 @@
 
 ## Programiranje
 
-* [Page 1](programiranje/page-1.md)
+* [Implementacija Moorovega avtomata](programiranje/implementacija-moorovega-avtomata.md)
 
 ***
 

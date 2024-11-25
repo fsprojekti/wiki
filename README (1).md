@@ -12,7 +12,7 @@ Tipka z oznako **S1** je povezana na eni strani na pin **5V** in na drugi strani
 
 Delovanje vezja:
 
-* Ko tipko aktiviramo steče tok iz pina **5V** v pin **D13**. Ker imajo vhodi mikrokrmilnika visoko omsko upornost (100 _M_Ω) je tok, ki steče majhen (reda nekaj 10 _nA_). Upornost žice je nizka zato je padec napetosti majhen in se ves napetostni potencial prenese na vhod mikrokrmilnika v našem primeru je to _5V_.
+* Ko tipko aktiviramo steče tok iz pina **5V** v pin **D13**. Ker imajo vhodi mikrokrmilnika visoko omsko upornost (100 _&#x4D;_&#x3A9;) je tok, ki steče majhen (reda nekaj 10 _nA_). Upornost žice je nizka zato je padec napetosti majhen in se ves napetostni potencial prenese na vhod mikrokrmilnika v našem primeru je to _5V_.
 * Ko tipko deaktiviramo prekinemo tokokrog in na vhod mikrokrmilnika ne dobimo napetostnega potenciala s strani stikala.
 
 {% hint style="warning" %}
@@ -27,12 +27,12 @@ Ko je tipka neaktivna sedaj vodnik ni več prost ampak je preko upora **R1** pov
 
 ### Električne komponente
 
-| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                                                 |
-| --------------- | ------------ | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83)                        |
-| mikrokrmilnik   | ATmega328    | Microchip       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                       |
-| razvojna plošča | Arduino Nano | Gravitech       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
-| upor            | /            | Multicomp       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                         |
+| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                                              |
+| --------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83)                     |
+| mikrokrmilnik   | ATmega328    | Microchip       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                    |
+| razvojna plošča | Arduino Nano | Gravitech       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| upor            | /            | Multicomp       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                      |
 
 ### Dimenzioniranje komponent
 
