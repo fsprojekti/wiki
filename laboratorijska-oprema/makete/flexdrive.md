@@ -2,7 +2,7 @@
 
 <figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
 
-### Opis makete
+## 1. Opis makete
 
 Maketa FlexDrive je laboratorijska naprava namenjena za podrobno raziskovanje in razumevanje mehanike elastično sklopljenih pogonskih sistemov. Mehanski del naprave sestavljati dve gredi ki sta preko elastične sklopke mehko vpeti. Na vpeti gredi je togo pritrjen vztrajnik na gnani gredi pa je togo pritrjen elektro motor, ki poganja celoten sklop. Blokovna shema prikazuje vse elemente v obliki blokov in signale ki jih povezujejo
 
@@ -28,7 +28,7 @@ Signali makete:
 * $$U_{an}$$analogni signal enkoderja (samo vpeta gred)
 * $$PWM(t)$$digitalni signal za komunikacijo z gonilnikom motorja
 
-### Mehanska naprava
+### 1.1 Mehanska naprava
 
 Mehanska naprava je rotirajoči dinamičen sistem in je shematično prikazan na sliki
 
@@ -55,11 +55,11 @@ Napravo sestavljajo vpeta os, ki z vztrajnostjo $$J_2$$. Na vpeto os je togo pri
 | $$J_3$$ | Vztrajnostni moment gnane osi | \~0      | $$g \cdot m²$$ |
 | $$k$$   | konstanta vzmeti              |          | $$N/m$$        |
 
-### Merilnik zasuka gnana gred
+### 1.2 Merilnik zasuka gnana gred
 
 Gnana gred je opremljena z merilnikom zasuka oz. kota. Nameščen je magnetni inkrementalni enkoder [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) slovenskega podjetja [RLS d.o.o.](https://www.rls.si/). Merilnik je nameščen na razvojni ploščici [RMK-AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FbyXYN1jzgBNJ6AE5CL2T%2FRMK4D01_02.pdf?alt=media\&token=79a8c043-1cb3-4de8-b4c9-b0015d1d1cb4). Merilnik meri relativno gibanje osi ter posreduje informacijo v obliki digitalnega signala mikrokrmilniku.&#x20;
 
-### Merilnik zasuka vpeta gred
+### 1.3 Merilnik zasuka vpeta gred
 
 Vpeta gred je opremljena z merilnikom zasuke oz. kota. Nameščen je optični inkrementalni enkoder podjetja  [POLOLU](https://www.pololu.com/) z podatkovni listom  [POLOLU-4883](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922).&#x20;
 
@@ -67,15 +67,15 @@ Vpeta gred je opremljena z merilnikom zasuke oz. kota. Nameščen je optični in
 Med enkoderjem in vpeto osjo je nameščen zobniški sistem z razmerjem 20.4:1. Kar je potrebno upoštevali pri izračunu zasuka!&#x20;
 {% endhint %}
 
-### Elektromotorski pogon
+### 1.4 Elektromotorski pogon
 
 Vrtenje vpete osi dosežemo z elektromotorjem. Maketa ima vgrajen elektromotor [POLOLU-4883](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922) podjetja [POLOLU](https://www.pololu.com/). Prestavno razmerje motorja je 20.4:1.
 
-### Gonilnik elektromotorja
+### 1.5 Gonilnik elektromotorja
 
 Za pogon enosmernega motorja skrbi motorski gonilnik[ MD10C R3 ](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media\&token=e0621c34-4375-4835-b94b-6c76b18cf1ee)podjetja [Cytron](https://www.cytron.io/). Gonilnik upravljamo z dvema digitalnima signaloma $$power$$ in $$direction$$. Signal $$power$$ predstavlja PWM (Pulse Width Modulation) moduliran signal $$direction$$ pa smer toka na izhodu gonilnika, kar posledično določa smer vrtenja enosmernega elektromotorja.&#x20;
 
-## Električni del
+## 2. Električni del
 
 Električna shema naprave povezuje Arduino mikrokrmilnik z dvema inkrementalnima dajalnikoma in regulatorjem enosmernega motorja. Serijska povezave med mikrokrmilnikom in mikroračunalnikom ni prikazana. Povezave digitalnih signalov z Arduinom so predstavljene v tabeli
 
@@ -88,7 +88,7 @@ Električna shema naprave povezuje Arduino mikrokrmilnik z dvema inkrementalnima
 | Gonilnik motor   | DIR | 25          | DIR             | izhod      |
 | Gonilnik motor   | PWM | 26          | PWM             | izhod      |
 
-### Električne komponente
+### 2.1 Električne komponente
 
 Seznam vse uporabljenih električnih komponent:
 
@@ -96,13 +96,13 @@ Seznam vse uporabljenih električnih komponent:
 
 
 
-## Programska oprema - CLI
+## 3. Programska oprema - CLI
 
 ***
 
 V tem razdelku je predstavljeno, kako uporabnik komunicira z napravo neposredno preko serijske povezave. Vključeni so vsi ukazi (CLI), opis njihovih funkcij, primeri uporabe ter načini vizualizacije meritev preko Arduino Serial Plotterja.
 
-### **1. Struktura ukazov (CLI)**
+### **3.1 Struktura ukazov (CLI)**
 
 Maketa FlexDrive uporablja preprosto in pregledno tekstovno ukazno vrstico (CLI), ki omogoča neposredno komunikacijo med uporabnikom in ESP32 krmilnikom preko Arduino Serial Monitorja ali katerega koli drugega terminala (npr. PuTTY, CoolTerm, RealTerm).
 
@@ -129,7 +129,7 @@ stop
 list
 ```
 
-### **1.2. Krmiljenje v odprti zanki (open loop)**
+### **3.2 Krmiljenje v odprti zanki (open loop)**
 
 V odprti zanki (open-loop) sistem ne uporablja povratne informacije o hitrosti. Motor vrtiš neposredno s podajanjem PWM signala in nastavitvijo smeri. Ta način je primeren za testiranje, diagnostiko ali učenje osnov delovanja sistema.
 
@@ -177,7 +177,7 @@ Za ustavitev sistema:
 stop
 ```
 
-### **1.3. Krmiljenje v zaprti zanki (PID)**
+### **3.3 Krmiljenje v zaprti zanki (PID)**
 
 V zaprti zanki (closed-loop) FlexDrive uporablja povratno informacijo iz enkoderja za regulacijo hitrosti motorja.\
 To pomeni, da sistem samodejno prilagaja PWM signal, da doseže željeno referenčno hitrost.
@@ -249,7 +249,7 @@ stop
 
 Nasvet: Če motor vibrira, sunkovito pospešuje ali preskakuje hitrost, zmanjšajte Kp ali povečajte Kd.
 
-### **1.4. Branje položaja in hitrosti**
+### **3.4 Branje položaja in hitrosti**
 
 FlexDrive omogoča napredno spremljanje podatkov preko serijskega porta ter nastavitev pomembnih parametrov, ki vplivajo na stabilnost meritev, odzivnost regulacije in hitrost prikaza podatkov.
 
@@ -398,7 +398,7 @@ plot_period 3
 plotSerialClosed
 ```
 
-### **1.5. Napredni ukazi (diagnostika, omejitve, informacije o sistemu)**
+### **3.5 Napredni ukazi (diagnostika, omejitve, informacije o sistemu)**
 
 V tem poglavju so zbrani vsi ukazi, ki omogočajo pregled stanja, konfiguracijo varnostnih omejitev ter pridobivanje sistemskih informacij. Ti ukazi so posebej pomembni pri diagnostiki, učenju ter pravilnem nastavljanju sistema FlexDrive.
 
@@ -518,7 +518,7 @@ stop        # zaustavi motor
 run         # zažene motor
 ```
 
-### 1.6. Pregledna tabela vseh ukazov (CLI)
+### 3.6 Pregledna tabela vseh ukazov (CLI)
 
 Spodnja tabela povzema vse razpoložljive ukaze FlexDrive sistema, skupaj s parametri, dovoljenimi vrednostmi in opisom njihove funkcije.
 
