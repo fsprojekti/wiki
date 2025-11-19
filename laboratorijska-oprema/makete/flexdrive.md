@@ -96,161 +96,13 @@ Seznam vse uporabljenih električnih komponent:
 
 
 
-## Programska oprema
-
-Omogoča nadzor makete **FlexDrive** s pomočjo **ESP32** mikrokontrolerja in **MATLAB/Simulink** v realnem času.&#x20;
-
-**Repozitorij:** [fsprojekti/flexDrive-mcu](https://github.com/fsprojekti/flexDrive-mcu)
-
-Repozitorij vsebuje dve glavni programski komponenti:
-
-### Arduino koda (ESP32)
-
-📌 **Lokacija**: `firmware/`\
-📌 **Opis**:
-
-* Koda je pripravljena za **ESP32**, ki deluje kot **krmilnik za FlexDrive maketo**.
-* Omogoča nadzor **DC motorja** in branje podatkov iz **enkoderjev**.
-* Podpira dva načina delovanja:
-  * **Odprtozančni način** – Motor se poganja z neposrednim PWM signalom.
-  * **Zaprtozančni način** – PID regulacija hitrosti z enkoderji.
-* Vključuje **serijski vmesnik** (CLI) za upravljanje prek **računalnika**.
-
-📌 **Ključne funkcije**:\
-✅ Nastavitev hitrosti motorja z PWM signalom.\
-✅ Spreminjanje smeri vrtenja motorja.\
-✅ Branje podatkov iz **enkoderjev** v realnem času.\
-✅ Pošiljanje podatkov preko **serijskega porta** (UART).\
-✅ Nastavitev PID regulatorja (zaprtozančni način).
-
-### **MATLAB/Simulink komunikacijski blok**
-
-📌 **Lokacija**: `matlab/`\
-📌 **Opis**:
-
-* **MATLAB/Simulink blok NI simulacijski model**, ampak omogoča **realnočasovno povezavo** z ESP32.
-* Omogoča branje podatkov in pošiljanje ukazov **direktno iz MATLAB-a/Simulinka**.
-* Uporaben za spremljanje sistema in **eksperimentiranje** v realnem času.
-
-📌 **Ključne funkcije**:\
-✅ Pošiljanje ukazov ESP32 za nadzor motorja.\
-✅ Pridobivanje podatkov iz enkoderjev v MATLAB-u.\
-✅ Možnost implementacije lastnih **regulacijskih algoritmov** v Simulinku.
-
-### **Kako uporabljati ta repozitorij?**
-
-#### **1️⃣ Namestitev kode na ESP32**
-
-1. Prenesi repozitorij ali skopiraj kodo iz `firmware/`.
-2. Odpri projekt v **Arduino IDE** ali **PlatformIO**.
-3. Priključi ESP32 na računalnik.
-4. Naloži program (`Upload`).
-
-#### **2️⃣ Uporaba CLI za nadzor**
-
-Po naložitvi kode lahko ESP32 upravljaš preko **serijske povezave**.\
-📌 **Primeri ukazov**:
-
-<pre class="language-bash"><code class="lang-bash"><strong>set_pwm 100       // Nastavi PWM signal na 100
-</strong>set_dir 1         // Nastavi smer vrtenja motorja (1 = naprej, 0 = nazaj)
-read_encoder 1    // Preberi vrednost enkoderja 1
-</code></pre>
-
-#### **3️⃣ Povezava z MATLAB/Simulink**
-
-1. Odpri **MATLAB** in naloži skripte iz `matlab/`.
-2. Poveži MATLAB s **serijskim portom** ESP32.
-3. Uporabi Simulink blok za komunikacijo z napravo v realnem času.
-
-### **🔌 Povezava in konfiguracija**
-
-ESP32 komunicira z računalnikom preko **serijskega porta**.\
-📌 **Privzete serijske nastavitve**:
-
-* **Baudrate**: `115200`
-* **Data bits**: `8`
-* **Parity**: `None`
-* **Stop bits**: `1`
-
-Uporabnik lahko pošilja ukaze prek **serijskega monitorja** v Arduino IDE, PuTTY, CoolTerm ali MATLAB.
-
-### **🛠️ Struktura ukazov**
-
-Ukazi so v obliki:
-
-```bash
-code<ukaz> [parametri]
-```
-
-* Argumenti so ločeni s presledki.
-* Nekateri ukazi vračajo **potrditev** ali podatke.
-* Če ukaz ni pravilno vnesen, ESP32 vrne napako.
+## Programska oprema - CLI
 
 ***
-
-### **📌 Seznam spremenljivk**
-
-| Spremenljivka | Vrednost (privzeta) | Pomen in uporaba                                                                                                                              |
-| ------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| **mode**      | `0`                 | <p>Način delovanja:<br>• <code>0</code>: Odprtozančni (brez PID regulacije)<br>• <code>1</code>: Zaprtozančni (z uporabo PID regulatorja)</p> |
-| **state**     | `0`                 | <p>Stanje sistema:<br>• <code>0</code>: Ustavljeno<br>• <code>1</code>: V teku (motor deluje)</p>                                             |
-| **pwmESC**    | `0`                 | Trenutna PWM vrednost za krmiljenje motorja (uporabno v odprtozančnem načinu)                                                                 |
-| **dir**       | `1`                 | <p>Smer vrtenja motorja:<br>• <code>1</code>: Naprej<br>• <code>0</code>: Nazaj (reverse)</p>                                                 |
-| **ref**       | `0.3`               | Referenčna hitrost (obratov/s), uporabljena v zaprtozančnem načinu                                                                            |
-| **Kp**        | `0.1`               | Proporcionalni faktor PID regulatorja                                                                                                         |
-| **Ki**        | `0.0`               | Integralni faktor PID regulatorja                                                                                                             |
-| **Kd**        | `0.0`               | Diferencialni faktor PID regulatorja                                                                                                          |
-| **pwmMax**    | `4000`              | Maksimalna dovoljena PWM vrednost                                                                                                             |
-| **plot**      | `false`             | Zastavica, ki omogoča (true) ali onemogoča (false) realnočasovno risanje/pošiljanje podatkov                                                  |
-
-***
-
-### **📌 Seznam CLI ukazov**&#x20;
-
-#### **🔧 Sistem nadzor**
-
-| Ukaz   | Opis                                                                                       |
-| ------ | ------------------------------------------------------------------------------------------ |
-| `init` | Inicializira sistem in pripravi vse module.                                                |
-| `run`  | Zažene sistem (motor začne delovati).                                                      |
-| `stop` | Ustavi sistem (motor ustavi delovanje).                                                    |
-| `list` | Izpiše trenutno stanje sistema (način, stanje, PWM, smer, PID nastavitve, enkoderji itd.). |
-
-#### **⚙️ Nadzor motorja**
-
-| Ukaz                 | Opis                                                                                                                                                                                                                                                                                |
-| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `mode <0 or 1>`      | <p>Nastavi način delovanja:<br>• <strong>0 (odprtozančni):</strong> Motor deluje s fiksno PWM vrednostjo, brez PID regulacije.<br>• <strong>1 (zaprtozančni):</strong> Motor deluje s PID regulatorjem, ki prilagaja PWM glede na razliko med referenčno in dejansko hitrostjo.</p> |
-| `pwm <vrednost>`     | Nastavi PWM vrednost motorja (vrednost med 0 in `pwmMax`). Velja predvsem v odprtozančnem načinu.                                                                                                                                                                                   |
-| `dir <0 or 1>`       | <p>Nastavi smer vrtenja:<br>• <strong>0:</strong> Nazaj (reverse)<br>• <strong>1:</strong> Naprej (forward)</p>                                                                                                                                                                     |
-| `pwm_max <vrednost>` | Nastavi maksimalno PWM vrednost (vrednost mora biti vsaj 100).                                                                                                                                                                                                                      |
-
-#### **📏 PID regulacija**
-
-| Ukaz             | Opis                                                                        |
-| ---------------- | --------------------------------------------------------------------------- |
-| `ref <vrednost>` | <p>Nastavi referenčno hitrost <br>(v obratih/s, med -10.0 in 10.0).<br></p> |
-| `kp <vrednost>`  | <p>Nastavi proporcionalni faktor </p><p>(omejeno med 0 in 100).<br></p>     |
-| `ki <vrednost>`  | <p>Nastavi integralni faktor </p><p>(omejeno med 0 in 100).<br></p>         |
-| `kd <vrednost>`  | <p>Nastavi diferencialni faktor </p><p>(omejeno med 0 in 100).<br></p>      |
-
-#### **🛠 Enkoderji in podatki**
-
-| Ukaz                     | Opis                                                                                                                              |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
-| `read_encoder <1 or 2>`  | Prebere in izpiše trenutno vrednost izbranega enkoderja (1 ali 2).                                                                |
-| `reset_encoder <1 or 2>` | Ponastavi števec izbranega enkoderja (1 ali 2) na 0.                                                                              |
-| `plot <0 or 1>`          | Omogoči (1) ali onemogoči (0) realnočasovno pošiljanje podatkov (enkoderske vrednosti, hitrost, PWM ipd.) prek serijske povezave. |
-
-***
-
-## Programska oprema
-
-### 1. Upravljanje sistema preko Arduino Serial Monitorja (CLI)
 
 V tem razdelku je predstavljeno, kako uporabnik komunicira z napravo neposredno preko serijske povezave. Vključeni so vsi ukazi (CLI), opis njihovih funkcij, primeri uporabe ter načini vizualizacije meritev preko Arduino Serial Plotterja.
 
-#### **1.1. Struktura ukazov (CLI)**
+### **1. Struktura ukazov (CLI)**
 
 Maketa FlexDrive uporablja preprosto in pregledno tekstovno ukazno vrstico (CLI), ki omogoča neposredno komunikacijo med uporabnikom in ESP32 krmilnikom preko Arduino Serial Monitorja ali katerega koli drugega terminala (npr. PuTTY, CoolTerm, RealTerm).
 
@@ -277,7 +129,7 @@ stop
 list
 ```
 
-#### **1.2. Krmiljenje v odprti zanki (open loop)**
+### **1.2. Krmiljenje v odprti zanki (open loop)**
 
 V odprti zanki (open-loop) sistem ne uporablja povratne informacije o hitrosti. Motor vrtiš neposredno s podajanjem PWM signala in nastavitvijo smeri. Ta način je primeren za testiranje, diagnostiko ali učenje osnov delovanja sistema.
 
@@ -325,7 +177,7 @@ Za ustavitev sistema:
 stop
 ```
 
-#### **1.3. Krmiljenje v zaprti zanki (PID)**
+### **1.3. Krmiljenje v zaprti zanki (PID)**
 
 V zaprti zanki (closed-loop) FlexDrive uporablja povratno informacijo iz enkoderja za regulacijo hitrosti motorja.\
 To pomeni, da sistem samodejno prilagaja PWM signal, da doseže željeno referenčno hitrost.
@@ -397,7 +249,7 @@ stop
 
 Nasvet: Če motor vibrira, sunkovito pospešuje ali preskakuje hitrost, zmanjšajte Kp ali povečajte Kd.
 
-#### **1.4. Branje položaja in hitrosti**
+### **1.4. Branje položaja in hitrosti**
 
 FlexDrive omogoča napredno spremljanje podatkov preko serijskega porta ter nastavitev pomembnih parametrov, ki vplivajo na stabilnost meritev, odzivnost regulacije in hitrost prikaza podatkov.
 
@@ -546,7 +398,7 @@ plot_period 3
 plotSerialClosed
 ```
 
-#### **1.5. Napredni ukazi (diagnostika, omejitve, informacije o sistemu)**
+### **1.5. Napredni ukazi (diagnostika, omejitve, informacije o sistemu)**
 
 V tem poglavju so zbrani vsi ukazi, ki omogočajo pregled stanja, konfiguracijo varnostnih omejitev ter pridobivanje sistemskih informacij. Ti ukazi so posebej pomembni pri diagnostiki, učenju ter pravilnem nastavljanju sistema FlexDrive.
 
@@ -666,7 +518,7 @@ stop        # zaustavi motor
 run         # zažene motor
 ```
 
-#### 1.6. Pregledna tabela vseh ukazov (CLI)
+### 1.6. Pregledna tabela vseh ukazov (CLI)
 
 Spodnja tabela povzema vse razpoložljive ukaze FlexDrive sistema, skupaj s parametri, dovoljenimi vrednostmi in opisom njihove funkcije.
 
