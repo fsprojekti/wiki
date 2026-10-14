@@ -4,7 +4,7 @@
 
 ## Elektrotehnika
 
-* [Tipka in mikrokrmilnik](<README (1).md>)
+* [Tipka in mikrokrmilnik](elektrotehnika/tipka-in-mikrokrmilnik.md)
 * [LED in mikrokrmilnik](elektrotehnika/led-in-mikrokrmilnik.md)
 * [7-segmentni LED prikazovalnik in mikrokrmilnik](elektrotehnika/7-segmentni-led-prikazovalnik-in-mikrokrmilnik.md)
 * [Optosklopnik in mikrokrmilnik](elektrotehnika/optosklopnik-in-mikrokrmilnik.md)
@@ -40,6 +40,6 @@
 
 ## Arduino demo
 
-* [Branje digitalnih signalov](arduino-demo/page-4.md)
+* [Branje digitalnih signalov](arduino-demo/branje-digitalnih-signalov.md)
 * [Upravljanje digitalnih izhodov](arduino-demo/upravljanje-digitalnih-izhodov.md)
 * [Uporaba serijske komunikacije](arduino-demo/uporaba-serijske-komunikacije.md)

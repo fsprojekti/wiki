@@ -1,6 +1,6 @@
 # FlexDrive
 
-<figure><img src="../../.gitbook/assets/image (1) (1).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
 
 ## 1. Opis makete
 
@@ -32,7 +32,7 @@ Signali makete:
 
 Mehanska naprava je rotirajoči dinamičen sistem in je shematično prikazan na sliki
 
-<figure><img src="../../.gitbook/assets/image (1) (1) (1).png" alt=""><figcaption><p>Shema mehanskega dela makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption><p>Shema mehanskega dela makete</p></figcaption></figure>
 
 Napravo sestavljajo vpeta os, ki z vztrajnostjo $$J_2$$. Na vpeto os je togo pritrjen vztrajnih z vztrajnostjo $$J_1$$. Os je v podnožje vpeta preko dveh ležajev s skupnim dušenjem $$B_1$$. Gibanje vpete osi opisuje kot $$\phi_2(t)$$. Vpeta os je preko vzmetne sklopke s konstano $$k$$ mehko povezna na gnano os, katere vztrajnostni moment podaja $$J_3$$. Gnana os je togo vpeta na motor z dušenjem $$B_2$$. Gibanje gnane osi opisuje kot $$\phi_1(t)$$, navor $$M(t)$$pa dovaja elektro motor.
 

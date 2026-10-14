@@ -33,12 +33,12 @@ Delovanje vezja:
 
 ## Električne komponente
 
-| Komponenta      | Koda         | Proizvajalec | Podatkovni list                                                                                                                                                                                                                 |
-| --------------- | ------------ | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| optosklopnik    | 4N25         | Vishay       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FCAMTxKqiihmMlFemcG0r%2F4n25.pdf?alt=media\&token=8988286b-b7b5-46ec-a997-ead3a9f7d1e9)                         |
-| mikrokrmilnik   | ATmega328    | Microchip    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                       |
-| razvojna plošča | Arduino Nano | Gravitech    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
-| upori           | /            | Multicomp    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                         |
+| Komponenta      | Koda         | Proizvajalec | Podatkovni list                                                                                                                                                                                                              |
+| --------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| optosklopnik    | 4N25         | Vishay       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FCAMTxKqiihmMlFemcG0r%2F4n25.pdf?alt=media\&token=8988286b-b7b5-46ec-a997-ead3a9f7d1e9)                      |
+| mikrokrmilnik   | ATmega328    | Microchip    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                    |
+| razvojna plošča | Arduino Nano | Gravitech    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| upori           | /            | Multicomp    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                      |
 
 ## Dimenzioniranje komponent
 
@@ -48,8 +48,8 @@ Pri izračunu upora R1 si pomagajte z [gradivom](led-in-mikrokrmilnik.md)
 
 ### Upor R2
 
-Pri izračunu upora R2 si pomagajte z [gradivom](<../README (1).md>)
+Pri izračunu upora R2 si pomagajte z [gradivom](tipka-in-mikrokrmilnik.md)
 
 ### Upor R3
 
-Optosklopnik **4n25** ima dodatno električno povezavo baze optičnega tranzistorja na pin _6_. To povezavo lahko vzporedno uporabimo kot dodatno možnost odpiranja optosklopnika. V tem primeru te možnosti ne bomo uporabljali in bomo to povezavo vezali preko upora R3 na negativni potencial. Nepovezana povezava se obnaša kot antena, ki sprejema elektromagnetno sevanje iz okolice, kar povzroča nenadzorovano odpiranje optičnega tranzistorja. Pri izračunu vrednosti upora R3 si pomagajte z [gradivom](<../README (1).md#dimenzioniranje-komponent>)
+Optosklopnik **4n25** ima dodatno električno povezavo baze optičnega tranzistorja na pin _6_. To povezavo lahko vzporedno uporabimo kot dodatno možnost odpiranja optosklopnika. V tem primeru te možnosti ne bomo uporabljali in bomo to povezavo vezali preko upora R3 na negativni potencial. Nepovezana povezava se obnaša kot antena, ki sprejema elektromagnetno sevanje iz okolice, kar povzroča nenadzorovano odpiranje optičnega tranzistorja. Pri izračunu vrednosti upora R3 si pomagajte z [gradivom](tipka-in-mikrokrmilnik.md#dimenzioniranje-komponent)

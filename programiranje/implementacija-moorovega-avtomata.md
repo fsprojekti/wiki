@@ -14,7 +14,7 @@ Izdelati moramo električno vezje in programsko kodo.
 
 ### Električno vezje
 
-Električno vezje mora imeti tipko in biti sposobno krmiliti električni motor. Vključitev tipke v električno vezje si lahko ogledate v [gradivu](<../README (1).md>). Električno vezje za krmiljenje enosmernega motorja v vse smeri pa je predstavljeno v [gradivu](../elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md).
+Električno vezje mora imeti tipko in biti sposobno krmiliti električni motor. Vključitev tipke v električno vezje si lahko ogledate v [gradivu](../elektrotehnika/tipka-in-mikrokrmilnik.md). Električno vezje za krmiljenje enosmernega motorja v vse smeri pa je predstavljeno v [gradivu](../elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md).
 
 ### Programska koda
 
