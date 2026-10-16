@@ -1,55 +1,55 @@
-# Optosklopnik in mikrokrmilnik
+# Optocoupler and microcontroller
 
-Galvanska ločitev digitalnih vhodov mikrokrmilnika je potrebna, kadar želimo ohraniti informacijski tok podatkov do krmilnika, vendar želimo ločiti električni tokokrog vira informacij od električnega tokokroga mikrokrmilnika. Galvanska ločitev nudi prilagoditev napetostnih nivojev in zaščito mikrokrmilnika pred električnimi preobremenitvami.
+Galvanic isolation of a microcontroller's digital inputs is needed when we want to transfer information to the controller while keeping the signal source circuit electrically separate from the microcontroller circuit. It also allows different voltage levels to be interfaced and helps protect the microcontroller against electrical overloads.
 
-Standardni industrijski napetostni nivo je 24V, kar pomeni, da je za uporabo mikrokrmilnika, ki deluje na napetostnih nivojih 5V ali 3,3V, potrebna napetostna prilagoditev. Ena od možnih rešitev je uporaba optosklopnika.
+The standard industrial voltage level is 24 V. A microcontroller operating at 5 V or 3.3 V therefore requires voltage-level adaptation. An optocoupler is one possible solution.
 
-Optični sklopnik oz. optosklopnik je električni element, ki prevaja digitalno informacijo med dvema električnima tokokrogoma preko svetlobe. Shematična predstavitev optosklopnika je prikazana na sliki.
+An optocoupler transfers digital information between two electrical circuits using light. The figure shows its schematic representation.
 
-<figure><img src="../.gitbook/assets/optoElement.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/optoElement.png" alt="Schematic representation of an optocoupler"><figcaption></figcaption></figure>
 
-Optosklopnik ima na vhodu LED na katero priključimo tokokrog vira informacije in na izhodu optični tranzistor na katerega priključimo tokokrog ponora informacije.
+The optocoupler has an LED on the input side, connected to the signal source circuit, and a phototransistor on the output side, connected to the receiving circuit.
 
-Gradnjo električnega vezja pričnemo z izdelavo električne sheme.
+We begin building the circuit by drawing a circuit diagram.
 
-## Električna shema
+## Circuit diagram
 
-Električna shema vključitve optosklopnika prikazuje slika.
+The figure shows how to connect the optocoupler.
 
-<figure><img src="../.gitbook/assets/opto.png" alt=""><figcaption><p>Uporaba optosklopnika za galvansko ločitev dveh napajalnih virov</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/opto.png" alt="Optocoupler interface between a 24 V input circuit and a microcontroller"><figcaption><p>Using an optocoupler to provide galvanic isolation between two supply circuits</p></figcaption></figure>
 
-Vhodna LED optosklopnika je povezana preko tipke **S1** in upora **R1** na _24V_ napetostni nivo. Optični tranzistor optosklopnika je povezan na vhod **D12** mikrokrmilnika.
+The input LED is connected to the _24 V_ supply through button **S1** and resistor **R1**. The phototransistor is connected to microcontroller input **D12**.
 
 {% hint style="info" %}
-**Pozor!** Električna povezava izhoda optosklopnika in mikrokrmilnika je izvedene z **pull up** uporom, ki invertira logiko delovanja.
+**NOTE:** The connection between the optocoupler output and the microcontroller uses a **pull-up** resistor, resulting in inverted logic.
 {% endhint %}
 
-Delovanje vezja:
+Circuit operation:
 
-* Ko uporabnik aktivira tipko, steče tok skozi LED optosklopnika in LED začne oddajati svetlobo.
-* Ta svetloba nato osvetli optični tranzistor in ga odpre.
-* Ko je tranzistor odprt steče tok skozi upor **R2** in potencial **GND** se prenese na vhod mikrokrmilnika, ki predstavlja logično 0 oz. _FALSE_.
-* Ko je tranzistor zaprt tok skozi upor **R2** ne teče in na vhodu mikrokrmilnika dobimo visok potencial, ki predstavlja logično 1 oz. _TRUE_.
+* When the user presses the button, current flows through the optocoupler LED, which emits light.
+* The light reaches the phototransistor and turns it on.
+* With the transistor on, current flows through resistor **R2** and the microcontroller input is pulled to **GND**, corresponding to logic 0 or _FALSE_.
+* With the transistor off, current does not flow through **R2**, and the microcontroller input is high, corresponding to logic 1 or _TRUE_.
 
-## Električne komponente
+## Electrical components
 
-| Komponenta      | Koda         | Proizvajalec | Podatkovni list                                                                                                                                                                                                              |
+| Component | Part number | Manufacturer | Datasheet |
 | --------------- | ------------ | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| optosklopnik    | 4N25         | Vishay       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FCAMTxKqiihmMlFemcG0r%2F4n25.pdf?alt=media\&token=8988286b-b7b5-46ec-a997-ead3a9f7d1e9)                      |
-| mikrokrmilnik   | ATmega328    | Microchip    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                    |
-| razvojna plošča | Arduino Nano | Gravitech    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
-| upori           | /            | Multicomp    | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                      |
+| optocoupler | 4N25         | Vishay       | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FCAMTxKqiihmMlFemcG0r%2F4n25.pdf?alt=media\&token=8988286b-b7b5-46ec-a997-ead3a9f7d1e9) |
+| microcontroller | ATmega328    | Microchip    | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454) |
+| development board | Arduino Nano | Gravitech    | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| resistors | /            | Multicomp    | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7) |
 
-## Dimenzioniranje komponent
+## Component sizing
 
-### Upor R1
+### Resistor R1
 
-Pri izračunu upora R1 si pomagajte z [gradivom](led-in-mikrokrmilnik.md)
+For the calculation of R1, refer to [LED and microcontroller](led-in-mikrokrmilnik.md).
 
-### Upor R2
+### Resistor R2
 
-Pri izračunu upora R2 si pomagajte z [gradivom](tipka-in-mikrokrmilnik.md)
+For the calculation of R2, refer to [Button and microcontroller](tipka-in-mikrokrmilnik.md).
 
-### Upor R3
+### Resistor R3
 
-Optosklopnik **4n25** ima dodatno električno povezavo baze optičnega tranzistorja na pin _6_. To povezavo lahko vzporedno uporabimo kot dodatno možnost odpiranja optosklopnika. V tem primeru te možnosti ne bomo uporabljali in bomo to povezavo vezali preko upora R3 na negativni potencial. Nepovezana povezava se obnaša kot antena, ki sprejema elektromagnetno sevanje iz okolice, kar povzroča nenadzorovano odpiranje optičnega tranzistorja. Pri izračunu vrednosti upora R3 si pomagajte z [gradivom](tipka-in-mikrokrmilnik.md#dimenzioniranje-komponent)
+The **4N25** optocoupler exposes the phototransistor base on pin _6_. This connection provides an additional way to control the transistor. We will not use that option here, so we connect the base to the negative supply potential through resistor R3. An unconnected lead can act as an antenna, picking up electromagnetic interference and causing unintended transistor conduction. For guidance on selecting R3, refer to [Component sizing](tipka-in-mikrokrmilnik.md#component-sizing).

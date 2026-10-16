@@ -2,14 +2,14 @@
 
 * [Baza znanja](README.md)
 
-## Elektrotehnika
+## Electronics
 
-* [Tipka in mikrokrmilnik](elektrotehnika/tipka-in-mikrokrmilnik.md)
-* [LED in mikrokrmilnik](elektrotehnika/led-in-mikrokrmilnik.md)
-* [7-segmentni LED prikazovalnik in mikrokrmilnik](elektrotehnika/7-segmentni-led-prikazovalnik-in-mikrokrmilnik.md)
-* [Optosklopnik in mikrokrmilnik](elektrotehnika/optosklopnik-in-mikrokrmilnik.md)
-* [Rele in mikrokrmilnik](elektrotehnika/rele-in-mikrokrmilnik.md)
-* [Enosmerni motor in mikrokrmilnik](elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md)
+* [Button and microcontroller](elektrotehnika/tipka-in-mikrokrmilnik.md)
+* [LED and microcontroller](elektrotehnika/led-in-mikrokrmilnik.md)
+* [7-segment LED display and microcontroller](elektrotehnika/7-segmentni-led-prikazovalnik-in-mikrokrmilnik.md)
+* [Optocoupler and microcontroller](elektrotehnika/optosklopnik-in-mikrokrmilnik.md)
+* [Relay and microcontroller](elektrotehnika/rele-in-mikrokrmilnik.md)
+* [DC motor and microcontroller](elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md)
 
 ## Programiranje
 

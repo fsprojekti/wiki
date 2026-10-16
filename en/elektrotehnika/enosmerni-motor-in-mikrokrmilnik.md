@@ -1,66 +1,66 @@
-# Enosmerni motor in mikrokrmilnik
+# DC motor and microcontroller
 
-Enosmerni motor je eden najpogostejših aktuatorjev. Uporablja za različne namene kot so poganjanje mešal, tekočih trakov, ventilov, črpalk, ... Na sliki je primer enosmernega električnega motorja
+A DC motor is one of the most common actuators. Applications include driving mixers, conveyor belts, valves and pumps. The figure shows an example of a DC motor.
 
-<figure><img src="../.gitbook/assets/dcMotor.jpg" alt=""><figcaption><p>Enosmerni električni motor</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/dcMotor.jpg" alt="Example of a DC motor"><figcaption><p>DC motor</p></figcaption></figure>
 
-Enosmerni elektromotor ima dva električna priključka, na katera priključimo napetostni vir in poženemo motor. Smer vrtenja motorja je odvisna od smeri električnega toka.
+A DC motor has two electrical terminals. Connecting a voltage source to these terminals makes the motor run. The direction of rotation depends on the direction of the current.
 
-Motor lahko krmilimo na več različnih načinov. V nadaljevanju predstavljamo 3 načine za vse pa uporabljamo enake električne komponente, ki se jih tudi na enak način dimenzionira.
+There are several ways to control a motor. The following sections present three methods using the same types of electrical components and component-sizing approach.
 
-## Električne komponente
+## Electrical components
 
-| Komponenta      | Koda         | Proizvajalec     | Podatkovni list                                                                                                                                                                                                                 |
+| Component | Part number | Manufacturer | Datasheet |
 | --------------- | ------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| elektromotor    | 37488        | FischerTechnik   | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FGLSsD9tC9dNNH42jTjeJ%2Fftspares.pdf?alt=media\&token=2e875bd6-322a-431e-bf60-9f0cf77b16e4)                     |
-| rele            | V23105       | AXICOM           | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FNozBDqjgGq8wwq5ogwFr%2FreleyV23105.pdf?alt=media\&token=6e9614c8-4e16-4238-b2bd-0e36a72d839d)                  |
-| tranzistor      | BC550        | ON Semiconductor | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FNkIToA5TJdzhLiJa8uWY%2FtranBC550.pdf?alt=media\&token=64e3614f-356d-40e2-867e-8471feb14908)                    |
-| dioda           | 1N4007       | FairChild        | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVo1DGisQWbUp2fduCfXv%2F1N4007-471020.pdf?alt=media\&token=9852369f-aa20-4b5d-80e7-1aeb8fe76d6a)                |
-| mikrokrmilnik   | ATmega328    | Microchip        | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                       |
-| razvojna plošča | Arduino Nano | Gravitech        | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
-| upor            | /            | Multicomp        | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                         |
+| motor | 37488        | FischerTechnik   | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FGLSsD9tC9dNNH42jTjeJ%2Fftspares.pdf?alt=media\&token=2e875bd6-322a-431e-bf60-9f0cf77b16e4) |
+| relay | V23105       | AXICOM           | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FNozBDqjgGq8wwq5ogwFr%2FreleyV23105.pdf?alt=media\&token=6e9614c8-4e16-4238-b2bd-0e36a72d839d) |
+| transistor | BC550        | ON Semiconductor | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FNkIToA5TJdzhLiJa8uWY%2FtranBC550.pdf?alt=media\&token=64e3614f-356d-40e2-867e-8471feb14908) |
+| diode | 1N4007       | FairChild        | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVo1DGisQWbUp2fduCfXv%2F1N4007-471020.pdf?alt=media\&token=9852369f-aa20-4b5d-80e7-1aeb8fe76d6a) |
+| microcontroller | ATmega328    | Microchip        | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454) |
+| development board | Arduino Nano | Gravitech        | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech\_Arduino\_Nano3\_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| resistor | /            | Multicomp        | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7) |
 
-## Dimenzioniranje komponent
+## Component sizing
 
-Postopek dimenzioniranje releja, tranzistorja in uporov si lahko pogledate v [gradivu](rele-in-mikrokrmilnik.md)
+For the procedure for selecting the relay, transistor and resistors, refer to [Relay and microcontroller](rele-in-mikrokrmilnik.md).
 
-Pri izbiri releja moramo zagotoviti, da je specificiran maksimalni trajni tok skozi kontakt releja večji od toka enosmernega motorja. V našem primeru je obratovalni tok motorja $$1A$$ dovoljeni trajni tok kontakta releja pa $$3A$$, kar pomeni, da rele lahko uporabimo za krmiljenje motorja.
+The relay contact's specified maximum continuous current must exceed the motor current. In this example, the motor operating current is $$1A$$ and the relay contact's permitted continuous current is $$3A$$, so the contact meets this operating-current requirement.
 
-## Krmiljenje motorja v režimu vklop/izklop
+## On/off motor control
 
-Krmiljenje motorja v režimu vklop/izklop pomeni, da motor upravljamo kot digitalno breme in ima torej dve stanji motor stoji in motor se vrti. Električna shema povezuje motor s mikrokrmilnikom preko releja, kot prikazuje slika.
+On/off control treats the motor as a digital load with two states: stopped and running. The diagram shows the motor connected to the microcontroller through a relay.
 
-<figure><img src="../.gitbook/assets/dcmotor (1).png" alt="" width="563"><figcaption><p>Shema električnega vezja za krmiljenje motorja VKLOP/IZKLOP</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/dcmotor (1).png" alt="Relay circuit for switching a DC motor on and off" width="563"><figcaption><p>Circuit diagram for on/off motor control</p></figcaption></figure>
 
-Opis in delovanje vezja si lahko pogledate v [gradivu](rele-in-mikrokrmilnik.md). Kontakt releja smo zaporedno vezali z enosmernim motorjem. Aktivacija releja sklene kontakt **K1** in skozi motor steče električni tok, ki požene motor v gibanje.
+For the circuit description and operation, refer to [Relay and microcontroller](rele-in-mikrokrmilnik.md). The relay contact is connected in series with the DC motor. Energizing the relay closes contact **K1**, allowing current to flow through the motor and making it run.
 
-## Krmiljenje motorja v obe smeri
+## Bidirectional motor control
 
-Električna shema povezuje motor s mikrokrmilnikom preko releja, kot prikazuje slika.
+The diagram shows the motor connected to the microcontroller through relays.
 
-<figure><img src="../.gitbook/assets/motor2.png" alt=""><figcaption><p>Shema električnega vezja za krmiljenje elektromotorja v obe smeri</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/motor2.png" alt="Two-relay circuit for bidirectional motor control"><figcaption><p>Circuit diagram for bidirectional motor control</p></figcaption></figure>
 
-Kadar imamo na voljo releje, ki imajo kontakt izveden, tako da sta dostopna oba stanja (odprt in zaprt) lahko uporabimo samo dva digitalna izhoda mikrokrmilnika za krmiljenje motorja. Stanje motorja popisuje tabela
+If the relays have changeover contacts with both normally open and normally closed connections available, only two microcontroller digital outputs are needed. The table describes the motor states.
 
-| K1 | K2 | Motor  |
-| -- | -- | ------ |
-| 0  | 0  | miruje |
-| 0  | 1  | levo   |
-| 1  | 0  | desno  |
-| 1  | 1  | miruje |
+| K1 | K2 | Motor |
+| -- | -- | ----- |
+| 0 | 0 | Stopped |
+| 0 | 1 | Left |
+| 1 | 0 | Right |
+| 1 | 1 | Stopped |
 
-## Krmiljenje motorja v obe smeri s H mostičem
+## Bidirectional motor control using an H-bridge
 
-Električna shema povezuje motor s mikrokrmilnikom preko releja, kot prikazuje slika.
+The diagram shows the motor connected to the microcontroller through relays arranged as an H-bridge.
 
-<figure><img src="../.gitbook/assets/motor3.png" alt=""><figcaption><p>Električna shema vezja za krmiljenje elektro motorja z H mostičem</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/motor3.png" alt="Four-relay H-bridge circuit for motor control"><figcaption><p>Circuit diagram for motor control using an H-bridge</p></figcaption></figure>
 
-Kadar imamo na voljo releje, ki imajo kontakt izveden, tako da je dostopen sam eno stanje (zaprt) moramo uporabit 4 digitalne izhode mikrokrmilnika za krmiljenje motorja. Pri tej izvedbi moramo paziti, da pravilno krmilimo digitalne izhode saj lahko ob hkratni aktivaciji dveh zaporedno vezanih relejev pride do kratkega stika. Stanje motorja popisuje tabela
+If only normally open relay contacts are available, four microcontroller digital outputs are needed. The outputs must be controlled correctly: energizing both relays in the same bridge leg at once can cause a short circuit. The table describes the motor states.
 
-| K1 | K2 | K3 | K4 | Motor  |
-| -- | -- | -- | -- | ------ |
-| 0  | 0  | 0  | 0  | miruje |
-| 0  | 1  | 1  | 0  | desno  |
-| 1  | 0  | 0  | 1  | levo   |
+| K1 | K2 | K3 | K4 | Motor |
+| -- | -- | -- | -- | ----- |
+| 0 | 0 | 0 | 0 | Stopped |
+| 0 | 1 | 1 | 0 | Right |
+| 1 | 0 | 0 | 1 | Left |
 
-Vse ostale možnosti vključevanja relejev ali privedejo do kratkega stika ali pa bo motor miroval.
+Other combinations either leave the motor stopped or cause a short circuit.

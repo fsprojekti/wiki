@@ -1,45 +1,45 @@
-# Tipka in mikrokrmilnik
+# Button and microcontroller
 
-Če želimo prenesti informacijo o stanju tipke v mikrokrmilnik moramo zgraditi električno vezje. Gradnjo električnega vezja pričnemo z izdelavo električne sheme.
+To transfer information about the state of a button to a microcontroller, we need to build an electrical circuit. We begin by drawing a circuit diagram.
 
-## Električna shema
+## Circuit diagram
 
-Električna shema povezuje stikalo in mikrokrmilnik kot je prikazano na sliki.
+The diagram shows how to connect the button to the microcontroller.
 
-<figure><img src="../.gitbook/assets/inputArduinoI.png" alt="" width="563"><figcaption><p>Priključitev tipke na mikrokrmilnik</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/inputArduinoI.png" alt="Button connected directly between 5 V and microcontroller input D13" width="563"><figcaption><p>Connecting a button to the microcontroller</p></figcaption></figure>
 
-Tipka z oznako **S1** je povezana na eni strani na pin **5V** in na drugi strani na pin **D13** razvojne ploščice. Pin **5V** ima vedno napetostni potencial _5V_ čim je vklopljeno napajanje razvojne ploščice. Napajanje razvojne ploščice je izvedeno preko USB vmesnika, ki povezuje računalnik z razvojno ploščico in se uporablja tudi za nalaganje programa.
+Button **S1** is connected between the development board's **5V** pin and **D13** pin. The **5V** pin provides _5 V_ whenever the board is powered. A USB connection supplies power, connects the board to the computer and is also used to upload the program.
 
-Delovanje vezja:
+Circuit operation:
 
-* Ko tipko aktiviramo steče tok iz pina **5V** v pin **D13**. Ker imajo vhodi mikrokrmilnika visoko omsko upornost (100 _&#x4D;_&#x3A9;) je tok, ki steče majhen (reda nekaj 10 _nA_). Upornost žice je nizka zato je padec napetosti majhen in se ves napetostni potencial prenese na vhod mikrokrmilnika v našem primeru je to _5V_.
-* Ko tipko deaktiviramo prekinemo tokokrog in na vhod mikrokrmilnika ne dobimo napetostnega potenciala s strani stikala.
+* When the button is pressed, current flows from **5V** to **D13**. The microcontroller input has a high input resistance (approximately _100 MΩ_ in this simplified model), so only a small current flows, on the order of tens of _nA_. The wire resistance and resulting voltage drop are small, so the input voltage is approximately _5 V_.
+* When the button is released, the circuit is interrupted and the switch no longer applies a defined voltage to the input.
 
 {% hint style="warning" %}
-**POZOR** V električnih vezjih je potrebno vedno paziti na ožičenja, ki so na eni strani priključena na vhode mikrokrmilnika na drugi strani pa prosta. Namreč vsak tak vodnik predstavlja anteno, ki lovi magnetno polje in inducira električne napetosti. Ker so vhodi mikrokrmilnika visoko omski inducirane napetosti poženejo dovolj velike tokove, da jih vhod mikrokrmilnika zazna kot logično visok potencial.
+**CAUTION:** A conductor connected to a microcontroller input at one end and left unconnected at the other can act as an antenna and pick up electromagnetic interference. Since the input has a high impedance, this interference can cause the microcontroller to detect a logic high level.
 {% endhint %}
 
-Za pravilno delovanje moramo dodati (pull-down) upor v naše vezje. Obsežnejšo razlago o tej tematiki lahko najdete v priročniku. Popravljeno električno shemo prikazuje spodnja slika.
+For reliable operation, add a pull-down resistor. A more detailed explanation is available in the manual. The revised circuit is shown below.
 
-<figure><img src="../.gitbook/assets/inputArduino.png" alt="" width="563"><figcaption><p>Priključitev tipke in dodatnega (pull-up) upora</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/inputArduino.png" alt="Button input circuit with a pull-down resistor to ground" width="563"><figcaption><p>Connecting the button with an additional pull-down resistor</p></figcaption></figure>
 
-Ko je tipka neaktivna sedaj vodnik ni več prost ampak je preko upora **R1** povezan na nizek napetostni potencial. Vsak tok, ki je posledica inducirane napetosti sedaj odteče preko upora na nizek potencial, ker je upornost **R1** za dekado nižja od upornosti vhoda mikrokrmilnika.
+When the button is released, the input is no longer floating: resistor **R1** connects it to ground. Interference currents can flow through this resistor instead of creating an undefined input voltage. The resistor has a much lower resistance than the microcontroller input.
 
-### Električne komponente
+### Electrical components
 
-| Komponenta      | Koda         | Proizvajalec    | Podatkovni list                                                                                                                                                                                                              |
+| Component | Part number | Manufacturer | Datasheet |
 | --------------- | ------------ | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| tipka           | KS11R22CQD   | C\&K COMPONENTS | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83)                     |
-| mikrokrmilnik   | ATmega328    | Microchip       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454)                    |
-| razvojna plošča | Arduino Nano | Gravitech       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
-| upor            | /            | Multicomp       | [datoteka](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7)                      |
+| button | KS11R22CQD   | C\&K COMPONENTS | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FqmBvu21HLP039K5EvO7R%2Ftipka.pdf?alt=media\&token=7a603acd-c208-4158-b49f-55e25430cb83) |
+| microcontroller | ATmega328    | Microchip       | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FVdyx5L6r6wqAilPGHpen%2FATmega.pdf?alt=media\&token=a7f48452-034e-4411-b859-d87bf77d7454) |
+| development board | Arduino Nano | Gravitech       | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FmBK4u5xIBnLKRFzfea5q%2FGravitech_Arduino_Nano3_0.pdf?alt=media\&token=b8cb7c7d-aee0-4845-863b-88c382cca882) |
+| resistor | /            | Multicomp       | [datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FwniMD8SuO6uL0i9SD8N2%2Fupor.pdf?alt=media\&token=3553e1a0-af07-4fd2-8af3-615a8cee41e7) |
 
-### Dimenzioniranje komponent
+### Component sizing
 
-**Upor R1**
+**Resistor R1**
 
-Vrednost upora mora biti dovolj velika, da ob aktivnem stikalu ne trošimo preveč energije in dovolj majhen, da preusmeri večino induciranega toka preko sebe na nizek napetostni potencial. Velikost upora se lahko izračuna vendar večinoma uporabimo izkustvene vrednosti. Velikost upora določimo glede na potrebe:
+The resistance must be high enough to avoid excessive power consumption when the button is pressed and low enough to divert interference currents to ground. Although it can be calculated, practical values are often chosen according to the application:
 
-* 3,3kΩ...10kΩ za splošno uporabo
-* 50kΩ...100kΩ se uporablja tam kjer je pomembna poraba energije
-* 200Ω...1kΩ se uporablja tam kjer je pomembna hitrost preklapljanja
+* 3.3 kΩ to 10 kΩ for general use;
+* 50 kΩ to 100 kΩ where power consumption is important;
+* 200 Ω to 1 kΩ where switching speed is important.
