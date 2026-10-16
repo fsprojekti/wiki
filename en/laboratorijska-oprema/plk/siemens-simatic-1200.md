@@ -1,46 +1,46 @@
 # Simatic 1200
 
-## Električna vezava PLK
+## PLC electrical wiring
 
-### Povezava napajanja
+### Power supply connection
 
-### Povezava digitalnega vhoda
+### Digital input connection
 
-### Povezava digitalnega izhoda
+### Digital output connection
 
-### Povezava DC motorja v H mostič
+### DC motor H-bridge connection
 
-## Programiranje
+## Programming
 
-### Prvi zagon
+### First startup
 
-1. Na namizju vašega PC najdite program TIA Portal V18 in ga zaženite
+1. Find TIA Portal V18 on your computer and start it.
 
-<figure><img src="../../.gitbook/assets/Screenshot_3.png" alt=""><figcaption><p>Zagon programa TIA portal</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_3.png" alt="Starting TIA Portal"><figcaption><p>Starting TIA Portal</p></figcaption></figure>
 
-2. Ko se program naloži se vam pokaže naslednje okno. Izberete _Create new project_
+2. When the application opens, select _Create new project_.
 
-<figure><img src="../../.gitbook/assets/Screenshot_4.png" alt=""><figcaption><p>Zagonski zaslon programa TIA portal</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_4.png" alt="TIA Portal startup screen"><figcaption><p>TIA Portal startup screen</p></figcaption></figure>
 
-3. Poimenujemo nov projekt in potrdimo
+3. Enter a name for the new project and confirm.
 
-<figure><img src="../../.gitbook/assets/Screenshot_5.png" alt=""><figcaption><p>Kreiranje novega projekta</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_5.png" alt="Creating a new project"><figcaption><p>Creating a new project</p></figcaption></figure>
 
-4. Ko je projekt ustvarjen se nam pokaže naslednj okno. Izberemo _Configure a device_
+4. When the project is created, select _Configure a device_.
 
-<figure><img src="../../.gitbook/assets/Screenshot_6.png" alt=""><figcaption><p>Prikaz možnosti nadaljnjega razvoja projekta</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_6.png" alt="Project development options"><figcaption><p>Project development options</p></figcaption></figure>
 
-5. Dodamo novo napravo z izbiro prikazano na sliki
+5. Add a new device using the option shown below.
 
-<figure><img src="../../.gitbook/assets/Screenshot_7.png" alt=""><figcaption><p>Prikaz naprav in možnosti za dodajanje nove naprave</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_7.png" alt="Devices and the option to add a new device"><figcaption><p>Devices and the option to add a new device</p></figcaption></figure>
 
-6. Pojavi se nam izbirnik preko katerega izberemo ustrezno napravo. Izbrati je potrebno tako ustrezen CPU (Centralno procesno enoto) kot konfiguracijo vhodnih in izhodnih enot. Oznako najdemo napisano na boku PLK.
+6. Select the correct device. Match both the CPU (central processing unit) and input/output configuration to the identifier on the side of the PLC.
 
-<figure><img src="../../.gitbook/assets/Screenshot_8.png" alt=""><figcaption><p>Izbira ustrezne konfiguracije PLK</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_8.png" alt="Selecting the PLC configuration"><figcaption><p>Selecting the PLC configuration</p></figcaption></figure>
 
-7. V naslednjem koraku je potrebno izbrati ustrezen firmware (programsko kodo PLK), ki jo uporablja izbrani PLK. V našem primeru je to _V4.5._
+7. Select the firmware version used by the PLC. This example uses _V4.5_.
 
-<figure><img src="../../.gitbook/assets/Screenshot_9.png" alt=""><figcaption><p>Izbira firmware PLK</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_9.png" alt="Selecting the PLC firmware"><figcaption><p>Selecting the PLC firmware</p></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/Screenshot_10.png" alt=""><figcaption></figcaption></figure>
 
@@ -58,7 +58,7 @@
 
 <figure><img src="../../.gitbook/assets/Screenshot_18.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/Screenshot_19.png" alt=""><figcaption><p>imag</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/Screenshot_19.png" alt="TIA Portal configuration screen"><figcaption><p>TIA Portal configuration screen</p></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/Screenshot_20.png" alt=""><figcaption></figcaption></figure>
 

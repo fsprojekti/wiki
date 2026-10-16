@@ -1,5 +1,5 @@
 ---
-description: Baza znanja za študente mehatronike
+description: Knowledge base for mechatronics students
 cover: .gitbook/assets/shutterstock_333995531.jpg
 coverY: 53.645333333333355
 layout:
@@ -28,8 +28,8 @@ layout:
     visible: false
 ---
 
-# Baza znanja
+# Knowledge base
 
 
 
-<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>Elektrotehnika</td><td></td><td></td><td><a href="https://app.gitbook.com/s/OjZ1XG64rvc2AeRBUH5H/elektrotehnika">Elektrotehnika</a></td></tr><tr><td>Programiranje</td><td></td><td></td><td><a href="https://app.gitbook.com/s/OjZ1XG64rvc2AeRBUH5H/programiranje">Programiranje</a></td></tr><tr><td>Laboratorijska oprema</td><td></td><td></td><td><a href="https://app.gitbook.com/s/OjZ1XG64rvc2AeRBUH5H/laboratorijska-oprema">laboratorijska oprema</a></td></tr><tr><td>Makete</td><td></td><td></td><td><a href="laboratorijska-oprema/makete/">makete</a></td></tr><tr><td>PLK</td><td></td><td></td><td><a href="laboratorijska-oprema/plk/">plk</a></td></tr></tbody></table>
+<table data-view="cards"><thead><tr><th></th><th></th><th></th><th data-hidden data-card-target data-type="content-ref"></th></tr></thead><tbody><tr><td>Electronics</td><td></td><td></td><td><a href="elektrotehnika/README.md">Electronics</a></td></tr><tr><td>Programming</td><td></td><td></td><td><a href="programiranje/README.md">Programming</a></td></tr><tr><td>Laboratory equipment</td><td></td><td></td><td><a href="laboratorijska-oprema/README.md">Laboratory equipment</a></td></tr><tr><td>Training rigs</td><td></td><td></td><td><a href="laboratorijska-oprema/makete/README.md">Training rigs</a></td></tr><tr><td>PLCs</td><td></td><td></td><td><a href="laboratorijska-oprema/plk/README.md">PLCs</a></td></tr></tbody></table>

@@ -1,12 +1,12 @@
 ---
-description: Stikala, Svetila in Multiplekserji
+description: Switches, LEDs and multiplexers
 ---
 
-# Demo program VHDL
+# VHDL demo program
 
-## Priprava projekta&#x20;
+## Project setup
 
-Priprava projekta v programskem okolju Quartus Prime sledi [navodilom](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FZJwbDLhKC03SlK0AJB6X%2FQuartus_Std_Introduction_VHDL%20\(1\).pdf?alt=media\&token=42ab85e7-bbef-4e06-a897-296f77fb1812).
+Follow the [instructions](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FZJwbDLhKC03SlK0AJB6X%2FQuartus_Std_Introduction_VHDL%20\(1\).pdf?alt=media\&token=42ab85e7-bbef-4e06-a897-296f77fb1812) to create the project in Quartus Prime.
 
 <figure><img src="../../../.gitbook/assets/image (38).png" alt=""><figcaption></figcaption></figure>
 
@@ -14,7 +14,7 @@ Priprava projekta v programskem okolju Quartus Prime sledi [navodilom](https://f
 
 <figure><img src="../../../.gitbook/assets/image (39).png" alt=""><figcaption></figcaption></figure>
 
-## Izvedba naloge
+## Completing the exercise
 
 <figure><img src="../../../.gitbook/assets/image (41).png" alt=""><figcaption></figcaption></figure>
 

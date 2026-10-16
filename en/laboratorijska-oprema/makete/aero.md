@@ -18,83 +18,83 @@ layout:
 
 # Aero
 
-<figure><img src="../../.gitbook/assets/aeroMaketa.jpg" alt="" width="375"><figcaption><p>AREO maketa</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/aeroMaketa.jpg" alt="AERO laboratory rig" width="375"><figcaption><p>AERO laboratory rig</p></figcaption></figure>
 
-## Opis makete
+## Rig description
 
-Maketa AERO je laboratorijska naprava namenjena spoznavanju področja vodenja dinamičnih sistemov. Napravo sestavlja rotirajoči prečni nosilec na katerega sta pritrjena dva ventilatorska pogona, ki poganjata nosilec v horizontalni ravnini. Merilnik kota sledi gibanju rotacije nosilca.
+AERO is a laboratory rig for studying control of dynamic systems. It consists of a rotating crossbeam with two fan drives that move the beam in the horizontal plane. An angle sensor measures the beam's rotation.
 
-Maketo sestavljajo naslednji gradniki:
+The rig consists of the following components:
 
-* mehanska naprava
-* merilnik zasuka
-* ventilatorski pogon
-* regulator motorja
-* mikrokrmilnik (Arduino Due)
-* mikroračunalnik (RaspberryPi)
+* mechanical assembly
+* angular encoder
+* fan drive
+* motor driver
+* microcontroller (Arduino Due)
+* single-board computer (Raspberry Pi)
 
-Gradniki so povezani kot prikazuje blokovna shema
+The components are connected as shown in the block diagram.
 
 ```mermaid
 graph LR
-    A[Regulator motorja] -->|"Udc(t)"| B[DC Motor]
-    B -->|"F(t)"|C[Naprava]
-    C-->|"Fi(t)"|D[Merilnik zasuka]
-    D-->|"AB(t)"|F[Mikrokrmilnik]
+    A[Motor driver] -->|"Udc(t)"| B[DC Motor]
+    B -->|"F(t)"|C[Mechanical assembly]
+    C-->|"Fi(t)"|D[Angular encoder]
+    D-->|"AB(t)"|F[Microcontroller]
     F-->|"PWM(t)"|A
-    F---|Sporočila|G[Mikroračunalnik]
+    F---|Messages|G[Single-board computer]
 ```
 
-### Mehanska naprava
+### Mechanical assembly
 
-Naprava je rotirajoči mehanski dinamičen sistem. Shematično je prikazan na sliki
+The rig is a rotating mechanical dynamic system, shown schematically below.
 
-<figure><img src="../../.gitbook/assets/aeroScheme.png" alt="" width="375"><figcaption><p>Shema masnega modela makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/aeroScheme.png" alt="Mass model of the rig" width="375"><figcaption><p>Mass model of the rig</p></figcaption></figure>
 
-Napravo sestavlja tram, ki rotira okoli vertikalne osi. Na obeh koncih rotirajočega trama je pritrjen po en ventilatorski pogon, ki je ponazorjen s točkasto maso $m\_3$. Zasuk vertikalne osi označuje kot $$varphi(t)$$, poganja pa ga potisk ventilatorskih pogonov, ki ustvarjata sili $$F_1(t)$$ in $$F_2(t)$$.
+The beam rotates about a vertical axis. A fan drive is mounted at each end, represented by point mass $m\_3$. The angle $$varphi(t)$$ describes rotation about the vertical axis. Fan thrust forces $$F_1(t)$$ and $$F_2(t)$$ drive this rotation.
 
-* Spremenljivke sistema
+* System variables
 
-| Oznaka           | Opis                               | Enota |
+| Symbol | Description | Unit |
 | ---------------- | ---------------------------------- | ----- |
-| $$F_1$$, $$F_2$$ | Sila, ki povzroča rotacijo naprave | $$N$$ |
-| $$\varphi$$      | Kot rotacije vertikalne osi        | $$°$$ |
+| $$F_1$$, $$F_2$$ | Force causing the rig to rotate | $$N$$ |
+| $$\varphi$$ | Angle of rotation about the vertical axis | $$°$$ |
 
-* Parametri sistema
+* System parameters
 
-| Oznaka  | Opis                              | Vrednost  | Enota          |
+| Symbol | Description | Value | Unit |
 | ------- | --------------------------------- | --------- | -------------- |
-| $$B$$   | Dušenje vertikalne osi            | $$0.001$$ | $$kg/s$$       |
-| $$J_1$$ | Vztrajnosti moment vertikalne osi | $$0.29$$  | $$g \cdot m²$$ |
-| $$m_2$$ | Masa prečnega trama               | $$90$$    | $$g$$          |
-| $$l_2$$ | Dolžina horizontalnega telesa     | $$32$$    | $$cm$$         |
-| $$m_3$$ | Masa ventilatorskega pogona       | $$90$$    | $$g$$          |
+| $$B$$ | Damping of the vertical axis | $$0.001$$ | $$kg/s$$ |
+| $$J_1$$ | Moment of inertia about the vertical axis | $$0.29$$ | $$g \cdot m²$$ |
+| $$m_2$$ | Crossbeam mass | $$90$$ | $$g$$ |
+| $$l_2$$ | Horizontal beam length | $$32$$ | $$cm$$ |
+| $$m_3$$ | Fan drive mass | $$90$$ | $$g$$ |
 
-### Merilnik zasuka
+### Angular encoder
 
-Vertikalna os je opremljena z merilnikom zasuka oz. kota. Nameščen je magnetni inkrementalni enkoder [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02\_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) slovenskega podjetja [RLS d.o.o.](https://www.rls.si/). Merilnik meri relativno gibanje osi ter posreduje informacijo v obliki digitalnega signala mikrokrmilniku. V tabeli so predstavljeni signali merilnika in barve žic, po katerih tečejo signali (to velja samo za to maketo in ne za merilnik na splošno)
+The vertical axis has an angular encoder: a magnetic incremental [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02\_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) from the Slovenian company [RLS d.o.o.](https://www.rls.si/). It measures relative shaft motion and sends a digital signal to the microcontroller. The table lists the encoder signals and wire colors for this particular rig; these colors are not a general encoder standard.
 
-| Oznaka  | Opis                          | Barva žice | Vhod/Izhod |
+| Symbol | Description | Wire color | Input/Output |
 | ------- | ----------------------------- | ---------- | ---------- |
-| Vcc     | Napajanje 3.3V ali 5V         | bela       | Vhod       |
-| GND     | Negativni potencial napajanje | zelena     | Vhod       |
-| A       | Enkoderski digitalni signal A | rjava      | Izhod      |
-| B       | Enkoderski digitalni signal B | rumena     | Izhod      |
-| Vang    | Enkoderski analogni signal    | modra      | Izhod      |
+| Vcc | 3.3 V or 5 V supply | White | Input |
+| GND | Supply ground | Green | Input |
+| A | Digital encoder signal A | Brown | Output |
+| B | Digital encoder signal B | Yellow | Output |
+| Vang | Analog encoder signal | Blue | Output |
 
-### Ventilatorski pogon
+### Fan drives
 
-Obračanje naprave okoli osi dosežemo z dvema enakima ventilatorskima pogonoma, kjer vsak ventilator poganja napravo v eno smer in s tem spreminja kot $$\varphi$$. Podatkovni list ventilatorskega pogona
+Two identical fan drives rotate the rig about its axis. Each fan drives it in one direction, changing angle $$\varphi$$. Fan drive datasheet.
 
-### Gonilnik ventilatorskega pogona
+### Fan motor driver
 
-Za pogon enosmernega motorja skrbi motorski gonilnik MD10C R3 podjetja [Cytron](https://www.cytron.io/).
+An MD10C R3 motor driver from [Cytron](https://www.cytron.io/) drives the DC motor.
 
-Gonilnik je povezan na dva pogona na način, ki omogoča dvosmerno vrtenje naprave. S spreminjanjem polaritete izhoda gonilnika se ne obrača smer vrtenja pogonov, ampak se izmenjujeta delovanja enega in druge pogona. Gonilnik upravljamo z dvema digitalnima signaloma $$power$$ in $$direction$$. $$power$$ signal predstavlja PWM (Pulse Width Modulation) moduliran signal $$direction$$ pa polariteto napetostnega izhoda. Praktičen primer krmiljenje gonilnika je dostopen v gradivu.
+The driver connects to the two fan drives so that the rig can rotate in either direction. Reversing the driver's output polarity selects which fan operates rather than reversing a fan's rotation. Two digital signals control the driver: $$power$$ is a PWM (Pulse Width Modulation) signal, and $$direction$$ selects the output polarity. A practical driver-control example is provided in the course material.
 
-Karakteristiko sile potiska v odvisnosti od nastavitve PWM signala gonilnika opisuje tabela.
+The table shows thrust as a function of the driver's PWM setting.
 
-| PWM (od 255) | F\[N] |
+| PWM (out of 255) | F\[N] |
 | ------------ | ----- |
 | 0-175        | 0     |
 | 180          | 0.013 |
@@ -114,30 +114,30 @@ Karakteristiko sile potiska v odvisnosti od nastavitve PWM signala gonilnika opi
 | 250          | 0.092 |
 | 255          | 0.095 |
 
-### Mikrokrmilnik
+### Microcontroller
 
-Uporabljen je mikrokrmilnik ARM, ki je vpet na razvojni plošči ArduinoDue.
+An ARM microcontroller on an Arduino Due development board is used.
 
-### Mikroračunalnik
+### Single-board computer
 
-Uporabljen je mikroračunalnik RaspberryPi 4B, ki komunicira preko serijske komunikacije z razvojno ploščo ArduinoDue. Mikroračunalnik tudi poganja strežnik, ki skrbi za grafični vmesnik, preko katerega lahko upornik spremlja in upravlja maketo.
+A Raspberry Pi 4B communicates with the Arduino Due over a serial connection. It also runs the server for the graphical interface used to monitor and control the rig.
 
-## Električni del
+## Electrical hardware
 
-Električna shema naprave povezuje arduino mikrokrmilnik z dvema inkrementalnima dajalnikoma in regulatorjem enosmernega motorja. Serijska povezave med mikrokrmilnikom in mikroračunalnikom ni prikazana.
+The circuit connects the Arduino microcontroller to two incremental encoders and a DC motor driver. The serial connection between the microcontroller and single-board computer is not shown.
 
-Povezave digitalnih signalov z Arduinom so predstavljene v tabeli
+The table lists the digital connections to the Arduino.
 
-| Naprava  | Pin | Arduino Pin | Oznaka povezave | vhod/izhod |
+| Device | Pin | Arduino pin | Signal label | Input/Output |
 | -------- | --- | ----------- | --------------- | ---------- |
-| RMK4 Fi  | A   | 22          | A1              | vhod       |
-| RMK4 Fi  | B   | 23          | B1              | vhod       |
-| MD10C-R3 | DIR | 2           | DIR             | izhod      |
-| MD10C-R3 | PWM | 3           | PWM             | izhod      |
+| RMK4 Fi | A | 22 | A1 | Input |
+| RMK4 Fi | B | 23 | B1 | Input |
+| MD10C-R3 | DIR | 2 | DIR | Output |
+| MD10C-R3 | PWM | 3 | PWM | Output |
 
-### Električne komponente
+### Electrical components
 
-Seznam vse uporabljenih električnih komponent:
+List of electrical components used:
 
-<table><thead><tr><th>Komponenta</th><th width="461">Oznaka</th><th>Proizvajalec</th><th>Podatkovni list</th></tr></thead><tbody><tr><td>inkrementalni dajalnik</td><td>RLS AM4096</td><td><a href="https://www.rls.si/">RLS d.o.o.</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media&#x26;token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7">datoteka</a></td></tr><tr><td>gonilnik ventilatorskih pogonov</td><td>MD10C R3</td><td><a href="https://www.cytron.io/">Cytron</a></td><td>datoteka</td></tr><tr><td>mikrokrmilnik</td><td>SAM3X8E ARM</td><td><a href="https://www.microchip.com/">Microchip</a></td><td>datoteka</td></tr><tr><td>razvojna plošča</td><td>Arduino Due</td><td><a href="https://www.arduino.cc/">Arduino</a></td><td>datoteka</td></tr><tr><td>mikroračunalnik</td><td>RaspberryPi 4B 4GB</td><td><a href="https://www.raspberrypi.org/">RaspberryPi</a></td><td>datoteka</td></tr></tbody></table>
+<table><thead><tr><th>Component</th><th width="461">Part number</th><th>Manufacturer</th><th>Datasheet</th></tr></thead><tbody><tr><td>incremental encoder</td><td>RLS AM4096</td><td><a href="https://www.rls.si/">RLS d.o.o.</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media&#x26;token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7">file</a></td></tr><tr><td>fan motor driver</td><td>MD10C R3</td><td><a href="https://www.cytron.io/">Cytron</a></td><td>file</td></tr><tr><td>microcontroller</td><td>SAM3X8E ARM</td><td><a href="https://www.microchip.com/">Microchip</a></td><td>file</td></tr><tr><td>development board</td><td>Arduino Due</td><td><a href="https://www.arduino.cc/">Arduino</a></td><td>file</td></tr><tr><td>single-board computer</td><td>RaspberryPi 4B 4GB</td><td><a href="https://www.raspberrypi.org/">RaspberryPi</a></td><td>file</td></tr></tbody></table>
 

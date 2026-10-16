@@ -1,38 +1,38 @@
-# Branje digitalnih signalov
+# Reading digital signals
 
-Brali bomo stanje tipke ter ga shranili v pomnilnik mikrokrmilnika. Z branjem digitalnih signalov prenesemo informacijo digitalnega senzorja v krmilnik, preko vhodnega pina. Nalogo razdelimo v dva dela elektrotehnični in programski.
+We will read the button state and store it in the microcontroller's memory. Reading a digital signal transfers information from a digital sensor to the controller through an input pin. We divide the task into electrical hardware and software.
 
-## Elektrotehnični del
+## Electrical hardware
 
-Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja tipka, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v[ gradivu](../elektrotehnika/tipka-in-mikrokrmilnik.md).
+The hardware requires a circuit consisting of a button, a microcontroller and supporting components. See [Button and microcontroller](../elektrotehnika/tipka-in-mikrokrmilnik.md) for an example.
 
-### Programski del
+### Software
 
-Pri pisanju kode si bomo pomagali s funkcijami iz knjižnice Arduino projekta.
+We will use functions from the Arduino library when writing the code.
 
 * [pinMode()](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/)
 * [digitalRead()](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/)
 
-Primer programske kode, ki prebere informacijo digitalnega vhoda in jo zapiše v globalno spremenljivko programa.
+This example reads a digital input and stores its state in a global program variable.
 
 ```c
-//Globalne konstante
-//Pin 0 tipka
+//Global constants
+//Button on pin 0
 int S0pin = 0;
 
-//Globalne spremenljivke
-//Spremenljivka tipke
+//Global variables
+//Button state variable
 bool S0 = false;
 
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  //S0pin nastavimo v način digitalnega vhoda
+  //Configure S0pin as a digital input
   pinMode(S0pin, INPUT);
 }
 
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Branje digitalnih vhodov
+  //Read the digital inputs
   S0 = digitalRead(S0pin);
 }
 ```

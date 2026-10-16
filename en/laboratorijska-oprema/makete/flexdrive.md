@@ -1,112 +1,112 @@
 # FlexDrive
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption><p>FlexDrive maketa</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt="FlexDrive laboratory rig"><figcaption><p>FlexDrive laboratory rig</p></figcaption></figure>
 
-## 1. Opis makete
+## 1. Rig description
 
-Maketa FlexDrive je laboratorijska naprava namenjena za podrobno raziskovanje in razumevanje mehanike elastično sklopljenih pogonskih sistemov. Mehanski del naprave sestavljati dve gredi ki sta preko elastične sklopke mehko vpeti. Na vpeti gredi je togo pritrjen vztrajnik na gnani gredi pa je togo pritrjen elektro motor, ki poganja celoten sklop. Blokovna shema prikazuje vse elemente v obliki blokov in signale ki jih povezujejo
+FlexDrive is a laboratory rig for studying the mechanics of elastically coupled drive systems. Its mechanical assembly consists of two shafts connected by an elastic coupling. A flywheel is rigidly mounted on the load shaft, while an electric motor drives the drive shaft and the entire assembly. The block diagram shows the components and their connecting signals.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption><p>Bločna shema makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt="Block diagram of the rig"><figcaption><p>Block diagram of the rig</p></figcaption></figure>
 
-Bloki makete:
+Rig components:
 
-* mehanska naprava
-* merilnik zasuka na gnani gredi (Drive shaft)
-* merilnik zasuka na vpeti gredi (Load shaft)
+* mechanical assembly
+* angular encoder on the drive shaft
+* angular encoder on the load shaft
 * DC motor
-* gonilnik motorja
-* mikrokrmilnik
-* računalnik
+* motor driver
+* microcontroller
+* computer
 
-Signali makete:
+Rig signals:
 
-* $$U_{DC}$$ zvezni napetostni signal za pogon DC motorja
-* $$M(t)$$ navor ki ga motor dovaja na gnano gred
-* $$\phi_1(t)$$zasuk vpete gredi
-* $$\phi_2(t)$$zasuk gnane gredi
-* $$AB(t)$$kvadratični signal enkoderja
-* $$U_{an}$$analogni signal enkoderja (samo vpeta gred)
-* $$PWM(t)$$digitalni signal za komunikacijo z gonilnikom motorja
+* $$U_{DC}$$: continuous voltage signal driving the DC motor
+* $$M(t)$$: torque supplied by the motor to the drive shaft
+* $$\phi_1(t)$$: load shaft rotation
+* $$\phi_2(t)$$: drive shaft rotation
+* $$AB(t)$$: quadrature encoder signal
+* $$U_{an}$$: analog encoder signal (load shaft only)
+* $$PWM(t)$$: digital control signal to the motor driver
 
-### 1.1 Mehanska naprava
+### 1.1 Mechanical assembly
 
-Mehanska naprava je rotirajoči dinamičen sistem in je shematično prikazan na sliki
+The mechanical assembly is a rotating dynamic system, shown schematically below.
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption><p>Shema mehanskega dela makete</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (6).png" alt="Diagram of the rig's mechanical assembly"><figcaption><p>Diagram of the rig's mechanical assembly</p></figcaption></figure>
 
-Napravo sestavljajo vpeta os, ki z vztrajnostjo $$J_2$$. Na vpeto os je togo pritrjen vztrajnih z vztrajnostjo $$J_1$$. Os je v podnožje vpeta preko dveh ležajev s skupnim dušenjem $$B_1$$. Gibanje vpete osi opisuje kot $$\phi_2(t)$$. Vpeta os je preko vzmetne sklopke s konstano $$k$$ mehko povezna na gnano os, katere vztrajnostni moment podaja $$J_3$$. Gnana os je togo vpeta na motor z dušenjem $$B_2$$. Gibanje gnane osi opisuje kot $$\phi_1(t)$$, navor $$M(t)$$pa dovaja elektro motor.
+The load shaft has moment of inertia $$J_2$$ and carries a rigidly attached flywheel with inertia $$J_1$$. Two bearings support the shaft, with combined damping $$B_1$$. Its motion is described by angle $$\phi_2(t)$$. A spring coupling with stiffness $$k$$ connects it to the drive shaft, whose inertia is $$J_3$$. The drive shaft is rigidly connected to a motor with damping $$B_2$$. Its motion is described by angle $$\phi_1(t)$$, and the electric motor supplies torque $$M(t)$$.
 
-* Spremenljivke sistema
+* System variables
 
-| Oznaka                                       | Opis                               | Enota  |
+| Symbol | Description | Unit |
 | -------------------------------------------- | ---------------------------------- | ------ |
-| <p><span class="math">M(t)</span></p><p></p> | Navor, ki ga povzroča elektromotor | $$Nm$$ |
-| $$\phi_1$$                                   | Kot rotacije gnane osi             | °      |
-| $$\phi_2$$                                   | Kot rotacije vpeto osi             | °      |
+| <p><span class="math">M(t)</span></p><p></p> | Torque produced by the electric motor | $$Nm$$ |
+| $$\phi_1$$ | Drive shaft rotation angle | &deg; |
+| $$\phi_2$$ | Load shaft rotation angle | &deg; |
 
-* Parametri sistema
+* System parameters
 
-| Oznaka  | Opis                          | Vrednost | Enota          |
+| Symbol | Description | Value | Unit |
 | ------- | ----------------------------- | -------- | -------------- |
-| $$B_1$$ | Dušenje vpete osi             |          | $$kg/s$$       |
-| $$B_2$$ | Dušenje gnane osi             |          | $$kg/s$$       |
-| $$J_1$$ | Vztrajnosti moment vztrjanika | 0.612    | $$g \cdot m²$$ |
-| $$J_2$$ | Vztrajnostni moment vpete osi | 0.0902   | $$g \cdot m²$$ |
-| $$J_3$$ | Vztrajnostni moment gnane osi | \~0      | $$g \cdot m²$$ |
-| $$k$$   | konstanta vzmeti              |          | $$N/m$$        |
+| $$B_1$$ | Load shaft damping | | $$kg/s$$ |
+| $$B_2$$ | Drive shaft damping | | $$kg/s$$ |
+| $$J_1$$ | Flywheel moment of inertia | 0.612 | $$g \cdot m^2$$ |
+| $$J_2$$ | Load shaft moment of inertia | 0.0902 | $$g \cdot m^2$$ |
+| $$J_3$$ | Drive shaft moment of inertia | \~0 | $$g \cdot m^2$$ |
+| $$k$$ | Spring stiffness | | $$N/m$$ |
 
-### 1.2 Merilnik zasuka gnana gred
+### 1.2 Drive shaft angular encoder
 
-Gnana gred je opremljena z merilnikom zasuka oz. kota. Nameščen je magnetni inkrementalni enkoder [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) slovenskega podjetja [RLS d.o.o.](https://www.rls.si/). Merilnik je nameščen na razvojni ploščici [RMK-AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FbyXYN1jzgBNJ6AE5CL2T%2FRMK4D01_02.pdf?alt=media\&token=79a8c043-1cb3-4de8-b4c9-b0015d1d1cb4). Merilnik meri relativno gibanje osi ter posreduje informacijo v obliki digitalnega signala mikrokrmilniku.&#x20;
+The drive shaft has a magnetic incremental [RLS AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FyzCheUulIy3s2L2ZKiW7%2FAM4096D02_09.pdf?alt=media\&token=98176deb-bbd0-47c8-8e04-4e16f1c4bee7) encoder from the Slovenian company [RLS d.o.o.](https://www.rls.si/). It is mounted on an [RMK-AM4096](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FbyXYN1jzgBNJ6AE5CL2T%2FRMK4D01_02.pdf?alt=media\&token=79a8c043-1cb3-4de8-b4c9-b0015d1d1cb4) development board. The encoder measures relative shaft motion and sends a digital signal to the microcontroller.
 
-### 1.3 Merilnik zasuka vpeta gred
+### 1.3 Load shaft angular encoder
 
-Vpeta gred je opremljena z merilnikom zasuke oz. kota. Nameščen je optični inkrementalni enkoder podjetja  [POLOLU](https://www.pololu.com/) z podatkovni listom  [POLOLU-4883](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922).&#x20;
+The load shaft has an optical incremental encoder from [POLOLU](https://www.pololu.com/). See the [POLOLU-4883 datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922).
 
 {% hint style="info" %}
-Med enkoderjem in vpeto osjo je nameščen zobniški sistem z razmerjem 20.4:1. Kar je potrebno upoštevali pri izračunu zasuka!&#x20;
+A 20.4:1 gear train connects the encoder to the load shaft. Account for this ratio when calculating the rotation angle!
 {% endhint %}
 
-### 1.4 Elektromotorski pogon
+### 1.4 Electric motor drive
 
-Vrtenje vpete osi dosežemo z elektromotorjem. Maketa ima vgrajen elektromotor [POLOLU-4883](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922) podjetja [POLOLU](https://www.pololu.com/). Prestavno razmerje motorja je 20.4:1.
+An electric motor drives the shaft. The rig uses a [POLOLU-4883](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media\&token=f1a4c430-3dc9-469c-b787-b65e03a61922) motor from [POLOLU](https://www.pololu.com/) with a 20.4:1 gear ratio.
 
-### 1.5 Gonilnik elektromotorja
+### 1.5 Motor driver
 
-Za pogon enosmernega motorja skrbi motorski gonilnik[ MD10C R3 ](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media\&token=e0621c34-4375-4835-b94b-6c76b18cf1ee)podjetja [Cytron](https://www.cytron.io/). Gonilnik upravljamo z dvema digitalnima signaloma $$power$$ in $$direction$$. Signal $$power$$ predstavlja PWM (Pulse Width Modulation) moduliran signal $$direction$$ pa smer toka na izhodu gonilnika, kar posledično določa smer vrtenja enosmernega elektromotorja.&#x20;
+An [MD10C R3](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media\&token=e0621c34-4375-4835-b94b-6c76b18cf1ee) motor driver from [Cytron](https://www.cytron.io/) drives the DC motor. Two digital signals control it: $$power$$ is a PWM (Pulse Width Modulation) signal, and $$direction$$ sets the output current direction and therefore the motor's direction of rotation.
 
-## 2. Električni del
+## 2. Electrical hardware
 
-Električna shema naprave povezuje Arduino mikrokrmilnik z dvema inkrementalnima dajalnikoma in regulatorjem enosmernega motorja. Serijska povezave med mikrokrmilnikom in mikroračunalnikom ni prikazana. Povezave digitalnih signalov z Arduinom so predstavljene v tabeli
+The circuit connects the Arduino microcontroller to two incremental encoders and a DC motor driver. The serial connection between the microcontroller and single-board computer is not shown. The table lists the digital connections to the Arduino.
 
-| Naprava          | Pin | Arduino Pin | Oznaka povezave | vhod/izhod |
+| Device | Pin | Arduino pin | Signal label | Input/Output |
 | ---------------- | --- | ----------- | --------------- | ---------- |
-| Magnetni enkoder | A   | 32          | A1              | vhod       |
-| Magnetni enkoder | B   | 33          | B1              | vhod       |
-| Optični enkoder  | A   | 36          | A2              |            |
-| Optični enkoder  | B   | 37          | B2              |            |
-| Gonilnik motor   | DIR | 25          | DIR             | izhod      |
-| Gonilnik motor   | PWM | 26          | PWM             | izhod      |
+| Magnetic encoder | A | 32 | A1 | Input |
+| Magnetic encoder | B | 33 | B1 | Input |
+| Optical encoder | A | 36 | A2 | |
+| Optical encoder | B | 37 | B2 | |
+| Motor driver | DIR | 25 | DIR | Output |
+| Motor driver | PWM | 26 | PWM | Output |
 
-### 2.1 Električne komponente
+### 2.1 Electrical components
 
-Seznam vse uporabljenih električnih komponent:
+List of electrical components used:
 
-<table><thead><tr><th>Komponenta</th><th width="174">Oznaka</th><th>Proizvajalec</th><th>Podatkovni list</th></tr></thead><tbody><tr><td>Magnetni enkoder</td><td>RLS AM4096</td><td><a href="https://www.rls.si/">RLS d.o.o.</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FbyXYN1jzgBNJ6AE5CL2T%2FRMK4D01_02.pdf?alt=media&#x26;token=79a8c043-1cb3-4de8-b4c9-b0015d1d1cb4">datoteka</a></td></tr><tr><td>Optični enkoder</td><td>POLOLU</td><td><a href="https://www.pololu.com/">POLOLU</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media&#x26;token=f1a4c430-3dc9-469c-b787-b65e03a61922">datoteka</a></td></tr><tr><td>Gonilnik motor</td><td>MD10C R3</td><td><a href="https://www.cytron.io/">Cytron</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media&#x26;token=e0621c34-4375-4835-b94b-6c76b18cf1ee">datoteka</a></td></tr><tr><td>Mikrokrmilnik</td><td>ESP32 - LILYGO</td><td><a href="https://www.espressif.com/en/products/modules/esp32">Espressif</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2Fzm4t7rH9GXGytU5nTjB7%2FESP-32%20Dev%20Kit%20C%20V2_EN.pdf?alt=media&#x26;token=bf2beae7-b3bd-435d-b155-cd2a164210b9">datoteka</a></td></tr></tbody></table>
+<table><thead><tr><th>Component</th><th width="174">Part number</th><th>Manufacturer</th><th>Datasheet</th></tr></thead><tbody><tr><td>Magnetic encoder</td><td>RLS AM4096</td><td><a href="https://www.rls.si/">RLS d.o.o.</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FbyXYN1jzgBNJ6AE5CL2T%2FRMK4D01_02.pdf?alt=media&#x26;token=79a8c043-1cb3-4de8-b4c9-b0015d1d1cb4">file</a></td></tr><tr><td>Optical encoder</td><td>POLOLU</td><td><a href="https://www.pololu.com/">POLOLU</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FFI9ruRMcNiLlxmRKPVba%2Fpololu-25d-metal-gearmotors.pdf?alt=media&#x26;token=f1a4c430-3dc9-469c-b787-b65e03a61922">file</a></td></tr><tr><td>Motor driver</td><td>MD10C R3</td><td><a href="https://www.cytron.io/">Cytron</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FsN0uYqGXUT1pKGO2iOuc%2FA1TemgvjKjL.pdf?alt=media&#x26;token=e0621c34-4375-4835-b94b-6c76b18cf1ee">file</a></td></tr><tr><td>Microcontroller</td><td>ESP32 - LILYGO</td><td><a href="https://www.espressif.com/en/products/modules/esp32">Espressif</a></td><td><a href="https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2Fzm4t7rH9GXGytU5nTjB7%2FESP-32%20Dev%20Kit%20C%20V2_EN.pdf?alt=media&#x26;token=bf2beae7-b3bd-435d-b155-cd2a164210b9">file</a></td></tr></tbody></table>
 
 
 
-## 3. Programska oprema - CLI
+## 3. Software: CLI
 
 ***
 
-V tem razdelku je predstavljeno, kako uporabnik komunicira z napravo neposredno preko serijske povezave. Vključeni so vsi ukazi (CLI), opis njihovih funkcij, primeri uporabe ter načini vizualizacije meritev preko Arduino Serial Plotterja.
+This section explains how to communicate directly with the rig over a serial connection. It covers the CLI commands, their functions, examples and measurement visualization in Arduino Serial Plotter.
 
-### **3.1 Struktura ukazov (CLI)**
+### **3.1 Command structure (CLI)**
 
-Maketa FlexDrive uporablja preprosto in pregledno tekstovno ukazno vrstico (CLI), ki omogoča neposredno komunikacijo med uporabnikom in ESP32 krmilnikom preko Arduino Serial Monitorja ali katerega koli drugega terminala (npr. PuTTY, CoolTerm, RealTerm).
+FlexDrive provides a simple text-based command-line interface (CLI) for communication with the ESP32 controller through Arduino Serial Monitor or another terminal, such as PuTTY, CoolTerm or RealTerm.
 
-Ukazi se vnašajo kot navadne besedilne vrstice, npr.:
+Enter commands as plain text lines, for example:
 
 ```
 mode 1
@@ -115,13 +115,13 @@ kp 5
 run
 ```
 
-Vsak ukaz ima osnovno obliko:
+Each command has the following basic form:
 
 ```
-<ukaz> <parameter>
+<command> <parameter>
 ```
 
-Nekateri ukazi nimajo parametrov in se uporabljajo samostojno:
+Some commands have no parameters and are used on their own:
 
 ```
 run
@@ -129,11 +129,11 @@ stop
 list
 ```
 
-### **3.2 Krmiljenje v odprti zanki (open loop)**
+### **3.2 Open-loop control**
 
-V odprti zanki (open-loop) sistem ne uporablja povratne informacije o hitrosti. Motor vrtiš neposredno s podajanjem PWM signala in nastavitvijo smeri. Ta način je primeren za testiranje, diagnostiko ali učenje osnov delovanja sistema.
+In open-loop mode, the system does not use speed feedback. You control the motor directly by setting its PWM value and direction. This mode is useful for testing, diagnostics and learning the system's basic operation.
 
-Najpogostejši ukazi v open-loop načinu so:
+Common open-loop commands are:
 
 ```
 mode 0
@@ -142,21 +142,21 @@ dir 1
 run
 ```
 
-Pomen posameznih ukazov:
+Command meanings:
 
 * **mode 0**\
-  Preklopi način delovanja v odprto zanko (brez regulacije).
+  Select open-loop operation without feedback control.
 * **pwm**\
-  Nastavi PWM med 0 in `pwm_max` (privzeto 4000).\
-  Ta ukaz določa moč motorja.
+  Set PWM between 0 and `pwm_max` (4000 by default).\
+  This command controls the motor drive level.
 * **dir <0|1>**\
-  Nastavi smer vrtenja:
-  * 0 = naprej
-  * 1 = nazaj
+  Set the direction of rotation:
+  * 0 = forward
+  * 1 = reverse
 * **run**\
-  Zažene motor z zadnjimi nastavljenimi PWM in dir parametri.
+  Start the motor using the latest PWM and direction settings.
 
-Primer hitrega testiranja motorja:
+Quick motor test example:
 
 ```
 mode 0
@@ -164,59 +164,59 @@ pwm 800
 run
 ```
 
-Primer spreminjanja smeri med delovanjem:
+Changing direction during operation:
 
 ```
 dir 1
 pwm 1000
 ```
 
-Za ustavitev sistema:
+To stop the system:
 
 ```
 stop
 ```
 
-### **3.3 Krmiljenje v zaprti zanki (PID)**
+### **3.3 Closed-loop control (PID)**
 
-V zaprti zanki (closed-loop) FlexDrive uporablja povratno informacijo iz enkoderja za regulacijo hitrosti motorja.\
-To pomeni, da sistem samodejno prilagaja PWM signal, da doseže željeno referenčno hitrost.
+In closed-loop mode, FlexDrive uses encoder feedback to control motor speed.\
+The system automatically adjusts PWM to reach the requested reference speed.
 
-Closed-loop način omogoča:
+Closed-loop mode provides:
 
-* stabilno hitrost,
-* kompenzacijo obremenitev,
-* ponovljivost,
-* učenje osnov PID regulacije.
+* stable speed,
+* load compensation,
+* repeatability,
+* an introduction to PID control.
 
-Za vklop zaprte zanke uporabimo:
+To enable closed-loop mode, use:
 
 ```
 mode 1
 ```
 
-Ključni ukazi za regulacijo hitrosti:
+Main speed-control commands:
 
 * **ref**\
-  Nastavi referenčno hitrost v _obr/s_ (turns per second).\
-  Primer: `ref 0.6` pomeni 0.6 obrata na sekundo.
+  Set the reference speed in _rev/s_ (revolutions per second).\
+  For example, `ref 0.6` requests 0.6 revolutions per second.
 * **kp**\
-  Nastavi proporcionalni faktor (–1000 do +1000).\
-  Višji Kp → hitrejši odziv, lahko pa povzroči oscilacije.
+  Set the proportional gain (-1000 to +1000).\
+  A higher Kp gives a faster response but may cause oscillation.
 * **ki**\
-  Nastavi integralni faktor (0 do 100).\
-  Odpravlja statično napako, a lahko povzroči prekomerno integracijo.
+  Set the integral gain (0 to 100).\
+  It reduces steady-state error but can cause integral windup.
 * **kd**\
-  Nastavi diferencialni faktor (0 do 100).\
-  Duši hitre spremembe in zmanjšuje nihanje.
+  Set the derivative gain (0 to 100).\
+  It damps rapid changes and reduces oscillation.
 
-Po nastavitvi PID parametrov zapremo regulacijsko zanko z ukazom:
+After setting the PID parameters, start closed-loop control with:
 
 ```
 run
 ```
 
-Primer popolne konfiguracije PID regulacije:
+Complete PID configuration example:
 
 ```
 mode 1
@@ -227,13 +227,13 @@ kd 0.05
 run
 ```
 
-Spreminjanje referenčne hitrosti med delovanjem:
+Changing the reference speed during operation:
 
 ```
 ref 1.2
 ```
 
-Spreminjanje PID parametrov v realnem času:
+Adjusting PID parameters in real time:
 
 ```
 kp 12
@@ -241,53 +241,53 @@ ki 0.3
 kd 0.1
 ```
 
-Zaustavitev zaprte zanke:
+Stopping closed-loop operation:
 
 ```
 stop
 ```
 
-Nasvet: Če motor vibrira, sunkovito pospešuje ali preskakuje hitrost, zmanjšajte Kp ali povečajte Kd.
+Tip: If the motor vibrates, accelerates abruptly or changes speed erratically, reduce Kp or increase Kd.
 
-### **3.4 Branje položaja in hitrosti**
+### **3.4 Reading position and speed**
 
-FlexDrive omogoča napredno spremljanje podatkov preko serijskega porta ter nastavitev pomembnih parametrov, ki vplivajo na stabilnost meritev, odzivnost regulacije in hitrost prikaza podatkov.
+FlexDrive provides serial monitoring and settings that affect measurement stability, controller response and the data display rate.
 
-V tej skupini so ukazi:
+This group includes commands for:
 
-* za filtriranje hitrosti (alpha),
-* nastavitev časa vzorčenja regulacijske zanke (ts),
-* klasični “raw” plot,
-* napredni plotting za Arduino Serial Plotter,
-* nastavitve intervala izrisa (plot\_period).
+* speed filtering (alpha),
+* control-loop sample time (ts),
+* the legacy raw plot,
+* Arduino Serial Plotter output,
+* plot interval settings (plot\_period).
 
 ***
 
-**FILTRIRANJE HITROSTI (LOW-PASS FILTER)**
+**SPEED FILTERING (LOW-PASS FILTER)**
 
-Parameter **alpha** določa stopnjo glajenja merjene hitrosti iz enkoderja.
+Parameter **alpha** sets the smoothing applied to the measured encoder speed.
 
-Večja alpha (npr. 0.4) → hitrejši odziv, manj glajenja\
-Manjša alpha (npr. 0.05) → počasnejši odziv, bolj gladka hitrost
+A larger alpha, such as 0.4, gives a faster response with less smoothing.\
+A smaller alpha, such as 0.05, gives a slower response and smoother speed measurements.
 
-Nastavitev:
+Setting:
 
 ```
 alpha 0.1
 ```
 
-Veljavne vrednosti: 0.00 … 1.00
+Valid values: 0.00 to 1.00
 
 ***
 
-**NASTAVITEV ČASA VZORČENJA (ts)**
+**SETTING THE SAMPLE TIME (ts)**
 
-Ukaz **ts** nastavi čas med posameznimi cikli regulacije v milisekundah.
+Command **ts** sets the time between control cycles in milliseconds.
 
-Manjši ts → hitrejše vzorčenje → hitrejša regulacija\
-Večji ts → počasnejša regulacija → manj procesorske obremenitve
+A smaller ts gives faster sampling and control updates.\
+A larger ts gives slower control updates and reduces processor load.
 
-Primer:
+Example:
 
 ```
 ts 10
@@ -295,20 +295,20 @@ ts 10
 
 ***
 
-**“RAW” PLOT (KOMPATIBILNO Z ENOSTAVNIMI TERMINALI)**
+**RAW PLOT (COMPATIBLE WITH SIMPLE TERMINALS)**
 
-To je starejši način pošiljanja podatkov, pri katerem ESP32 ciklično izpisuje:
+This legacy data-output mode makes the ESP32 periodically print:
 
-* položaje enkoderjev
-* hitrosti
+* encoder positions
+* speeds
 
-Vklop:
+Enable:
 
 ```
 plot 1
 ```
 
-Izklop:
+Disable:
 
 ```
 plot 0
@@ -316,20 +316,20 @@ plot 0
 
 ***
 
-**SERIJSKI PLOTTER – OPEN LOOP**
+**SERIAL PLOTTER: OPEN LOOP**
 
-Za uporabo z Arduino Serial Plotter lahko prikazuje:
+For Arduino Serial Plotter, the output can include:
 
 * pwm
-* dejansko hitrost
+* actual speed
 
-Aktivacija:
+Enable:
 
 ```
 plotSerialOpen
 ```
 
-Primer izrisa med delovanjem open-loop:
+Open-loop plotting example:
 
 ```
 mode 0
@@ -340,21 +340,21 @@ plotSerialOpen
 
 ***
 
-**SERIJSKI PLOTTER – CLOSED LOOP**
+**SERIAL PLOTTER: CLOSED LOOP**
 
-V zaprti zanki Serial Plotter izriše 3 signale:
+In closed-loop mode, Serial Plotter displays three signals:
 
 * pwm
-* referenčno hitrost
-* dejansko hitrost
+* reference speed
+* actual speed
 
-Aktivacija:
+Enable:
 
 ```
 plotSerialClosed
 ```
 
-Primer:
+Example:
 
 ```
 mode 1
@@ -366,22 +366,22 @@ plotSerialClosed
 
 ***
 
-**NASTAVITEV FREKVENCE PLOTTINGA (plot\_period)**
+**SETTING THE PLOT INTERVAL (plot\_period)**
 
-Parameter določa, da se podatki izrišejo samo vsak _plot\_period-ti_ ciklus.
+This parameter outputs data only once every _plot\_period_ control cycles.
 
-Primer:\
+Example:\
 ts = 10 ms\
 plot\_period = 5\
-→ plotting vsakih 50 ms
+Plot output is therefore produced every 50 ms.
 
-Nastavitev:
+Setting:
 
 ```
 plot_period 5
 ```
 
-Minimalna vrednost:
+Minimum value:
 
 ```
 plot_period 1
@@ -389,7 +389,7 @@ plot_period 1
 
 ***
 
-**HITRA KOMBINACIJA ZA TEST**
+**QUICK TEST CONFIGURATION**
 
 ```
 alpha 0.15
@@ -398,39 +398,39 @@ plot_period 3
 plotSerialClosed
 ```
 
-### **3.5 Napredni ukazi (diagnostika, omejitve, informacije o sistemu)**
+### **3.5 Advanced commands: diagnostics, limits and system information**
 
-V tem poglavju so zbrani vsi ukazi, ki omogočajo pregled stanja, konfiguracijo varnostnih omejitev ter pridobivanje sistemskih informacij. Ti ukazi so posebej pomembni pri diagnostiki, učenju ter pravilnem nastavljanju sistema FlexDrive.
+These commands display the system state, configure operating limits and retrieve system information. They are useful for diagnostics, learning and configuring FlexDrive.
 
 ***
 
-**IZPIS TRENUTNEGA STANJA SISTEMA (list)**
+**DISPLAYING THE CURRENT SYSTEM STATE (list)**
 
-Ukaz **list** prikaže popolno stanje naprave:
+Command **list** shows the complete device state:
 
-* način delovanja (open/closed loop)
-* stanje (run/stop)
-* PWM vrednost in smer
-* PID parametre
-* referenčno hitrost
-* filtriranje (alpha)
-* čas vzorčenja (ts)
-* plot način
-* hitrost in položaje enkoderjev
+* operating mode (open or closed loop)
+* state (run or stop)
+* PWM value and direction
+* PID parameters
+* reference speed
+* filtering (alpha)
+* sample time (ts)
+* plot mode
+* encoder speeds and positions
 
-Primer:
+Example:
 
 ```
 list
 ```
 
-To je najpomembnejši ukaz za diagnostiko.
+This is the main diagnostic command.
 
 ***
 
-**INFORMACIJE O FIRMWARE (version)**
+**FIRMWARE INFORMATION (version)**
 
-Ukaz izpiše verzijo naloženega firmware-a:
+This command prints the installed firmware version:
 
 ```
 version
@@ -438,28 +438,28 @@ version
 
 ***
 
-**OMEJITEV NAJVEČJE PWM VREDNOSTI (pwm\_max)**
+**LIMITING THE MAXIMUM PWM VALUE (pwm\_max)**
 
-Določa največjo dovoljeno PWM vrednost, ki jo lahko doseže ESC. S tem zaščitimo motor in napajalnik pred prevelikimi tokovi.
+This sets the maximum PWM value the ESC can reach, helping limit excessive motor and power-supply current.
 
-Primer:
+Example:
 
 ```
 pwm_max 3000
 ```
 
-Minimalna dovoljena vrednost je 100.
+The minimum permitted setting is 100.
 
 ***
 
-**NASTAVITEV SMERI VRTENJA (dir)**
+**SETTING THE ROTATION DIRECTION (dir)**
 
-Določa smer rotacije motorja:
+Set the motor's rotation direction:
 
 * 0 = forward
 * 1 = reverse
 
-Primer:
+Example:
 
 ```
 dir 0
@@ -467,9 +467,9 @@ dir 0
 
 ***
 
-**ROČNI NADZOR (pwm + dir) — DIAGNOSTIČNI MODE**
+**MANUAL CONTROL (pwm + dir): DIAGNOSTIC MODE**
 
-V open-loop načinu lahko ročno upravljamo motor:
+In open-loop mode, the motor can be controlled manually:
 
 ```
 mode 0
@@ -480,9 +480,9 @@ run
 
 ***
 
-**ZAČETNA INICIALIZACIJA SISTEMA (init)**
+**INITIAL SYSTEM SETUP (init)**
 
-Inicializira notranje spremenljivke, uporabno pri čistih testih:
+Initialize the internal variables, which is useful for starting a fresh test:
 
 ```
 init
@@ -490,15 +490,15 @@ init
 
 ***
 
-**USTAVITEV IN ZAGON SISTEMA (stop / run)**
+**STOPPING AND STARTING THE SYSTEM (stop / run)**
 
-Zaustavitev motorja:
+Stop the motor:
 
 ```
 stop
 ```
 
-Ponovni zagon z obstoječimi nastavitvami:
+Restart using the existing settings:
 
 ```
 run
@@ -506,60 +506,60 @@ run
 
 ***
 
-**KRATEK POVZETEK DIAGNOSTIČNIH UKAZOV**
+**DIAGNOSTIC COMMAND SUMMARY**
 
 ```
-list        # izpis stanja
-version     # verzija firmware
-pwm_max 4000 # omejitev PWM
-dir 0       # smer
-init        # ponastavitev notranjih vrednosti
-stop        # zaustavi motor
-run         # zažene motor
+list        # display state
+version     # firmware version
+pwm_max 4000 # PWM limit
+dir 0       # direction
+init        # reset internal values
+stop        # stop the motor
+run         # start the motor
 ```
 
-### 3.6 Pregledna tabela vseh ukazov (CLI)
+### 3.6 CLI command reference
 
-Spodnja tabela povzema vse razpoložljive ukaze FlexDrive sistema, skupaj s parametri, dovoljenimi vrednostmi in opisom njihove funkcije.
+The table summarizes all FlexDrive commands, their parameters, allowed values and functions.
 
-| Ukaz             | Parameter     | Območje vrednosti     | Opis                                          |
+| Command | Parameter | Value range | Description |
 | ---------------- | ------------- | --------------------- | --------------------------------------------- |
-| mode             | 0 / 1         | 0 = open, 1 = closed  | Izbira načina delovanja                       |
-| run              | –             | –                     | Zažene motor / regulacijo                     |
-| stop             | –             | –                     | Ustavi motor                                  |
-| ref              | vrednost      | –10.0 … 10.0 (obr/s)  | Nastavi referenčno hitrost                    |
-| pwm              | vrednost      | 0 … pwm\_max          | Ročna nastavitev PWM v open-loop              |
-| pwm\_max         | vrednost      | ≥ 100                 | Omeji največji PWM                            |
-| dir              | 0 / 1         | 0 = naprej, 1 = nazaj | Smer vrtenja motorja                          |
-| kp               | vrednost      | –1000 … 1000          | Proporcionalni faktor PID regulacije          |
-| ki               | vrednost      | 0 … 100               | Integralni faktor PID regulacije              |
-| kd               | vrednost      | 0 … 100               | Diferencialni faktor PID regulacije           |
-| alpha            | vrednost      | 0.0 … 1.0             | Filter za glajenje hitrosti (low-pass filter) |
-| ts               | vrednost (ms) | ≥ 1                   | Čas vzorčenja regulacijske zanke              |
-| plot             | 0 / 1         | 0 = izklop, 1 = vklop | Stari “raw” način izrisa podatkov             |
-| plotSerialOpen   | –             | –                     | Plot PWM + hitrost (open-loop)                |
-| plotSerialClosed | –             | –                     | Plot PWM + ref + hitrost (closed-loop)        |
-| plot\_period     | vrednost      | ≥ 1                   | Izris vsak _n_-ti cikel                       |
-| list             | –             | –                     | Izpis trenutnega stanja celotnega sistema     |
-| version          | –             | –                     | Prikaz verzije firmware                       |
-| init             | –             | –                     | Ponastavi notranje vrednosti sistema          |
+| mode | 0 / 1 | 0 = open, 1 = closed | Select operating mode |
+| run | - | - | Start the motor or controller |
+| stop | - | - | Stop the motor |
+| ref | value | -10.0 to 10.0 (rev/s) | Set reference speed |
+| pwm | value | 0 to pwm\_max | Set PWM manually in open-loop mode |
+| pwm\_max | value | >= 100 | Limit maximum PWM |
+| dir | 0 / 1 | 0 = forward, 1 = reverse | Set motor rotation direction |
+| kp | value | -1000 to 1000 | PID proportional gain |
+| ki | value | 0 to 100 | PID integral gain |
+| kd | value | 0 to 100 | PID derivative gain |
+| alpha | value | 0.0 to 1.0 | Speed low-pass filter |
+| ts | value (ms) | >= 1 | Control-loop sample time |
+| plot | 0 / 1 | 0 = off, 1 = on | Legacy raw data output |
+| plotSerialOpen | - | - | Plot PWM and speed in open-loop mode |
+| plotSerialClosed | - | - | Plot PWM, reference and speed in closed-loop mode |
+| plot\_period | value | >= 1 | Output data every _n_ cycles |
+| list | - | - | Display the complete current system state |
+| version | - | - | Display firmware version |
+| init | - | - | Reset internal system values |
 
 ***
 
-#### 2. Povezava z MATLAB-om
+#### 2. MATLAB connection
 
-V tem razdelku je prikazano, kako MATLAB komunicira z maketo FlexDrive, bere podatke, pošilja ukaze ter izvaja meritve, ki se uporabljajo pri laboratorijskih vajah.
+This section describes how MATLAB communicates with FlexDrive, reads data, sends commands and records measurements for laboratory exercises.
 
-**2.1. Vzpostavitev serijske komunikacije v MATLAB-u**
+**2.1. Establishing serial communication in MATLAB**
 
-**2.2. Pošiljanje ukazov iz MATLAB-a**
+**2.2. Sending commands from MATLAB**
 
-**2.3. Branje podatkov v realnem času**
+**2.3. Reading data in real time**
 
-**2.4. Zajem časovnih potekov (step response, sinus, šum)**
+**2.4. Recording time responses: steps, sine waves and noise**
 
-**2.5. Obdelava podatkov in izris grafov**
+**2.5. Processing data and plotting graphs**
 
-**2.6. Primeri MATLAB skript za laboratorijske naloge**
+**2.6. MATLAB script examples for laboratory exercises**
 
-**2.7. Analiza in izvoz podatkov za PID nastavitve**
+**2.7. Analyzing and exporting data for PID tuning**

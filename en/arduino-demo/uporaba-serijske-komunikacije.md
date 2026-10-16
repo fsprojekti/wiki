@@ -1,137 +1,137 @@
-# Uporaba serijske komunikacije
+# Using serial communication
 
-Serijska povezava omogoča znakovno dvosmerno komunikacijo z vzpostavitvijo komunikacijskega kanala med mikrokrmilnikom in osebnim računalnikom kot prikazuje slika
+A serial connection enables two-way character-based communication between a microcontroller and a personal computer, as shown below.
 
 ```mermaid
 graph LR;
-    A(Osebni računalnik)---|serijska povezava|B(mikrokrmilnik )
+    A(Personal computer)---|Serial connection|B(Microcontroller)
 ```
 
-### Elektrotehnični del
+### Electrical hardware
 
-Serijska povezava povezuje dve serijski napravi, kar pomeni, da mora tako osebni računalnik kot mikrokrmilnik to omogočati. Računalniki, po večini, nimajo vgrajene serijske naprave tako, da je potrebno serijsko napravo dodati (primer). Tako serijsko naprave se poveže na računalnik preko kakega drugega vodila najpogosteje je to USB. Skoraj vsi mikrokrmilniki imajo serijsko napravo vgrajeno v čip kot eno izmed perifernih naprav. Najdemo jo pod imenom UART ali USART. Shema serijske povezave bolj natančno izgleda kot je prikazano na sliki
+Serial communication connects two serial interfaces, so both the computer and the microcontroller must support it. A computer may require an external serial adapter, usually connected through USB. Most microcontrollers include a UART or USART peripheral. The following diagram shows the connection in more detail.
 
 ```mermaid
 graph LR
-  A(Osebni računalnik)---|USB|B(Serijska naprava)
-   B---|Žična povezava|C(UART/USART)
-   subgraph Mikrokrmilnik
-   C---|Povezave v čipu|D(procesor in ostali <br> deli mikrokrmilnika)
+  A(Personal computer)---|USB|B(Serial interface)
+   B---|Wired connection|C(UART/USART)
+   subgraph Microcontroller
+   C---|On-chip connections|D(Processor and other <br> microcontroller components)
    end
 ```
 
-Serijsko komunikacijo določa standard RS232, katerega osnove so povzete v gradivu.
+RS-232 is a standard for serial communication; its basic principles are covered in the course material.
 
-#### Serijska povezava z Arduinom
+#### Serial connection with Arduino
 
-Uporaba serijskege povezave pri Arduino razvojnih ploščicah je poenostavljena saj ima Arduino že vgrajen USB/Serial pretvornik za povezavo z osebnim računalnikom. Torej shema serijske povezave izgleda tako
+On Arduino boards with a built-in USB-to-serial converter, connecting to a computer is simplified. The connection is shown below.
 
 ```mermaid
 graph LR;
-   A(Osebni računalnik)---|USB|B(USB/Serial pretvornik)
-   subgraph Arduino razvojna ploščica
-   B---|Povezave na razvojni ploščici|C(UART/USART)
-   subgraph Mikrokrmilnik
-   C---|Povezave v čipu|D(procesor in ostali <br> deli mikrokrmilnika)
+   A(Personal computer)---|USB|B(USB-to-serial converter)
+   subgraph Arduino development board
+   B---|Board connections|C(UART/USART)
+   subgraph Microcontroller
+   C---|On-chip connections|D(Processor and other <br> microcontroller components)
    end
    end
 ```
 
-### Programski del
+### Software
 
-Uporaba serijske naprave na računalniku je mogoča z posebno programsko opremo, ki za uporabnika ustvari konzolo preko katere nato prejemamo in zapisujemo sporočila. Arduino IDE ima konzolno aplikacijo že vgrajeno. Za uporabo serijske naprave na strani mikrokrmilnika pa je potrebno napisati program, oz če uporabljamo Arduino razvojno okolje imamo na voljo knjižnico [Serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/), ki poskrbi za pravilno konfiguracijo vgrajene serijske naprave in omogoča njeno uporabo na uporabniku prijazen način.
+On the computer, terminal software provides a console for sending and receiving messages. The Arduino IDE includes a Serial Monitor. On the microcontroller, a program must configure and use the serial peripheral. The Arduino [Serial](https://www.arduino.cc/reference/en/language/functions/communication/serial/) library provides a convenient interface for this.
 
-#### Zapisovanje nizov
+#### Writing strings
 
-Program bo vzpostavil serijsko komunikacijo z osebnim računalnikom in izpisoval stanje števca, katerega vrednost se povečuje na 1s.
+The program establishes serial communication with the computer and prints the counter value at one-second intervals.
 
 ```c
-//Globalne spremenljivke
-//Spremenljivka števca
-int stevec = 0;
+//Global variables
+//Counter variable
+int counter = 0;
 
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  //Vzpostavimo serijsko komunikacijo in nastavimo njeno hitrost
+  //Initialize serial communication and set the baud rate
   Serial.begin(9600);
 }
 
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Zapišemo spremni niz na serijsko povezavo
-  Serial.print("Števec: ");
-  //Zapišemo stanje števca na serijsko povezavo
-  Serial.println(stevec);
-  //Zakasnitev za 1s
+  //Send a label over the serial connection
+  Serial.print("Counter: ");
+  //Send the counter value
+  Serial.println(counter);
+  //Wait for 1 second
   delay(1000);
 }
 ```
 
-Pri prvem zapisu smo uporabili ukaz _Serial.print()_, ki nam na serijsko povezavo zapiše želeni niz. Pri drugem pa smo uporabili ukaz _Serial.println()_, ki nam poleg želenega niza na koncu doda znak za novo vrstico, kar se odraža v vrstičnem izpisu na konzoli. Enak učinek bi dosegli če bi zapisali niz $\n$ kot argument funkcije _Serial.print()_.
+The first output uses _Serial.print()_ to send the requested string. The second uses _Serial.println()_, which also appends a line ending so that successive values appear on separate console lines. Sending a newline character with _Serial.print()_ can also move the output to the next line.
 
-#### Branje znakov
+#### Reading characters
 
-Program bo prebral poslane znake in ob znaku "1" vklopil vgrajeno LED ob znaku "0" pa jo izklopil.
+The program reads incoming characters. Character "1" turns the built-in LED on, and character "0" turns it off.
 
 ```c
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  //Vzpostavimo serijsko komunikacijo in nastavimo njeno hitrost
+  //Initialize serial communication and set the baud rate
   Serial.begin(9600);
 }
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Preverimo ali se je v serijskem zalogovniku znakov pojavil kakšen znak
+  //Check whether any characters have arrived in the serial buffer
   if (Serial.available() > 0) {
-    //Prebiramo vrednosti poslane po serijski povezavi
-    int znak = Serial.read();
-    //Ali je poslani znak enak številki 49 po ASCI kodiranju oz. znaku '1'
-    if (znak == '1') {
+    //Read the value received over the serial connection
+    int character = Serial.read();
+    //Check for ASCII code 49, the character '1'
+    if (character == '1') {
       digitalWrite(LED_BUILTIN, HIGH);
     }
-    //Ali je poslani znak enak številki 48 po ASCI kodiranju oz. znaku '0'
-    if (znak == 48) {
+    //Check for ASCII code 48, the character '0'
+    if (character == 48) {
       digitalWrite(LED_BUILTIN, LOW);
     }
   }
 }
 ```
 
-Uporaba funkcije _Serial.available()_ pohitri delovanje programa saj hitro preveri ali je prispel kak znak. Če bi uporabljali samo funkcijo _Serial.read()_ bi program vsak cikel izvedel branje, kar bi izredno upočasnilo izvajanje programa.
+_Serial.available()_ checks whether data has arrived before the program attempts to read it. The example only processes a character when the receive buffer contains data.
 
-#### Branje in pisanje nizov
+#### Reading and writing strings
 
-Program bo prebral poslan niz in ob vrednosti "vklopi" vklopil vgrajeno LED in izpisal "led prizgana". Če bo vrednost niza "izklopi" pa bo LED izklopil in izpisal "led ugasnjena".
+The program reads an incoming string. The command "on" turns the built-in LED on and prints "LED on"; "off" turns it off and prints "LED off".
 
 ```c
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  //Vzpostavimo serijsko komunikacijo in nastavimo njeno hitrost
+  //Initialize serial communication and set the baud rate
   Serial.begin(9600);
 }
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Preverimo ali se je v serijskem zalogovniku znakov pojavil kakšen znak
+  //Check whether any characters have arrived in the serial buffer
   if (Serial.available() > 0) {
-    //Prebiramo vrednosti nizev poslanih po serijski povezavi
-    String niz = Serial.readString();
-    //Odstranimo zadnji znak niza \n, ki nakazuje konec niza
-    niz = niz.substring(0, niz.length() - 1);
+    //Read the string received over the serial connection
+    String message = Serial.readString();
+    //Remove the final newline character from the string
+    message = message.substring(0, message.length() - 1);
 
-    //Ali je poslani niz enak 'vklopi'
-    if ( niz == "vklopi") {
+    //Check whether the received string is 'on'
+    if ( message == "on") {
       digitalWrite(LED_BUILTIN, HIGH);
-      Serial.println("led prizgana");
+      Serial.println("LED on");
     }
-    //Ali je poslani niz enak 'izklopi'
-    if (niz == "izklopi") {
+    //Check whether the received string is 'off'
+    if (message == "off") {
       digitalWrite(LED_BUILTIN, LOW);
-      Serial.println("led ugasnjena");
+      Serial.println("LED off");
     }
   }
 }
 ```
 
 {% hint style="info" %}
-**Pozor!** Uporaba serijske komunikacije je časovno potraten proces in zavira delovanje mikrokrmilnika.
+**NOTE:** Serial communication takes processing time and can slow down the microcontroller's other tasks.
 {% endhint %}

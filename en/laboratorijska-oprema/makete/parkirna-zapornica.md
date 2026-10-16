@@ -1,46 +1,46 @@
-# Parkirna zapornica
+# Parking barrier
 
-Maketa zapornice je učni pripomoček, ki posnema obnašanje prave zapornice. Maketa omogoča izvedbo avtomatizacije s krmilnikom.
+The parking barrier rig is a teaching aid that reproduces the behavior of a real barrier. It can be automated using a controller.
 
-<figure><img src="../../.gitbook/assets/parkirna.png" alt="" width="563"><figcaption><p>Izris makete parkirna zapornica</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/parkirna.png" alt="Parking barrier rig diagram" width="563"><figcaption><p>Parking barrier rig diagram</p></figcaption></figure>
 
-### Gradniki makete
+### Rig components
 
-Maketo sestavljajo naslednji gradniki:
+The rig consists of the following components:
 
-* elektro motor s prenosom za pogon zapornica
-* končne stikala za zaznavanje skrajnih položajev zapornice
-* fotocelica, za zaznavanje vozila pod zapornico
-* magnetno stikalo, za zaznavanje vozila pred zapornico
-* semafor, z rdečo in zeleno lučjo, za signalizacijo vozniku
-* priključne sponke
+* geared electric motor driving the barrier
+* limit switches detecting the barrier's end positions
+* photoelectric sensor detecting a vehicle under the barrier
+* magnetic switch detecting a vehicle in front of the barrier
+* red and green traffic lights signaling to the driver
+* connection terminals
 
-### Električna shema
+### Circuit diagram
 
-Gradniki makete so električno povezani po shemi na sliki
+The components are connected as shown in the circuit diagram.
 
 <figure><img src="../../.gitbook/assets/shemaZapornica.png" alt=""><figcaption></figcaption></figure>
 
 {% hint style="info" %}
-Maketo napajamo z enosmerno napetostjo **12V**. Na priključno sponko **X3 +** priključimo pozitiven potencial na priključno sponko **X3 -** pa negativnega.
+Power the rig with **12 V DC**. Connect the positive supply to terminal **X3 +** and the negative supply to **X3 -**.
 {% endhint %}
 
-### Primeri priključitve gradnikov
+### Component connection examples
 
-Maketa ja zgrajena na način, ki dopušča svobodo pri izbiri načina vključitve njenih gradnikov v krmilni sistem. Podajamo pa po en primer pravilne priključitve za vsak gradnik makete.
+The rig allows different ways to integrate its components into a control system. The following sections provide an example connection for each component.
 
-#### Motor s prenosom
+#### Geared motor
 
-Pogon traku je izveden z uporabo enosmernega motorja in mehanskega prenosa za zmanjšanje obratov motorja. Smer vrtenja enosmernih motorjev je določna s smerjo toka, ki teče skoznje. Primer krmiljenja smeri motorja z uporabo štirih relejev povezanih v H mostič, je prikazan na sliki
+A DC motor and reduction gearing drive the mechanism. The current direction determines the motor's rotation direction. The figure shows bidirectional motor control using four relays arranged as an H-bridge.
 
-<figure><img src="../../.gitbook/assets/hmostic.png" alt="" width="237"><figcaption><p>Priključitev DC motorja v H mostič z uporabo 4 relejev</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/hmostic.png" alt="DC motor connected to an H-bridge using four relays" width="237"><figcaption><p>DC motor connected to an H-bridge using four relays</p></figcaption></figure>
 
-Če aktiviramo releja _Q1_ in _Q4_ potem steče tok od pozitivnega potenciala _L+_ skozi _Q1_ do levega priključka motorja. Nato nadaljuje pot iz desnega priključka motorja skozi _Q4_ in v negativni potencial _M_, kar požene motor. Vrtenje motorja obrnemo z aktivacijo _Q2_ in _Q3_, kjer podobno kot prej steče tok le, da je smer toka skozi motor iz desne proti levi, kar povzroči vrtenje motorja v drugo smer.
+Energizing relays _Q1_ and _Q4_ allows current to flow from positive supply _L+_ through _Q1_ to the motor's left terminal, then from its right terminal through _Q4_ to negative supply _M_. Energizing _Q2_ and _Q3_ reverses the current through the motor and therefore its rotation direction.
 
-#### Fotocelica
+#### Photoelectric sensor
 
-Fotocelica je digitalno stikalo, ki spremeni stanje, ko pride med vir svetlobe in sprejemnik svetlobe ovira. Vir svetlobe fotocelice je žarnica, ki jo priklopimo na napajanje sprejemnik pa je foto občutljiv tranzistor. Fotocelica in primer priklopa na krmilnik sta prikazana na sliki
+The photoelectric sensor changes its digital state when an object blocks the path between its light source and receiver. The source is a powered lamp, and the receiver is a phototransistor. The figure shows the sensor and an example controller connection.
 
-<figure><img src="../../.gitbook/assets/foto.png" alt="" width="375"><figcaption><p>Priključitev fotocelice na digitalni vhod PLK</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/foto.png" alt="Connecting a photoelectric sensor to a PLC digital input" width="375"><figcaption><p>Connecting a photoelectric sensor to a PLC digital input</p></figcaption></figure>
 
-Ko pride ovira med žarnico in fototranzistor se prekine dotok svetlobe na bazo tranzistorja in tranzistor se zapre, kar pomeni, da tok iz pozitivnega potenciala vira _L+_ skozi tranzistor do digitalnega vhoda krmilnika ne teče več in to zaznamo kot logično 0.
+When an object blocks the light reaching the phototransistor, the transistor turns off. Current no longer flows from positive supply _L+_ through the transistor to the controller input, which is detected as logic 0.

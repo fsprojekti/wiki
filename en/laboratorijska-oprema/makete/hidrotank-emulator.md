@@ -1,94 +1,94 @@
 # HidroTank emulator
 
-### 1. Opis
+### 1. Description
 
-Maketa računalniško simulira delovanje enostavnega tekočinskega sistema v realnem času. Tekočinski sistem sestavljajo hranilnik tekočine ter ventil za dovod tekočine in ventil za odvod tekočine. Sistem je mogoče krmiliti ročno ali pa z uporabo mehanskega regulatorja.
+The rig simulates a simple fluid system in real time. The system consists of a tank, an inlet valve and an outlet valve. It can be controlled manually or using a mechanical controller.
 
-### 2. Odprtozančni model
+### 2. Open-loop model
 
-Odprtozančni sistem je prikazan na sliki. Sestavljajo ga dovodni ventil z merilnikom pretoka dovodne tekočine, hranilnik tekočine in odvodni ventil z merilnikom pretoka odvodne tekočine.
+The figure shows the open-loop system: an inlet valve with an inlet flow meter, a tank, and an outlet valve with an outlet flow meter.
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Odprtozančni model </p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image.png" alt="Open-loop model"><figcaption><p>Open-loop model</p></figcaption></figure>
 
-#### 2.1 Dovodni ventil
+#### 2.1 Inlet valve
 
-Dovodni ventil dovaja tekočino v hranilnik. Pretok tekočine v hranilnik v odvisnosti od odprtosti ventila (Position) opisuje enačba:
-
-$$
-\varphi_{\text{dovodni}}(\text{valve}) = 0.0025 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%]
-$$
-
-Povezava med odprtostjo ventila in pretokom je linearna in omejena pri 100% odprtosti ventila. Trenutno vrednost pretoka (Flow) meri merilnik, njegovo vrednost pa prikazuje prikazovalnik levo od ventila.
-
-#### 2.2 Odvodni ventil
-
-Odvodni ventil odvaja tekočino iz hranilnika. Pretok tekočine iz hranilnika je odvisen od odprtosti ventila in nivoja tekočine v hranilniku $$h(t)$$, opisuje pa ga enačba:
+The inlet valve supplies fluid to the tank. Inlet flow as a function of valve opening (Position) is described by:
 
 $$
-\varphi_{\text{odvodni}}(\text{valve}, h) = 0.005 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%] \cdot \sqrt{2 \cdot g \cdot h(t)}
+\varphi_{\text{inlet}}(\text{valve}) = 0.0025 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%]
 $$
 
-Maksimalni odvodni pretok bo dosežen, ko bo nivo tekočine najvišji ($$h = 1 , \text{m}$$) in ventil popolnoma odprt ($$\text{valve} = 100%$$).
+Valve opening and flow have a linear relationship, limited at 100% opening. A flow meter measures the current flow (Flow), displayed to the left of the valve.
 
-#### 2.3 Hranilnik tekočine
+#### 2.2 Outlet valve
 
-Nivo tekočine v hranilniku opisuje diferencialna enačba:
+The outlet valve drains fluid from the tank. Outlet flow depends on valve opening and fluid level $$h(t)$$:
 
 $$
-h(t) = \int \frac{1}{S_{\text{hranilnik}}} \left( \varphi_{\text{dovodni}}(t) - \varphi_{\text{odvodni}}(t) \right) \, dt
+\varphi_{\text{outlet}}(\text{valve}, h) = 0.005 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%] \cdot \sqrt{2 \cdot g \cdot h(t)}
 $$
 
-Nivo tekočine v hranilniku je odvisen od konstrukcije hranilnika in integrala razlike pretokov ter začetnega stanja nivoja, ki je implicitno podan v integralu. Hranilnik ima obliko kvadra s površino $$S = 0.1 , \text{m}^2$$ in maksimalno višino $$1  \text{m}$$. Minimalni nivo tekočine je $$0 \text{m}$$, pri nivoju več kot $$1  \text{m}$$ pa pride do preliva.
+Maximum outlet flow occurs at the highest fluid level ($$h = 1 , \text{m}$$) with the valve fully open ($$\text{valve} = 100%$$).
 
-#### 2.4 Blokovna shema sistema
+#### 2.3 Tank
 
-Blokovna shema sistema opisuje gradnike in povezave med njimi. Dovodni ventil nastavlja dovodni pretok tekočine. Dovodnemu pretoku tekočine se odšteje odvodni pretok, ki ga nastavlja odvodni ventil. Razlika pretokov nato polni hranilnik tekočine in spreminja nivo tekočine $$h(t)$$.
+The fluid level in the tank is described by:
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="516"><figcaption><p>Blokovna shema odprtozančnega sistema</p></figcaption></figure>
+$$
+h(t) = \int \frac{1}{S_{\text{tank}}} \left( \varphi_{\text{inlet}}(t) - \varphi_{\text{outlet}}(t) \right) \, dt
+$$
 
-### 3. Zaprtozančni model
+The fluid level depends on the tank geometry, the integrated difference between inlet and outlet flow, and the initial level implicit in the integral. The tank is rectangular, with cross-sectional area $$S = 0.1 , \text{m}^2$$ and a maximum height of $$1 \text{m}$$. The minimum fluid level is $$0 \text{m}$$; levels above $$1 \text{m}$$ cause overflow.
 
-Za razliko od odprtozančnega sistema, kjer niso podane zahteve glede vodenja, zaprtozančni sistem zahteva ustrezno vodenje sistema (nastavljanje ventilov) za dosego ustreznega nivoja tekočine v hranilniku.
+#### 2.4 System block diagram
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Blokovna shema zaprtozančnega sistema</p></figcaption></figure>
+The block diagram shows the components and their connections. The inlet valve sets the incoming flow. The outlet valve sets the outgoing flow, which is subtracted from the incoming flow. The flow difference changes the tank's fluid level $$h(t)$$.
 
-Zaprtozančni sistem podaja zahtevan oz. referenčni nivo tekočine $$h_{\text{ref}}(t)$$. Razlika med referenčnim in dejanskim nivojem je pogrešek $$e(t) = h_{\text{ref}}(t) - h(t)$$. Regulator na podlagi pogreška izračuna ustrezno odprtje ventila $$u(t)$$ oz. dovodni pretok v hranilnik tekočine, da zmanjša pogrešek.
+<figure><img src="../../.gitbook/assets/image (1).png" alt="Open-loop system block diagram" width="516"><figcaption><p>Open-loop system block diagram</p></figcaption></figure>
 
-Maketa omogoča izvedbo dveh tipov:
+### 3. Closed-loop model
 
-* Ročni regulacijski sistem
-* Mehanski regulacijski sistem
+Closed-loop operation controls the valves to achieve a specified fluid level in the tank. In open-loop operation, no feedback-based level-control requirement is imposed.
 
-#### 3.1 Ročni regulacijski sistem
+<figure><img src="../../.gitbook/assets/image (2).png" alt="Closed-loop system block diagram"><figcaption><p>Closed-loop system block diagram</p></figcaption></figure>
 
-Ročni regulacijski sistem zagotavlja krmiljenje ventilov s pomočjo operaterja. Operater spremlja zahtevan oz. referenčni nivo ter ustrezno reagira z odpiranjem oz. zapiranjem ventilov.
+The closed-loop system specifies reference level $$h_{\text{ref}}(t)$$. The difference between reference and actual level is error $$e(t) = h_{\text{ref}}(t) - h(t)$$. The controller uses this error to calculate valve opening $$u(t)$$, and therefore inlet flow, to reduce the error.
 
-#### 3.2 Mehanski regulacijski sistem
+The rig supports two controller types:
 
-Mehanski regulacijski sistem zagotavlja krmiljenje dovodnega ventila preko mehanske povratne povezave.&#x20;
+* Manual control system
+* Mechanical control system
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Mehanski regulacijski sistem</p></figcaption></figure>
+#### 3.1 Manual control system
 
-Mehanski krmilnik uporablja ponton oz. plovec ter sistem mehanskih vzvodov za krmiljenje dovodnega ventila.
+An operator controls the valves manually, monitoring the reference level and opening or closing the valves as required.
 
-**Mehanski parametri**
+#### 3.2 Mechanical control system
 
-| Oznaka | Velikost    | Enota | Opomba             |
+Mechanical feedback controls the inlet valve.
+
+<figure><img src="../../.gitbook/assets/image (3).png" alt="Mechanical control system"><figcaption><p>Mechanical control system</p></figcaption></figure>
+
+A float and a system of mechanical levers control the inlet valve.
+
+**Mechanical parameters**
+
+| Symbol | Value | Unit | Note |
 | ------ | ----------- | ----- | ------------------ |
-| l1     | 0.4         | m     | Fiksna ročica      |
-| l2     | 0.5         | m     | Fiksna ročica      |
-| l3     | \[0.5, 3.0] | m     | Nastavljiva ročica |
-| l4     | \[0.5, 3.0] | m     | Nastavljiva ročica |
-| ponton | 0.142       | m     | Višina pontona     |
+| l1 | 0.4 | m | Fixed lever arm |
+| l2 | 0.5 | m | Fixed lever arm |
+| l3 | \[0.5, 3.0] | m | Adjustable lever arm |
+| l4 | \[0.5, 3.0] | m | Adjustable lever arm |
+| float | 0.142 | m | Float height |
 
-**Lokacije točk glede na točko C**
+**Point locations relative to point C**
 
-| Oznaka | Lokacija (x, y) | Enota | Opomba                            |
+| Symbol | Location (x, y) | Unit | Note |
 | ------ | --------------- | ----- | --------------------------------- |
-| A      | \[-0.75, y]     | m     | Prosto gibanje v vertikalni smeri |
-| B      | \[x, y]         | m     | Spremenljiva točka                |
-| C      | \[0, 0]         | m     | Fiksna točka                      |
-| D      | \[0.5, 3.0]     | m     | Spremenljiva točka                |
-| E      | \[1.34, y]      | m     | Prosto gibanje v vertikalni smeri |
+| A | \[-0.75, y] | m | Free vertical movement |
+| B | \[x, y] | m | Variable point |
+| C | \[0, 0] | m | Fixed point |
+| D | \[0.5, 3.0] | m | Variable point |
+| E | \[1.34, y] | m | Free vertical movement |
 
-Točka A krmili dovodni ventil z omejitvami gibanja: ventil je zaprt (0%) pri točki A nižje kot 0.31 m od točke C in popolnoma odprt pri točki A višje kot 0.085 m od točke C. Vmesne pozicije določa linearna enačba med skrajnima točkama.
+Point A controls the inlet valve within its travel limits. The valve is closed (0%) when A is more than 0.31 m below C and fully open when A is more than 0.085 m above C. Intermediate positions follow a linear relationship between the endpoints.

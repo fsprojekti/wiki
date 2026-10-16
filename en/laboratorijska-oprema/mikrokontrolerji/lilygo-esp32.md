@@ -1,78 +1,78 @@
 # LILYGO - ESP32
 
-## Opis
+## Description
 
-<figure><img src="../../.gitbook/assets/image (8).png" alt="" width="375"><figcaption><p>Razvojna plošča LILYGO</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (8).png" alt="LILYGO development board" width="375"><figcaption><p>LILYGO development board</p></figcaption></figure>
 
-Razvojna plošča TTGO, z ESP32 mikrokrmilnik in TFT zaslonom, je napredna in vsestranska platforma, namenjena za razvoj in implementacijo IoT (Internet of Things) projektov. Tu so ključne značilnosti:
+The TTGO development board combines an ESP32 microcontroller with a TFT display for developing Internet of Things (IoT) projects. Its main features are:
 
-1. **Mikrokrmilnik ESP32**: Srce razvojne plošče je ESP32, zmogljiv mikrokrmilnik, ki podpira Wi-Fi in Bluetooth povezljivost. Ponuja veliko procesorsko moč, nizko porabo energije in je idealen za različne aplikacije, vključno s pametnimi domovi, avtomatizacijo, nadzornimi sistemi itd.
-2. **TFT Zaslon**: Plošča vključuje barvni TFT zaslon, ki omogoča prikazovanje grafike, besedila in vmesnikov uporabnikov. Ta zaslon je primeren za aplikacije, ki potrebujejo vizualni izhod, kot so pametne ure, vremenske postaje ali interaktivni nadzorni sistemi.
-3. **GPIO Vhodi/Izhodi**: Razvojna plošča TTGO s ESP32 in TFT zaslonom ima več GPIO (General Purpose Input/Output) priključkov, ki omogočajo povezavo z različnimi senzorji, aktuatorji in drugimi moduli.
-4. **Programiranje in Razvojno Okolje**: TTGO ploščo je mogoče programirati z uporabo priljubljenih razvojnih okolij, kot so Arduino IDE, Espressif IDF ali celo MicroPython. To olajša razvoj za širok spekter razvijalcev, od začetnikov do izkušenih.
-5. **Napajanje in Baterija**: Plošča je zasnovana za delovanje z različnimi viri napajanja, vključno z možnostjo priključitve na baterijo, kar omogoča njeno uporabo v prenosnih ali oddaljenih aplikacijah.
+1. **ESP32 microcontroller:** The ESP32 supports Wi-Fi and Bluetooth. It combines processing capability with low power consumption for applications such as smart homes, automation and monitoring systems.
+2. **TFT display:** The color TFT display can show graphics, text and user interfaces. It is suitable for applications requiring visual output, such as clocks, weather stations and interactive monitoring systems.
+3. **GPIO inputs and outputs:** The board provides GPIO (General Purpose Input/Output) connections for sensors, actuators and other modules.
+4. **Programming and development environments:** The TTGO board can be programmed using Arduino IDE, Espressif IDF or MicroPython, supporting both beginners and experienced developers.
+5. **Power supply and battery:** The board supports different power sources, including a battery, allowing portable or remote applications.
 
-Ta razvojna plošča je idealna za hobiste, izobraževalne namene, prototipiranje in majhne do srednje velike IoT projekte.
+This development board is suitable for hobby projects, education, prototyping and small to medium-sized IoT projects.
 
-## Arduino delovno okolje
+## Arduino development environment
 
-Nastavitev delovnega okolja za razvojno ploščo TTGO obsega naslednje korake:
+Set up the development environment for the TTGO board as follows:
 
-### 1. Inštalacija modula razvojne plošče
+### 1. Installing board support
 
-V Arduino okolju je potrebno dodati povezavo do zunanjega modula, saj v osnovnem IDE ni podpore za to razvojno ploščo
+Add the external board-package URL in Arduino IDE because the default installation does not include support for this board.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt="" width="312"><figcaption><p>Pot do pojavnega okna za nastavitve Arduino okolja</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (10).png" alt="Opening Arduino IDE preferences" width="312"><figcaption><p>Opening Arduino IDE preferences</p></figcaption></figure>
 
-Ko odpremo nastavitve Arduino okolja dodamo povezavo do razvojne plošče v okno (Additional board managers URL).&#x20;
+Open Arduino IDE preferences and add the board-package URL under **Additional Boards Manager URLs**.
 
 ```
 https://espressif.github.io/arduino-esp32/package_esp32_index.json
 ```
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption><p>Dodajanje zunanje povezave za razvojno ploščo ESP32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt="Adding the external ESP32 board-package URL"><figcaption><p>Adding the external ESP32 board-package URL</p></figcaption></figure>
 
-Ko smo dodali povezavo do zunanjega vira lahko sedaj namestimo dodatne module razvojnih ploščic, ki se nahajajo pod imenom _esp32 by Espressif Systems._
+After adding the URL, install the board package named _esp32 by Espressif Systems_.
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt="" width="563"><figcaption><p>Izbira modula razvojnih ploščic esp32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt="Selecting the esp32 board package" width="563"><figcaption><p>Selecting the esp32 board package</p></figcaption></figure>
 
-Po namestitvi modula lahko sedaj izberemo svojo razvojno ploščo iz nabora. Izberemo ploščo TTGO LoRa32-OLED.
+After installation, select your development board. This walkthrough uses TTGO LoRa32-OLED.
 
-<figure><img src="../../.gitbook/assets/image (11).png" alt="" width="563"><figcaption><p>Izbira razvojne plošče</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (11).png" alt="Selecting the development board" width="563"><figcaption><p>Selecting the development board</p></figcaption></figure>
 
-### 2. Inštalacija TFT prikazovalnika
+### 2. Installing TFT display support
 
-TFT prikazovalnik uporablja SPI komunikacijo z ravojno ploščo LILYGO. Če želimo uporabljati ta prikazovalnik lahko izkoristimo knjižnico, ki bo poskrbela za komunikacijo ter omogočala lažjo in predvsem hitrejšo uporabo prikazovalnika.
+The TFT display communicates with the LILYGO board over SPI. A display library handles communication and makes the display easier to use.
 
-<figure><img src="../../.gitbook/assets/image (12).png" alt="" width="423"><figcaption><p>Knjižnica za prikazovalnik</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (12).png" alt="Display library" width="423"><figcaption><p>Display library</p></figcaption></figure>
 
-Ko smo naložili knjižnico za prikazovalnik je potrebno še nastaviti pravilno konfiguracijo namreč knjižnica je splošna tako za različne dimenzije prikazovalnikov kot različnih tipov komunikacij z krmilniki. Potrebno bo urediti že dokument že nameščene knjižnice.
+After installing the display library, select the correct configuration. The library supports different display sizes and controller interfaces, so an installed configuration file must be edited.
 
-<figure><img src="../../.gitbook/assets/image (13).png" alt=""><figcaption><p>Dostop do datoteke za nastavitev TFT prikazovalnika</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (13).png" alt="Opening the TFT display configuration file"><figcaption><p>Opening the TFT display configuration file</p></figcaption></figure>
 
-Dokument najdemo med nameščenimi Arduino knjižnicami pod imenom _User\_Setup\_Select.h_
+Find _User\_Setup\_Select.h_ in the installed Arduino libraries.
 
-Najprej onemogočimo  (za-komentiramo) vrstico 32&#x20;
+First, disable line 32 by commenting it out.
 
-<figure><img src="../../.gitbook/assets/image (14).png" alt=""><figcaption><p>Vrstica 32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (14).png" alt="Line 32"><figcaption><p>Line 32</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (15).png" alt=""><figcaption><p>Onemogočimo (za-komentiramo) vrstico 32</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (15).png" alt="Disable line 32 by commenting it out"><figcaption><p>Disable line 32 by commenting it out</p></figcaption></figure>
 
-Omogočimo (od-komentiramo) vrstico 58
+Enable line 58 by uncommenting it.
 
-<figure><img src="../../.gitbook/assets/image (16).png" alt=""><figcaption><p>Izbira prave konfiguracije TFT prikazovalnika in razvojne plošče</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (16).png" alt="Selecting the correct TFT display and board configuration"><figcaption><p>Selecting the correct TFT display and board configuration</p></figcaption></figure>
 
-### 3. Namestitev demonstracijskega programa
+### 3. Installing the demo program
 
-V Arduino okolju izberemo enega izmed demonstracijskih programov.
+Select one of the example programs in Arduino IDE.
 
-<figure><img src="../../.gitbook/assets/image (17).png" alt=""><figcaption><p>Izbira demonstacijskega programa digitalna ura</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (17).png" alt="Selecting the digital clock example"><figcaption><p>Selecting the digital clock example</p></figcaption></figure>
 
-Priključimo ploščo in izberemo pravilni prehod (port) za namestitev
+Connect the board and select the correct upload port.
 
-<figure><img src="../../.gitbook/assets/image (18).png" alt=""><figcaption><p>Izbira razvojne plošče in prehoda</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (18).png" alt="Selecting the development board and port"><figcaption><p>Selecting the development board and port</p></figcaption></figure>
 
-Po namestitvi se na prikazovalniku izpiše trenutni čas
+After uploading, the display shows the current time.
 
-<figure><img src="../../.gitbook/assets/image (21).png" alt=""><figcaption><p>Izpis na prikazovalniku po namestitvi demonstracijskega programa</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (21).png" alt="Display after uploading the demo program"><figcaption><p>Display after uploading the demo program</p></figcaption></figure>
 

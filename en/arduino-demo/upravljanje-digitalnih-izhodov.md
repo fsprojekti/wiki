@@ -1,41 +1,41 @@
-# Upravljanje digitalnih izhodov
+# Controlling digital outputs
 
-Z mikrokrmilnikom bomo izmenično na $$1s$$ prižigali in ugašali LED. Z zapisovanjem na digitalne izhode, prenesemo informacijo iz krmilnika na izhodne pine mikrokrmilnika. Izhodni pini nato krmilijo aktuator, v našem primeru je to LED. Nalogo razdelimo v dva dela elektrotehnični in programski.
+We will use the microcontroller to switch an LED on and off at $$1s$$ intervals. Writing digital outputs transfers information from the controller to its output pins, which control an actuator: an LED in this example. We divide the task into electrical hardware and software.
 
-## Elektrotehnični del
+## Electrical hardware
 
-Elektrotehnični del zahteva izgradnjo električnega vezja, ki ga sestavlja LED, mikrokrmilnik in pomožne komponente. Primer izgradnje takega vezja je na voljo v [gradivu](../elektrotehnika/led-in-mikrokrmilnik.md)
+The hardware requires a circuit consisting of an LED, a microcontroller and supporting components. See [LED and microcontroller](../elektrotehnika/led-in-mikrokrmilnik.md) for an example.
 
-## Programski del
+## Software
 
-Pri pisanju kode si bomo pomagali s funkcijami iz knjižnice Arduino projekta.
+We will use functions from the Arduino library when writing the code.
 
 * [pinMode()](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/)
 * [digitalWrite()](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)
 
-Primer programa, ki izmenično (na 1s) spreminja vrednost digitalnega izhoda.
+This example changes a digital output's state at one-second intervals.
 
 ```c
-//Globalne konstante
-//Pin 1 mikrokrmilnika
+//Global constants
+//Microcontroller pin 1
 int K1pin = 1;
 
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  //K1pin nastavimo v način digitalnega izhoda
+  //Configure K1pin as a digital output
   pinMode(K1pin, OUTPUT);
 }
 
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Zapisovanje izhodov
-  //Digitalni izhod K1pin nastavimo na visok napetostni potencial (5V za arduino Nano)
+  //Write the outputs
+  //Set K1pin high (5 V on the Arduino Nano)
   digitalWrite(K1pin, HIGH);
-  //Ustavimo izvajanje programa za 1s
+  //Pause program execution for 1 second
   delay(1000);
-  //Digitalni izhod K1pin nastavimo na nizek napetostni potencial (0V)
+  //Set K1pin low (0 V)
   digitalWrite(K1pin, LOW);
-  //Ustavimo izvajanje programa za 1s
+  //Pause program execution for 1 second
   delay(1000);
 }
 ```

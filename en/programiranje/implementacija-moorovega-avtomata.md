@@ -1,174 +1,174 @@
-# Implementacija Moorovega avtomata
+# Implementing a Moore state machine
 
-## Implementacija Moorovega avtomata
+## Implementing a Moore state machine
 
-Izdelali bomo sistem za krmiljenje enosmernega motorja, ki mora delovati na sledeči način:
+We will build a DC motor control system with the following required behavior:
 
-1. Ko prvič pritisnemo tipko se motor požene v levo
-2. Ko drugič pritisnemo tipko se motor ustavi
-3. Ko tretjič pritisnemo tipko se motor požene v desno
-4. Ob četrtem pritisku tipke se motor ustavi
-5. Zgornja sekvenca se ponavlja neskončno dolgo
+1. The first button press starts the motor in the left direction.
+2. The second button press stops the motor.
+3. The third button press starts the motor in the right direction.
+4. The fourth button press stops the motor.
+5. The sequence repeats indefinitely.
 
-Izdelati moramo električno vezje in programsko kodo.
+We need to build the electrical circuit and write the program.
 
-### Električno vezje
+### Electrical circuit
 
-Električno vezje mora imeti tipko in biti sposobno krmiliti električni motor. Vključitev tipke v električno vezje si lahko ogledate v [gradivu](../elektrotehnika/tipka-in-mikrokrmilnik.md). Električno vezje za krmiljenje enosmernega motorja v vse smeri pa je predstavljeno v [gradivu](../elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md).
+The circuit needs a button and a bidirectional motor driver. See [Button and microcontroller](../elektrotehnika/tipka-in-mikrokrmilnik.md) for the button circuit and [DC motor and microcontroller](../elektrotehnika/enosmerni-motor-in-mikrokrmilnik.md) for motor control in both directions.
 
-### Programska koda
+### Program code
 
-Krmilni sistem za naš problem lahko zapišemo v obliki Moorovega končnega avtomata. Izhodi moorovega avtomata so odvisni samo od trenutnega stanja avtomata. Vhodi vplivajo samo na spremembo stanja avtomata, torej na izhode vplivajo posredno. Splošen diagram poteka implementacija moorovega avtomata za krmilni sistem.
+We can represent this controller as a Moore finite-state machine. Its outputs depend only on the current state. Inputs affect state transitions, so they influence the outputs indirectly. The following flowchart shows the general implementation.
 
 ```mermaid
 graph TD
-A(Zagon krmilnika) -->B(Nastavitve digitalnih vhodov in izhodov)
-B --> C(Branje digitalnih vhodov)
-C -->D(Tranzicijs stanj avtomata)
-D -->E(Zapis digitalnih izhodov)
+A(Controller startup) -->B(Configure digital inputs and outputs)
+B --> C(Read digital inputs)
+C -->D(State transition)
+D -->E(Write digital outputs)
 E-->C
 ```
 
-Avtomat deluje po korakih:
+The state machine operates as follows:
 
-1. Krmilnik se zažene ko priključimo napajanje
-2. Nastavitve krmilnika
-3. Preberemo vrednosti digitalnih vhodov in njihove vrednosti shranimo
-4. Izvedemo en korak oz. tranzicijo avtomata
-5. Zapišemo nove vrednosti digitalnih izhodov
-6. Vrnemo se v korak branja digitalnih vhodov
+1. The controller starts when power is connected.
+2. Configure the controller.
+3. Read and store the digital input values.
+4. Execute one state transition step.
+5. Write the new digital output values.
+6. Return to reading the digital inputs.
 
-Avtomat deluje v zanki neskončno dolgo oz. dokler ne izključimo napajanja krmilnika.
+The loop runs indefinitely, until the controller is powered off.
 
-#### Zapis avtomata krmilnega sistema
+#### Defining the controller state machine
 
-Iz opisa naloge načrtamo diagram prehajanja stanj, ki določa tranzicije moorovega avtomata.
-
-```mermaid
-graph LR
-A(Stanje 0<br> Motor miruje)-->|tipka==true|B(Stanje 1<br> Motor levo)
-B-->|tipka==true|C(Stanje 2<br> Motor desno)
-C-->|tipka==true|D(Stanje 3<br> Motor miruje)
-D-->|tipka==true|A
-```
-
-!> Pozor! Ker implementacija avtomata deluje v zanki moramo biti previdni pri prehajanju stanj, kjer so pogoji za prehod vrednosti digitalnih vhodov. Več o tem v gradivu.
-
-Popravljen diagram prehajanja stanj, zaradi vpliva digitalnega vhoda.
+Use the task description to draw a state-transition diagram for the Moore machine.
 
 ```mermaid
 graph LR
-A(Stanje 0<br> Motor miruje)-->|tipka==true|B(Stanje 1<br> Motor levo)
-B-->|tipka==false|B1(Stanje 2<br>Tipka neaktivna)
-B1-->|tipka==true|C(Stanje 3<br> Motor desno)
-C-->|tipka==false|C1(Stanje 4<br>Tipka neaktivna)
-C1-->|tipka==true|D(Stanje 5<br> Motor miruje)
-D-->|tipka==false|A
+A(State 0<br> Motor stopped)-->|button==true|B(State 1<br> Motor left)
+B-->|button==true|C(State 2<br> Motor right)
+C-->|button==true|D(State 3<br> Motor stopped)
+D-->|button==true|A
 ```
 
-#### Prevedba v programsko kodo
+!> CAUTION: Because the state machine runs in a loop, take care when a digital input level is used as a transition condition. See the course material for more information.
 
-Pri pisanju kode si bomo pomagali s funkcijami iz knjižnice Arduino projekta.
+The following state-transition diagram accounts for the digital input being held active.
+
+```mermaid
+graph LR
+A(State 0<br> Motor stopped)-->|button==true|B(State 1<br> Motor left)
+B-->|button==false|B1(State 2<br>Button released)
+B1-->|button==true|C(State 3<br> Motor right)
+C-->|button==false|C1(State 4<br>Button released)
+C1-->|button==true|D(State 5<br> Motor stopped)
+D-->|button==false|A
+```
+
+#### Converting the state machine to code
+
+We will use functions from the Arduino library when writing the code.
 
 * [pinMode()](https://www.arduino.cc/reference/en/language/functions/digital-io/pinmode/)
 * [digitalRead()](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalread/)
 * [digitalWrite()](https://www.arduino.cc/reference/en/language/functions/digital-io/digitalwrite/)
 
-Celoten moorov avtomat, ki ga sestavlja: Branje digitalnih vhodov, tranzicije stanj in zapisovanje digitalnih izhodov prevedemo v C kodo za Arduino. Zapisovanje digitalnih izhodov smo izvedli z uporabo funkcije $motorGonilnik()$
+Convert the entire Moore state machine, including input reads, state transitions and output writes, into Arduino C code. The $setMotorOutputs()$ function writes the motor control outputs.
 
 ```c
-//Globalne konstante
-//Pini digitalnih vhodov
-int S0pin = 0; //tipka
-//Pini digitalnih izhodov
-int Q1pin = 1;  //rele 1
-int Q2pin = 2;  //rele 2
-int Q3pin = 3;  //rele 3
-int Q4pin = 4;  //rele 4
+//Global constants
+//Digital input pins
+int S0pin = 0; //button
+//Digital output pins
+int Q1pin = 1;  //relay 1
+int Q2pin = 2;  //relay 2
+int Q3pin = 3;  //relay 3
+int Q4pin = 4;  //relay 4
 
-//Globalne spremenljivke
-bool S0 = false;  //Spremenljivka tipke
-int state = 0;  //Spremenljivka stanja avtomata
-int motor = 0;  //Spremenljivka stanja motorja 0/1/2...stop/levo/desno
+//Global variables
+bool S0 = false;  //Button state variable
+int state = 0;  //State-machine state variable
+int motor = 0;  //Motor state: 0/1/2 = stopped/left/right
 
-//Nastavitvena funkcija
+//Setup function
 void setup() {
-  pinMode(S0pin, INPUT);  //Nastavimo pin 0 kot digitalni vhod
-  //Nastavimo pine 1, 2, 3, 4 kot digitalne izhode za krmiljenje motorja s H mostičem
+  pinMode(S0pin, INPUT);  //Configure pin 0 as a digital input
+  //Configure pins 1, 2, 3 and 4 as digital outputs for the motor H-bridge
   pinMode(Q1pin, OUTPUT);
   pinMode(Q2pin, OUTPUT);
   pinMode(Q3pin, OUTPUT);
   pinMode(Q4pin, OUTPUT);
 }
 
-//Krožna funkcija
+//Main loop
 void loop() {
-  //Preberemo vrednosti digitalnih vhodov
+  //Read the digital input values
   S0 = digitalRead(S0pin);
-  //Tranzicija avtomata
+  //State transition
   switch (state) {
-    //Stanje 0: motor miruje
+    //State 0: motor stopped
     case 0: {
-        if (S0 == true) { //Ali je tipka aktivna
-          state++;  //Spremenimo stanje
-          motor = 1;  //Določimo vrtenje motorja levo
+        if (S0 == true) { //Is the button pressed?
+          state++;  //Change state
+          motor = 1;  //Select left motor rotation
         }
       } break;
-    // Stanje 1: motor se vrti levo
+    // State 1: motor rotating left
     case 1: {
-        if (S0 == false) {  //Ali je tipka neaktivna
-          state++;  //Spremenimo stanje
+        if (S0 == false) {  //Is the button released?
+          state++;  //Change state
         }
       } break;
-    // Stanje 2: tipka je neaktivna
+    // State 2: button released
     case 2: {
-        if (S0 == true) { //Ali je tipka aktivna
-          state++;  //Spremenimo stanje
-          motor = 2;  //Določimo vrtenje motorja desno
+        if (S0 == true) { //Is the button pressed?
+          state++;  //Change state
+          motor = 2;  //Select right motor rotation
         }
       } break;
-    // Stanje 3: motor se vrti desno
+    // State 3: motor rotating right
     case 3: {
-        if (S0 == false) {  //Ali je tipka neaktivna
-          state++;  //Spremenimo stanje
+        if (S0 == false) {  //Is the button released?
+          state++;  //Change state
         }
       } break;
-    // Stanje 4: tipka je neaktivna
+    // State 4: button released
     case 4: {
-        if (S0 == true) { //Ali je tipka aktivna
-          state++;  //Spremenimo stanje
-          motor = 0;  //Določimo vrtenje motorja stop
+        if (S0 == true) { //Is the button pressed?
+          state++;  //Change state
+          motor = 0;  //Stop the motor
         }
       } break;
-    // stanje 5: motor stoji
+    // State 5: motor stopped
     case 5: {
-        if (S0 == false) {  //Ali je tipka neaktivna
-          state = 0;  //Spremenimo stanje
+        if (S0 == false) {  //Is the button released?
+          state = 0;  //Change state
         }
       } break;
   }
-  //Zapišemo vrednosti digitalnih izhodov
-  motorGonilnik(motor);
+  //Write the digital output values
+  setMotorOutputs(motor);
 }
 
-//Funkcija za krmiljenje motorja
-void motorGonilnik(int smer) {
-  //Motor stop
-  if (smer == 0) {
+//Motor control function
+void setMotorOutputs(int direction) {
+  //Motor stopped
+  if (direction == 0) {
     digitalWrite(Q1pin, LOW);
     digitalWrite(Q2pin, LOW);
     digitalWrite(Q3pin, LOW);
     digitalWrite(Q4pin, LOW);
   }
-  //Motor levo
-  if (smer == 1) {
+  //Motor left
+  if (direction == 1) {
     digitalWrite(Q1pin, HIGH);
     digitalWrite(Q2pin, HIGH);
     digitalWrite(Q3pin, LOW);
     digitalWrite(Q4pin, LOW);
   }
-  //Motor desno
-  if (smer == 2) {
+  //Motor right
+  if (direction == 2) {
     digitalWrite(Q1pin, LOW);
     digitalWrite(Q2pin, LOW);
     digitalWrite(Q3pin, HIGH);

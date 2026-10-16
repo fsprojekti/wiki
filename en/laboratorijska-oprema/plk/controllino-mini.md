@@ -1,70 +1,70 @@
 # Controllino MINI
 
-Controllino MINI podjetja [Controllino](https://www.controllino.com/) predstavlja pol-profesionalno implementacijo Arduino razvojnih ploščic v PLK sistem.&#x20;
+Controllino MINI from [Controllino](https://www.controllino.com/) adapts the Arduino platform into a compact PLC system for automation applications.
 
-Gradiva:
+Resources:
 
-* [uporabniška navodila](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FJbzJmQr460GY2c4w9Sxh%2FminiManual.pdf?alt=media\&token=3511fd91-3ec2-48f6-8e2a-197b98b8a069)
-* [električna vezava signalov](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2F2AWveZKx8HxqJlxtXKGR%2FminiPinout.pdf?alt=media\&token=8fd727af-bfdc-4873-bf23-45ab0a9fd637)
-* [podatkovni list](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2F1UuDSsDUpCvJkR7ZWQCb%2FminiDatasheet.pdf?alt=media\&token=3713ae3f-3bd8-40f1-8f5a-2e6e553e2f3b)
+* [User manual](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2FJbzJmQr460GY2c4w9Sxh%2FminiManual.pdf?alt=media\&token=3511fd91-3ec2-48f6-8e2a-197b98b8a069)
+* [Signal wiring and pinout](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2F2AWveZKx8HxqJlxtXKGR%2FminiPinout.pdf?alt=media\&token=8fd727af-bfdc-4873-bf23-45ab0a9fd637)
+* [Datasheet](https://files.gitbook.com/v0/b/gitbook-x-prod.appspot.com/o/spaces%2FOjZ1XG64rvc2AeRBUH5H%2Fuploads%2F1UuDSsDUpCvJkR7ZWQCb%2FminiDatasheet.pdf?alt=media\&token=3713ae3f-3bd8-40f1-8f5a-2e6e553e2f3b)
 
-## Opis krmilnika
+## Controller description
 
-Na sliki je prikazan krmilnik CONTROLLINO MINI z označenimi sestavnimi deli. Jedro krmilnika CONTROLLINO MINI temelji na mikrokrmilniku ATmega328. Ta krmilnik ima 8 vhodov brez galvanske izolacije, 4 skupne analogni/digitalne vhode, 2 izključno digitalna vhoda in 2 izključno analogna vhoda. Poleg tega ima 8 digitalnih izhodov brez galvanske izolacije in 6 relejnih izhodov, ki so vzporedno z digitalnimi. CONTROLLINO MINI je zasnovan za različne aplikacije avtomatizacije in nadzora, ponuja fleksibilnost in kompaktno zasnovo, ki je primerna za projekte manjšega obsega.
+The figure shows the CONTROLLINO MINI with its components labeled. It is based on an ATmega328 microcontroller. It has eight inputs without galvanic isolation: four combined analog/digital inputs, two digital-only inputs and two analog-only inputs. It also has eight digital outputs without galvanic isolation and six relay outputs in parallel with digital outputs. Its compact, flexible design supports small automation and control projects.
 
-<figure><img src="../../.gitbook/assets/image (22).png" alt="" width="375"><figcaption><p>Controllino MINI</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (22).png" alt="Controllino MINI" width="375"><figcaption><p>Controllino MINI</p></figcaption></figure>
 
-## Električna vezava
+## Electrical wiring
 
-Krmilnik električno povežemo z napajanjem in z digitalnimi vhodi in digitalnimi izhodi.
+Connect the controller to its power supply, digital inputs and digital outputs.
 
-### Napajanje PLK
+### PLC power supply
 
-PLK za svoje delovanje potrebuje napajanje, v našem primeru je to enosmerna napetost 24V. Priključne sponke napajanja na PLK so prikazane na spodnji sliki.
+The PLC requires a power supply; this example uses 24 V DC. The supply terminals are shown below.
 
-<figure><img src="../../.gitbook/assets/image (24).png" alt="" width="375"><figcaption><p>Priključitev napajanja</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (24).png" alt="Connecting the power supply" width="375"><figcaption><p>Connecting the power supply</p></figcaption></figure>
 
-Oznaka na sliki 12V/24V označuje pozitivni potencial in oznaka GND negativni potencial napajalne napetosti.
+The **12V/24V** label indicates the positive supply terminal, and **GND** indicates supply ground.
 
-### Digitalni vhodi
+### Digital inputs
 
-Vezava digitalnih vhodov na PLK nam omogoča spremljanje stanja digitalnih naprav, kot so končna stikala, tlačni stikala in vse druge vrste digitalnih naprav. Primer priklopa stikala prikazuje spodnja slika.
+Digital inputs monitor devices such as limit switches, pressure switches and other digital sensors. The figure shows an example switch connection.
 
-<figure><img src="../../.gitbook/assets/image (25).png" alt="" width="337"><figcaption><p>Priključitev PLK na vhod A2 v digitalnem načinu</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (25).png" alt="Connecting a digital signal to PLC input A2" width="337"><figcaption><p>Connecting a digital signal to PLC input A2</p></figcaption></figure>
 
-### Digitalni izhodi
+### Digital outputs
 
-Vezava digitalnih izhodov na PLK nam omogoča izvajanje akcij oz. spreminjanje stanj digitalnih naprav, kot so luči, releji, motorji, črpalke in druge digitalne naprave. Primer povezave bremena na digitalni relejski izhod prikazuje spodnja slika.
+Digital outputs operate devices such as lamps, relays, motors and pumps. The figure shows a load connected to a digital relay output.
 
-<figure><img src="../../.gitbook/assets/image (26).png" alt="" width="234"><figcaption><p>Priklop bremena na relejski izhod D0</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (26).png" alt="Connecting a load to relay output D0" width="234"><figcaption><p>Connecting a load to relay output D0</p></figcaption></figure>
 
-Digitalni izhod PLK je izveden z relejem, zato lahko breme krmilimo samo preko relejskega stikala. Na prvo sponko relejskega stikala priključimo pozitivni potencial vira (24V) na drugo sponko pa prvi konec bremena. Drugi konec bremena zvežemo na negativni potencial vira (0V).
+The relay output switches the load through its contact. Connect the positive supply (24 V) to one contact terminal and the load to the other. Connect the load's other terminal to the negative supply (0 V).
 
-### Uporabniški vmesnik
+### User interface
 
-Uporabniški vmesnik predstavljajo vgrajene LED ki prikazujejo stanje vhodno izhodnih naprav.
+Built-in LEDs indicate the states of the input and output devices.
 
-<figure><img src="../../.gitbook/assets/image (27).png" alt=""><figcaption><p>LED za prikzovanje stanja vhodno izhodnih naprav</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (27).png" alt="LEDs indicating input and output states"><figcaption><p>LEDs indicating input and output states</p></figcaption></figure>
 
-Uporabniški vmesnik omogoča spremljanje stanja vhodno izhodnih naprav ne omogoča pa njihovega upravljanja.
+The interface allows input and output states to be monitored but does not directly control them.
 
-## Programsko orodje
+## Programming software
 
-Programiranja Controllino MINI se lahko izvaja v več okoljih.  Arduino IDE omogoča programiranje v programskem jeziku C.
+Controllino MINI can be programmed in several environments. Arduino IDE supports programming in C.
 
-### Nastavitev Arduino okolja
+### Arduino environment setup
 
-* [Navodila za nastavitev okolja](https://github.com/CONTROLLINO-PLC/CONTROLLINO_Library#installation-guide)
+* [Environment setup instructions](https://github.com/CONTROLLINO-PLC/CONTROLLINO_Library#installation-guide)
 
-### Nastavitev komunikacijskega vmesnika
+### Communication interface setup
 
-### Prenos programa na krmilnik
+### Uploading the program to the controller
 
-### Monitoring programa
+### Program monitoring
 
-### Pogoste težave
+### Common issues
 
-1. Napaka pri nalaganju
+1. Upload error
 
 {% code lineNumbers="true" %}
 ```c
@@ -72,10 +72,10 @@ avrdude: stk500_recv(): programmer is not responding
 ```
 {% endcode %}
 
-To težavo odpravimo z naslednjim postopkom
+To resolve this issue:
 
-* Pritisnite in držite gumb za ponastavitev na napravi Controllino.&#x20;
-* Povežite USB kabel (še vedno držite gumb za ponastavitev, programska oprema v Controllinu se ne zažene)&#x20;
-* Kliknite za nalaganje skice v Arduino IDE in počakajte na sporočilo "uploading" v vrstici za odpravljanje napak, nato takoj spustite gumb za ponastavitev in nalaganje se mora zaključiti (držite gumb za ponastavitev med fazo prevajanja "compiling")&#x20;
-* Če ni uspešno, ponovite postopek
+* Press and hold the reset button on the Controllino.
+* Connect the USB cable while holding reset, so the existing program does not start.
+* Start uploading the sketch in Arduino IDE. Keep holding reset during compilation. When the status changes to "uploading", release reset immediately so the upload can complete.
+* If the upload fails, repeat the procedure.
 
