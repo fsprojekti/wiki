@@ -1,13 +1,5 @@
 # HidroTank emulator
 
-### Zagon
-
-Maketa je ena sama datoteka HTML in ne potrebuje namestitve, strežnika ali internetne povezave.
-
-1. Klikni povezavo [hidrotank-emulator.html](../../.gitbook/assets/hidrotank-emulator.html); datoteka se prenese v mapo Prenosi.
-2. Odpri preneseno datoteko z dvoklikom ali jo povleci v okno brskalnika (Chrome, Edge ali Firefox).
-3. Maketa se odpre v brskalniku. Sestavljeni mehanizmi se shranijo v brskalnik in ostanejo tudi po ponovnem odprtju datoteke.
-
 ### 1. Opis
 
 HidroTank emulator je spletna aplikacija, ki v realnem času simulira enostaven tekočinski sistem: hranilnik z dovodnim ventilom na vrhu in odvodnim ventilom (odtokom) na dnu. Sistem je mogoče opazovati brez regulatorja, ga voditi ročno ali z mehanskim P-regulatorjem. Mehanski regulator je lahko vnaprej pripravljen (z vzvodi) ali pa ga uporabnik sam sestavi iz koles, ležajev in jermenov.
