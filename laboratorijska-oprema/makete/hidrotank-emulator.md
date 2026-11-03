@@ -1,6 +1,12 @@
 # HidroTank emulator
 
-**Maketa:** [hidrotank-emulator.html](../../.gitbook/assets/hidrotank-emulator.html) (prenesi in odpri v brskalniku)
+### Zagon
+
+Maketa je ena sama datoteka HTML in ne potrebuje namestitve, strežnika ali internetne povezave.
+
+1. Klikni povezavo [hidrotank-emulator.html](../../.gitbook/assets/hidrotank-emulator.html); datoteka se prenese v mapo Prenosi.
+2. Odpri preneseno datoteko z dvoklikom ali jo povleci v okno brskalnika (Chrome, Edge ali Firefox).
+3. Maketa se odpre v brskalniku. Sestavljeni mehanizmi se shranijo v brskalnik in ostanejo tudi po ponovnem odprtju datoteke.
 
 ### 1. Opis
 
