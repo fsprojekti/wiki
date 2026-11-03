@@ -6,6 +6,14 @@ HidroTank emulator je spletna aplikacija, ki v realnem času simulira enostaven 
 
 Vsak način delovanja prikazuje shemo sistema, nastavitve, meritve in graf.
 
+#### Zagon
+
+Aplikacija je ena sama datoteka HTML, ki ne potrebuje namestitve ali strežnika. Datoteko prenesemo in odpremo v brskalniku (Chrome, Edge ali Firefox). Sestavljeni mehanizmi se shranijo v brskalnik.
+
+{% file src="../../.gitbook/assets/hidrotank-emulator.html" %}
+HidroTank emulator (statična HTML datoteka)
+{% endfile %}
+
 <figure><img src="../../.gitbook/assets/hidrotank-sestavljanje.png" alt="Sestavljanje regulatorja: paleta delov, shema hranilnika in graf"><figcaption><p>Sestavljanje regulatorja: zgoraj paleta delov, levo shema z letvijo ventila in plovcem, desno graf</p></figcaption></figure>
 
 ### 2. Model sistema
