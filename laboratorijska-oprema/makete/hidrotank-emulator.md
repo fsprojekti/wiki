@@ -38,19 +38,29 @@ $$
 
 Nivo je omejen med $$0$$ in $$1 \, \text{m}$$; nad robom hranilnik preliva. Simulacija teče s korakom $$0.1 \, \text{s}$$ v realnem času.
 
-#### 2.4 Odtok
+#### 2.4 Blokovna shema odprtozančnega sistema
+
+Dovodni ventil nastavlja dovodni pretok. Od njega se odšteje odvodni pretok, ki je odvisen od odprtosti odtoka in nivoja. Razlika pretokov polni hranilnik in spreminja nivo $$h(t)$$.
+
+<figure><img src="../../.gitbook/assets/image (1).png" alt="Blokovna shema odprtozančnega sistema"><figcaption><p>Blokovna shema odprtozančnega sistema</p></figcaption></figure>
+
+#### 2.5 Odtok
 
 Odtok je lahko nastavljen na stalno odprtost, se pri $$30 \, \text{s}$$ skokovito spremeni (12 → 36 %) ali pa se odpira naključno. Pri naključnem odtoku je prvih 12 s odprt 24 %, nato vsakih 8–14 s izbere drugo odprtost med 12, 18, 24, 30 in 36 %. V zadnjih 30 s poskusa se ne spreminja. Vzorec je vedno enak, zato so poskusi med seboj primerljivi.
 
-#### 2.5 Ustrezna oskrba
+#### 2.6 Ustrezna oskrba
 
 Odtok predstavlja porabnika, ki potrebuje svoj nazivni pretok, to je pretok pri želenem nivoju in trenutni odprtosti. Oskrba je ustrezna, kadar dejanski odvodni pretok od nazivnega ne odstopa za več kot 3 %. Na grafu nivoja je to območje prikazano kot zelen pas okoli želenega nivoja. **Ustrezna oskrba** v orodni vrstici je delež časa poskusa, ko je bila oskrba ustrezna.
 
-#### 2.6 Meritve
+#### 2.7 Meritve
 
 Glede na način delovanja aplikacija sproti izpisuje nivo in želeni nivo, ustaljeni nivo, povprečni pogrešek v zadnjih 10 s, čas 63 % odziva, integral absolutnega pogreška (IAE) in ustrezno oskrbo.
 
 ### 3. Načini delovanja
+
+Pri vodenju v zaprti zanki regulator primerja želeni nivo $$h_{	ext{ref}}(t)$$ z dejanskim nivojem $$h(t)$$. Iz pogreška $$e(t) = h_{	ext{ref}}(t) - h(t)$$ določi odprtost dovodnega ventila $$u(t)$$. Regulator je lahko operater (ročna regulacija) ali mehanski P-regulator.
+
+<figure><img src="../../.gitbook/assets/image (2).png" alt="Blokovna shema zaprtozančnega sistema"><figcaption><p>Blokovna shema zaprtozančnega sistema</p></figcaption></figure>
 
 | Način | Opis |
 | ----- | ---- |
