@@ -2,93 +2,176 @@
 
 ### 1. Opis
 
-Maketa računalniško simulira delovanje enostavnega tekočinskega sistema v realnem času. Tekočinski sistem sestavljajo hranilnik tekočine ter ventil za dovod tekočine in ventil za odvod tekočine. Sistem je mogoče krmiliti ročno ali pa z uporabo mehanskega regulatorja.
+HidroTank emulator je spletna aplikacija, ki v realnem času simulira enostaven tekočinski sistem: hranilnik z dovodnim ventilom na vrhu in odvodnim ventilom (odtokom) na dnu. Sistem je mogoče opazovati brez regulatorja, ga voditi ročno ali z mehanskim P-regulatorjem. Mehanski regulator je lahko vnaprej pripravljen (z vzvodi) ali pa ga uporabnik sam sestavi iz koles, ležajev in jermenov.
 
-### 2. Odprtozančni model
+Vsak način delovanja prikazuje shemo sistema, nastavitve, meritve in graf.
 
-Odprtozančni sistem je prikazan na sliki. Sestavljajo ga dovodni ventil z merilnikom pretoka dovodne tekočine, hranilnik tekočine in odvodni ventil z merilnikom pretoka odvodne tekočine.
+<figure><img src="../../.gitbook/assets/hidrotank-sestavljanje.png" alt="Sestavljanje regulatorja: paleta delov, shema hranilnika in graf"><figcaption><p>Sestavljanje regulatorja: zgoraj paleta delov, levo shema z letvijo ventila in plovcem, desno graf</p></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption><p>Odprtozančni model </p></figcaption></figure>
+### 2. Model sistema
 
 #### 2.1 Dovodni ventil
 
-Dovodni ventil dovaja tekočino v hranilnik. Pretok tekočine v hranilnik v odvisnosti od odprtosti ventila (Position) opisuje enačba:
+Dovodni ventil je batni ventil s hodom $$0.12 \, \text{m}$$ od zaprtega do popolnoma odprtega položaja. Dovodni pretok je linearen z odprtostjo ventila $$u_{\text{dov}}$$ [%]:
 
 $$
-\varphi_{\text{dovodni}}(\text{valve}) = 0.0025 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%]
+\varphi_{\text{dovodni}} = 0.0025 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \frac{u_{\text{dov}}}{100}
 $$
-
-Povezava med odprtostjo ventila in pretokom je linearna in omejena pri 100% odprtosti ventila. Trenutno vrednost pretoka (Flow) meri merilnik, njegovo vrednost pa prikazuje prikazovalnik levo od ventila.
 
 #### 2.2 Odvodni ventil
 
-Odvodni ventil odvaja tekočino iz hranilnika. Pretok tekočine iz hranilnika je odvisen od odprtosti ventila in nivoja tekočine v hranilniku $$h(t)$$, opisuje pa ga enačba:
+Odvodni pretok je odvisen od odprtosti odtoka $$u_{\text{odv}}$$ [%] in nivoja $$h$$:
 
 $$
-\varphi_{\text{odvodni}}(\text{valve}, h) = 0.005 \, \left[\frac{\text{m}^3}{\text{s}}\right] \cdot \text{valve} \, [\%] \cdot \sqrt{2 \cdot g \cdot h(t)}
+\varphi_{\text{odvodni}} = \frac{u_{\text{odv}}}{100} \cdot \frac{\sqrt{2 g h}}{k}, \qquad k = 885.89
 $$
 
-Maksimalni odvodni pretok bo dosežen, ko bo nivo tekočine najvišji ($$h = 1 , \text{m}$$) in ventil popolnoma odprt ($$\text{valve} = 100%$$).
+Pri polnem hranilniku ($$h = 1 \, \text{m}$$) in popolnoma odprtem odtoku je odvodni pretok približno $$0.005 \, \text{m}^3/\text{s}$$.
 
-#### 2.3 Hranilnik tekočine
+#### 2.3 Hranilnik
 
-Nivo tekočine v hranilniku opisuje diferencialna enačba:
+Hranilnik ima površino $$A = 0.025 \, \text{m}^2$$ in višino $$1 \, \text{m}$$. Nivo opisuje diferencialna enačba
 
 $$
-h(t) = \int \frac{1}{S_{\text{hranilnik}}} \left( \varphi_{\text{dovodni}}(t) - \varphi_{\text{odvodni}}(t) \right) \, dt
+A \frac{dh}{dt} = \varphi_{\text{dovodni}}(t) - \varphi_{\text{odvodni}}(t)
 $$
 
-Nivo tekočine v hranilniku je odvisen od konstrukcije hranilnika in integrala razlike pretokov ter začetnega stanja nivoja, ki je implicitno podan v integralu. Hranilnik ima obliko kvadra s površino $$S = 0.1 , \text{m}^2$$ in maksimalno višino $$1  \text{m}$$. Minimalni nivo tekočine je $$0 \text{m}$$, pri nivoju več kot $$1  \text{m}$$ pa pride do preliva.
+Nivo je omejen med $$0$$ in $$1 \, \text{m}$$; nad robom hranilnik preliva. Simulacija teče s korakom $$0.1 \, \text{s}$$ v realnem času.
 
-#### 2.4 Blokovna shema sistema
+#### 2.4 Odtok
 
-Blokovna shema sistema opisuje gradnike in povezave med njimi. Dovodni ventil nastavlja dovodni pretok tekočine. Dovodnemu pretoku tekočine se odšteje odvodni pretok, ki ga nastavlja odvodni ventil. Razlika pretokov nato polni hranilnik tekočine in spreminja nivo tekočine $$h(t)$$.
+Odtok je lahko nastavljen na stalno odprtost, se pri $$30 \, \text{s}$$ skokovito spremeni (12 → 36 %) ali pa se odpira naključno. Pri naključnem odtoku je prvih 12 s odprt 24 %, nato vsakih 8–14 s izbere drugo odprtost med 12, 18, 24, 30 in 36 %. V zadnjih 30 s poskusa se ne spreminja. Vzorec je vedno enak, zato so poskusi med seboj primerljivi.
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt="" width="516"><figcaption><p>Blokovna shema odprtozančnega sistema</p></figcaption></figure>
+#### 2.5 Ustrezna oskrba
 
-### 3. Zaprtozančni model
+Odtok predstavlja porabnika, ki potrebuje svoj nazivni pretok, to je pretok pri želenem nivoju in trenutni odprtosti. Oskrba je ustrezna, kadar dejanski odvodni pretok od nazivnega ne odstopa za več kot 3 %. Na grafu nivoja je to območje prikazano kot zelen pas okoli želenega nivoja. **Ustrezna oskrba** v orodni vrstici je delež časa poskusa, ko je bila oskrba ustrezna.
 
-Za razliko od odprtozančnega sistema, kjer niso podane zahteve glede vodenja, zaprtozančni sistem zahteva ustrezno vodenje sistema (nastavljanje ventilov) za dosego ustreznega nivoja tekočine v hranilniku.
+#### 2.6 Meritve
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption><p>Blokovna shema zaprtozančnega sistema</p></figcaption></figure>
+Glede na način delovanja aplikacija sproti izpisuje nivo in želeni nivo, ustaljeni nivo, povprečni pogrešek v zadnjih 10 s, čas 63 % odziva, integral absolutnega pogreška (IAE) in ustrezno oskrbo.
 
-Zaprtozančni sistem podaja zahtevan oz. referenčni nivo tekočine $$h_{\text{ref}}(t)$$. Razlika med referenčnim in dejanskim nivojem je pogrešek $$e(t) = h_{\text{ref}}(t) - h(t)$$. Regulator na podlagi pogreška izračuna ustrezno odprtje ventila $$u(t)$$ oz. dovodni pretok v hranilnik tekočine, da zmanjša pogrešek.
+### 3. Načini delovanja
 
-Maketa omogoča izvedbo dveh tipov:
+| Način | Opis |
+| ----- | ---- |
+| Ročna regulacija | Dovodni ventil nastavlja uporabnik ročno, odtok se odpira naključno. Želeni nivo je 0.55 m, poskus traja 120 s. |
+| Spoznavanje sistema | Brez regulatorja: hranilnik se polni iz praznega s popolnoma odprtim dovodom, odtok je nastavljen pred poskusom med 0 in 100 % v korakih po 10 %. Poskus teče do preliva ali ustalitve (največ 120 s). |
+| P-regulator z vzvodi | Mehanski P-regulator z nihajno ročico (kot pri naftni črpalki): plovec visi na vrvi $$l_4$$ z desne glave ročice $$l_3$$, leva glava dviga bat dovodnega ventila. Velja $$K_p = 2.5 / l_3$$ in $$h_0 = 1.4 \, \text{m} - l_4$$. Nastavljajo se $$l_3$$, $$l_4$$, odtok in začetni nivo; poskus traja 60 s. |
+| P-regulator z vzvodi pod obremenitvijo | Isti regulator z naključnim odtokom pri želenem nivoju 0.55 m, 120 s. |
+| Sestavljeni P-regulator | Regulator, sestavljen iz koles, dvojnih koles, ležajev in jermenov, z naključnim odtokom pri želenem nivoju 0.55 m, 120 s. Opis v poglavjih 4 in 5. |
+| Delavnica | Prosto sestavljanje z vsemi deli (tudi plovec in letve); aplikacija sproti izpisuje odprtost ventila, $$K_p$$, nivo zapiranja in težave mehanizma, gumb **Primer** pa naloži delujoč regulator. Želeni nivo 0.75 m, odtok 12, 24 ali 36 %, 60 s. |
 
-* Ročni regulacijski sistem
-* Mehanski regulacijski sistem
+<figure><img src="../../.gitbook/assets/hidrotank-vzvodi.png" alt="P-regulator z nihajno ročico"><figcaption><p>P-regulator z vzvodi; dolžini ročice l₃ in vrvi l₄ se nastavljata z drsnikoma, Kp je izpisan ob vrtišču</p></figcaption></figure>
 
-#### 3.1 Ročni regulacijski sistem
+### 4. Sestavljeni P-regulator
 
-Ročni regulacijski sistem zagotavlja krmiljenje ventilov s pomočjo operaterja. Operater spremlja zahtevan oz. referenčni nivo ter ustrezno reagira z odpiranjem oz. zapiranjem ventilov.
+#### 4.1 Fiksni deli
 
-#### 3.2 Mehanski regulacijski sistem
+Shema vsebuje dele, ki jih ni mogoče odstraniti:
 
-Mehanski regulacijski sistem zagotavlja krmiljenje dovodnega ventila preko mehanske povratne povezave.&#x20;
+* **Plovec** plava na gladini; nanj je pritrjena **Letev plovca**, ki drsi samo navpično. Njeno dolžino je mogoče spremeniti.
+* **Letev ventila** je podaljšek bata dovodnega ventila in drsi samo navpično. Hod ventila je 0.12 m.
+* Ventil se v tem načinu **zapre, ko letev ventila potegnemo navzgor** (pri regulatorju z vzvodi se z dvigom odpre). Mehanizem mora zato ob dvigu nivoja letev ventila potisniti navzgor.
 
-<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption><p>Mehanski regulacijski sistem</p></figcaption></figure>
+#### 4.2 Razpoložljivi deli
 
-Mehanski krmilnik uporablja ponton oz. plovec ter sistem mehanskih vzvodov za krmiljenje dovodnega ventila.
+Med letvama se prenos sestavi iz:
 
-**Mehanski parametri**
+* **Kolo**: torno kolo ali jermenica (polmer 2–20 cm),
+* **Dvojno kolo**: veliko in malo kolo na isti gredi, za prestavo,
+* **Ležaj**: pritrdi os kolesa na ogrodje,
+* **Jermen**: poveže dve kolesi, odprt ali prekrižan.
 
-| Oznaka | Velikost    | Enota | Opomba             |
-| ------ | ----------- | ----- | ------------------ |
-| l1     | 0.4         | m     | Fiksna ročica      |
-| l2     | 0.5         | m     | Fiksna ročica      |
-| l3     | \[0.5, 3.0] | m     | Nastavljiva ročica |
-| l4     | \[0.5, 3.0] | m     | Nastavljiva ročica |
-| ponton | 0.142       | m     | Višina pontona     |
+Za merjenje razdalj je na voljo orodje **Meter**.
 
-**Lokacije točk glede na točko C**
+#### 4.3 Kako mehanizem deluje
 
-| Oznaka | Lokacija (x, y) | Enota | Opomba                            |
-| ------ | --------------- | ----- | --------------------------------- |
-| A      | \[-0.75, y]     | m     | Prosto gibanje v vertikalni smeri |
-| B      | \[x, y]         | m     | Spremenljiva točka                |
-| C      | \[0, 0]         | m     | Fiksna točka                      |
-| D      | \[0.5, 3.0]     | m     | Spremenljiva točka                |
-| E      | \[1.34, y]      | m     | Prosto gibanje v vertikalni smeri |
+Vsi stiki delujejo s trenjem brez zdrsa:
 
-Točka A krmili dovodni ventil z omejitvami gibanja: ventil je zaprt (0%) pri točki A nižje kot 0.31 m od točke C in popolnoma odprt pri točki A višje kot 0.085 m od točke C. Vmesne pozicije določa linearna enačba med skrajnima točkama.
+* kolo, ki se kotali po letvi, se ob premiku letve za $$\Delta s$$ zasuka za $$\Delta \varphi = \Delta s / r$$,
+* jermen med kolesoma s polmeroma $$r_1$$ in $$r_2$$ zagotavlja $$r_1 \varphi_1 = \pm r_2 \varphi_2$$ (odprt jermen ohrani smer vrtenja, prekrižan jo obrne),
+* kolesa na isti gredi (dvojno kolo) se zasučejo za enak kot.
+
+Ojačenje regulatorja je razmerje med odprtostjo ventila in odstopanjem nivoja:
+
+$$
+u = K_p \cdot (h_0 - h)
+$$
+
+kjer je $$h_0$$ nivo, pri katerem se ventil zapre. Ko se nivo spremeni za $$\Delta h$$, se letev ventila premakne za $$\Delta s$$, odprtost ventila pa za $$\Delta s / 0.12 \, \text{m}$$. Polmeri koles in vrsta jermena tako določajo $$K_p$$.
+
+#### 4.4 Nivo zapiranja $$h_0$$
+
+Kolo ventila na končnih legah ventila zdrsne. Zato:
+
+* se ventil na začetku zapre pri začetnem nivoju,
+* ko z drsnikom **Nivo vode** dvignemo vodo višje, letev ventila doseže zaprto lego in kolo zdrsne. Ventil se nato zapre pri **najvišjem nivoju, do katerega je bila voda dvignjena z roko**.
+
+Tako se $$h_0$$ nastavi z mehanizmom samim, brez gumba.
+
+#### 4.5 Prikaz
+
+V tem načinu aplikacija ne prikazuje $$K_p$$, nivoja zapiranja, odprtosti ventila ali opozoril o težavah mehanizma, in ni gumba **Zapri ventil pri tem nivoju**. Te vrednosti se določijo z orodjem Meter, s premikanjem vode z roko in z opazovanjem dovoda med poskusom. V načinu **Delavnica** so prikazane.
+
+### 5. Orodje za sestavljanje
+
+Nad shemo je plošča orodja: levo paleta delov in orodij, v sredini lastnosti izbranega dela ali spoja, desno gumbi za razveljavitev (↶), ponovitev (↷) in **Počisti**. Mehanizem se shrani v brskalnik in ostane tudi po ponovnem nalaganju strani.
+
+#### 5.1 Kolo ob letvi in ležaj
+
+Kolo iz palete povlečemo na shemo (klik na kartico ga postavi nad hranilnik). Nato kolo povlečemo ob letev: ko se obod približa letvi, se obe površini obarvata in pojavi se napis **Spusti za stik**. Ob spustu se kolo prisloni na letev in se po njej kotali brez zdrsa. Kolo nato pritrdimo z **Ležajem**, ki ga iz palete spustimo na os kolesa. Namesto tega lahko v lastnostih kolesa obkljukamo **Os v ležaju**.
+
+<figure><img src="../../.gitbook/assets/hidrotank-kolo-stik-lezaj.gif" alt="Kolo povlečemo ob letev plovca, spustimo za stik in na os spustimo ležaj"><figcaption><p>Kolo ob letvi plovca: stik in ležaj</p></figcaption></figure>
+
+#### 5.2 Kolo ob letvi ventila in polmer
+
+Enako postavimo kolo ob letev ventila. Polmer izbranega kolesa spremenimo v polju **Polmer** na plošči lastnosti. Seznam na plošči kaže vse spoje izbranega dela; vsak ima ✕ za odstranitev, **Odklopi vse** pa del odklopi od vseh spojev.
+
+<figure><img src="../../.gitbook/assets/hidrotank-kolo-ventil-polmer.gif" alt="Drugo kolo ob letvi ventila, sprememba polmera na 6 cm in ležaj"><figcaption><p>Drugo kolo ob letvi ventila, sprememba polmera in ležaj</p></figcaption></figure>
+
+#### 5.3 Jermen
+
+Izberemo orodje **Jermen** in kliknemo prvo in drugo kolo. Jermen je nato izbran in na plošči lastnosti izberemo **Odprt** ali **Prekrižan**. Če je konec jermena na dvojnem kolesu, z **Na kolesu** izberemo, na katerem od obeh koles teče. Esc prekine izbiro.
+
+<figure><img src="../../.gitbook/assets/hidrotank-jermen.gif" alt="Orodje Jermen poveže kolo ob letvi plovca s kolesom ob letvi ventila"><figcaption><p>Jermen med kolesoma</p></figcaption></figure>
+
+#### 5.4 Dvojno kolo in razveljavitev
+
+**Dvojno kolo** sta dve kolesi na isti gredi. Na plošči lastnosti nastavimo oba polmera (**Polmer zadaj** in **Polmer spredaj**); sprednje kolo ne more biti večje od zadnjega. Stik ali jermen na enem ali drugem kolesu da različno prestavo. Vsako spremembo lahko razveljavimo (↶ ali Ctrl+Z) in ponovimo (↷, Ctrl+Y ali Ctrl+Shift+Z), do 50 korakov nazaj.
+
+<figure><img src="../../.gitbook/assets/hidrotank-dvojno-kolo.gif" alt="Dvojno kolo na shemi, njegovi polmeri na plošči in razveljavitev s Ctrl+Z"><figcaption><p>Dvojno kolo in razveljavitev s Ctrl+Z</p></figcaption></figure>
+
+#### 5.5 Preizkus z roko
+
+Z drsnikom **Nivo vode** (Preizkus z roko) premikamo vodo in opazujemo, kako se mehanizem premika. Če se nivo dvigne, se mora letev ventila dvigniti (ventil se zapira). Dvig vode nad trenutni nivo zapiranja premakne $$h_0$$ (poglavje 4.4). Poskus se začne pri nivoju, kjer drsnik pustimo.
+
+<figure><img src="../../.gitbook/assets/hidrotank-preizkus-nivo.gif" alt="Drsnik Nivo vode dvigne vodo na 0.66 m in jo spusti nazaj na 0.55 m; plovec, kolesi in letev ventila se premikajo"><figcaption><p>Preizkus mehanizma z dvigom in spustom vode</p></figcaption></figure>
+
+#### 5.6 Poskus
+
+**Začni poskus** po kratkem odštevanju zažene simulacijo, **Premor** jo ustavi, **Nov poskus** jo ponastavi. Med poskusom mehanizma ni mogoče spreminjati. V orodni vrstici se sproti izpisujeta nivo in ustrezna oskrba.
+
+Spodnji posnetek je časovni zamik 120-sekundnega poskusa z mehanizmom iz prejšnjih korakov. Mehanizem deluje kot P-regulator in nivo se ustali, vendar nad pasom ustrezne oskrbe. Kje se nivo ustali, določata $$K_p$$ in $$h_0$$.
+
+<figure><img src="../../.gitbook/assets/hidrotank-poskus.gif" alt="Časovni zamik poskusa: nivo se ustali okoli 0.6 m, nad pasom ustrezne oskrbe"><figcaption><p>Poskus z zgrajenim mehanizmom (časovni zamik, 120 s)</p></figcaption></figure>
+
+#### 5.7 Povzetek ukazov
+
+| Dejanje | Kako |
+| ------- | ---- |
+| Dodaj del | Povleci kartico iz palete na shemo ali klikni nanjo |
+| Torni stik | Povleci kolo ob letev ali drugo kolo, spusti ob napisu **Spusti za stik** |
+| Zglob | Povleci točko ○ na drugo točko; v lastnostih spoja izberi **Zglob** ali **Tog spoj** |
+| Pritrditev na ogrodje | Spusti **Ležaj** na os kolesa ali točko, ali obkljukaj **Os v ležaju** |
+| Jermen | Orodje **Jermen**, klikni dve kolesi; izberi **Odprt** ali **Prekrižan** |
+| Merjenje | Orodje **Meter**, povleci od točke do točke |
+| Odstrani | Izberi del ali spoj in pritisni Delete, ali ✕ v seznamu spojev, ali **Odstrani del** |
+| Razveljavi / ponovi | ↶ / ↷, Ctrl+Z / Ctrl+Y |
+| Prekliči orodje ali izbiro | Esc |
+| Začni znova | **Počisti** vrne shemo na fiksne dele |
+
+Spremembe, pri katerih bi se mehanizem zagozdil, aplikacija zavrne in izpiše razlog. Kolo, ki zdrsne s konca letve, se ne vrti več, dokler se letev ne vrne.
+
+### 6. Graf
+
+Graf prikazuje nivo, želeni nivo, dotok in skupni odtok. Kazalcu sledijo črtkane črte z odčitkom časa in vrednosti. Kolešček miške povečuje časovno os, Shift + kolešček os vrednosti, vlečenje premika pogled, drsnik pod grafom izbere časovno okno. V orodni vrstici grafa so povečava na izbrani pravokotnik, korak nazaj, prikaz vsega (tudi z dvoklikom), risanje premic (npr. tangente za časovno konstanto), brisanje premic in shranjevanje grafa kot slike. Narisane premice ostanejo tudi po novem poskusu, zato lahko poskuse primerjamo.
