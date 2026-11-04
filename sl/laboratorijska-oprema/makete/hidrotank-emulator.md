@@ -6,7 +6,7 @@ HidroTank emulator je spletna aplikacija, ki v realnem času simulira enostaven 
 
 Vsak način delovanja prikazuje shemo sistema, nastavitve, meritve in graf.
 
-<figure><img src="../../.gitbook/assets/hidrotank-sestavljanje.png" alt="Sestavljanje regulatorja: paleta delov, shema hranilnika in graf"><figcaption><p>Sestavljanje regulatorja: zgoraj paleta delov, levo shema z letvijo ventila in plovcem, desno graf</p></figcaption></figure>
+<figure><img src="../../.gitbook/assets/hidrotank-sistem.png" alt="Shema hranilnika z dovodnim in odvodnim ventilom ter graf nivoja in pretokov"><figcaption><p>Hranilnik z dovodnim in odvodnim ventilom, desno graf nivoja in pretokov</p></figcaption></figure>
 
 ### 2. Model sistema
 
@@ -30,10 +30,10 @@ Pri polnem hranilniku ($$h = 1 \, \text{m}$$) in popolnoma odprtem odtoku je odv
 
 #### 2.3 Hranilnik
 
-Hranilnik ima površino $$A = 0.025 \, \text{m}^2$$ in višino $$1 \, \text{m}$$. Nivo opisuje diferencialna enačba
+Hranilnik ima površino $$A = 0.025 \, \text{m}^2$$ in višino $$1 \, \text{m}$$. Nivo je določen z začetnim nivojem in integralom razlike pretokov:
 
 $$
-A \frac{dh}{dt} = \varphi_{\text{dovodni}}(t) - \varphi_{\text{odvodni}}(t)
+h(t) = h(0) + \frac{1}{A} \int_0^t \left( \varphi_{\text{dovodni}}(\tau) - \varphi_{\text{odvodni}}(\tau) \right) d\tau
 $$
 
 Nivo je omejen med $$0$$ in $$1 \, \text{m}$$; nad robom hranilnik preliva. Simulacija teče s korakom $$0.1 \, \text{s}$$ v realnem času.
